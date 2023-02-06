@@ -1,0 +1,108 @@
+﻿@model IEnumerable<TravelPY.Models.DatTour>
+@*Chưa chỉnh sửa*@
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaTour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoCho)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayDatTour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GhiChu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThanhToan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaThanhToan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayThanhToan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhuongXa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaKhachHangNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaKhachSanNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaTour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoCho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDatTour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GhiChu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhToan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaThanhToan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayThanhToan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhuongXa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaKhachHangNavigation.MaKhachHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaKhachSanNavigation.MaKhachSan)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaDatTour">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MaDatTour">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaDatTour">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

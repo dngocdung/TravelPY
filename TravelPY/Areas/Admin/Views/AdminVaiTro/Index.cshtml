@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TravelPY.Models.VaiTro>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<h3>QUẢN LÍ QUYỀN TRUY CẬP</h3>
+
+<p>
+    <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminVaiTro" asp-action="Create">Thêm mới</a>
+</p>
+<div class="card">
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã Vai Trò</th>
+                    <th>Tên Quyền Truy Cập</th>
+                    <th>Mô Tả</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaVaiTro</td>
+                        <td>@item.TenVaiTro</td>
+                        <td>@item.MoTa</td>
+                        <td>
+                            <a asp-area="Admin" asp-controller="AdminVaiTro" asp-action="Details" asp-route-id="@item.MaVaiTro" class="btn btn-outline-primary">Chi tiết</a>
+                            <a asp-area="Admin" asp-controller="AdminVaiTro" asp-action="Edit" asp-route-id="@item.MaVaiTro" class="btn btn-outline-warning">Sửa</a>
+                            <a asp-area="Admin" asp-controller="AdminVaiTro" asp-action="Delete" asp-route-id="@item.MaVaiTro" class="btn btn-outline-danger">Xoá</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model TravelPY.Models.VaiTro
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<h1>Xoá quyền truy cập</h1>
+
+<h3>Bạn muốn xoá quyền truy cập này?</h3>
+<div class="card-body">
+    <h4 class="card-title">Xác nhận xóa quyền truy cập</h4>
+    <div class="table-responsive col-md-4">
+        <table class="table text-white">
+            <tbody>
+                <tr>
+                    <td>ID:</td>
+                    <td class="text-dark font-weight-semibold">@Model.MaVaiTro</td>
+                </tr>
+                <tr>
+                    <td>Tên quyền truy cập:</td>
+                    <td>@Model.TenVaiTro</td>
+                </tr>
+                <tr>
+                    <td>Mô tả:</td>
+                    <td>@Model.MoTa</td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="MaVaiTro" />
+                            <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

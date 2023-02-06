@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TravelPY.Models.Page>
+
+@{
+    ViewData["Title"] = "Danh sách Page";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<h3>QUẢN LÍ PAGE</h3>
+
+<p>
+    <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminPage" asp-action="Create">Thêm mới</a>
+</p>
+<div class="card">
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã Page</th>
+                    <th>Tên Page</th>
+                    <th>Số Bài Viết</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaPage</td>
+                        <td>@item.TenPage</td>
+                        <td>@item.SoBaiViet</td>
+                        <td>
+                            <a asp-area="Admin" asp-controller="AdminPage" asp-action="Details" asp-route-id="@item.MaPage" class="btn btn-outline-primary">Chi tiết</a>
+                            <a asp-area="Admin" asp-controller="AdminPage" asp-action="Edit" asp-route-id="@item.MaPage" class="btn btn-outline-warning">Sửa</a>
+                            <a asp-area="Admin" asp-controller="AdminPage" asp-action="Delete" asp-route-id="@item.MaPage" class="btn btn-outline-danger">Xoá</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

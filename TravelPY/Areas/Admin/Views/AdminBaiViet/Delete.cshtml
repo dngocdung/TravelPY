@@ -1,0 +1,88 @@
+﻿@model TravelPY.Models.BaiViet
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+
+
+<div class="card-body">
+    <h4 class="card-title">Bạn muốn xoá bài viết này?</h4>
+    <div class="table-responsive">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="MaBaiViet" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+        <table class="table text-white">
+            <tbody>
+                <tr>
+                    <td>Mã bài viết:</td>
+                    <td class="font-weight-semibold">@Model.MaBaiViet</td>
+                </tr>
+                <tr>
+                    <td>Tiêu đề:</td>
+                    <td>@Model.TieuDe</td>
+                </tr>
+                <tr>
+                    <td>Hình ảnh:</td>
+                    <td>
+                        <img width="200" height="200" src="~/images/news/@Model.HinhAnh" alt="@Model.TieuDe" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ngày tạo:</td>
+                    <td>@Model.NgayTao</td>
+                </tr>
+                <tr>
+                    <td>Tác giả:</td>
+                    <td>@Model.MaTaiKhoanNavigation.TenTaiKhoan</td>
+                </tr>
+                <tr>
+                    <td>Trạng thái:</td>
+                    <td>
+                        @if (Model.Publisher == true)
+                        {
+
+                            <div class="">
+                                <label class="form-check-label">
+
+                                    <input type="checkbox" checked disabled data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                    Đang hoạt động
+                                </label>
+                            </div>
+
+                        }
+                        else
+                        {
+
+                            <div class="">
+                                <label class="form-check-label">
+
+                                    <input type="checkbox" disabled data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                    Không hoạt động
+                                </label>
+                            </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Thuộc trang:</td>
+                    <td>@Model.MaPageNavigation.TenPage</td>
+                </tr>
+                <tr>
+                    <td>Alias:</td>
+                    <td>@Model.Alias</td>
+                </tr>
+                <tr>
+                    <td>Nội dung:</td>
+                    <td>@Html.Raw(Model.NoiDung)</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+    </div>
+</div>

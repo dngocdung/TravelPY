@@ -1,0 +1,114 @@
+﻿@model TravelPY.Models.Tour
+
+@{
+    ViewData["Title"] = "Thông tin Tour du lịch";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+
+<div class="card-body">
+    <h4 class="card-title">Thông tin tài khoản</h4>
+    <div class="table-responsive">
+        <table class="table text-white">
+            <tbody>
+                <tr>
+                    <td>Mã Tour:</td>
+                    <td class="font-weight-semibold">@Model.MaTour</td>
+                </tr>
+                <tr>
+                    <td>Tên Tour:</td>
+                    <td>@Model.TenTour</td>
+                </tr>
+                <tr>
+                    <td>Ngày khởi hành:</td>
+                    <td>@Model.NgayKhoiHanh</td>
+                </tr>
+                <tr>
+                    <td>Nơi khởi hành:</td>
+                    <td>@Model.NoiKhoiHanh</td>
+                </tr>
+                <tr>
+                    <td>Giờ khởi hành:</td>
+                    <td>@Model.GioKhoiHanh</td>
+                </tr>
+                <tr>
+                    <td>Giá gốc</td>
+                    <td>@Model.Gia</td>
+                </tr>
+                <tr>
+                    <td>Giá giảm:</td>
+                    <td>@Model.GiaGiam</td>
+                </tr>
+                <tr>
+                    <td>Hình ảnh:</td>
+                    <td>
+                        <img width="200" height="200" src="~/images/tours/@Model.HinhAnh" alt="@Model.TenTour" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phương tiện:</td>
+                    <td>@Model.PhuongTien</td>
+                </tr>
+                <tr>
+                    <td>Số ngày:</td>
+                    <td>@Model.SoNgay</td>
+                </tr>
+                <tr>
+                    <td>Số chỗ:</td>
+                    <td>@Model.SoCho</td>
+                </tr>
+                <tr>
+                    <td>Trạng thái:</td>
+                    <td>
+                        @if (Model.TrangThai == true)
+                        {
+
+                            <div class="">
+                                <label class="form-check-label">
+
+                                    <input type="checkbox" checked disabled data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                    Đang hoạt động
+                                </label>
+                            </div>
+
+                        }
+                        else
+                        {
+
+                            <div class="">
+                                <label class="form-check-label">
+
+                                    <input type="checkbox" disabled data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                    Không hoạt động
+                                </label>
+                            </div>
+                        }
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Thuộc danh mục:</td>
+                    <td>@Model.MaDanhMucNavigation.TenDanhMuc</td>
+                </tr>
+                <tr>
+                    <td>Hướng dẫn viên:</td>
+                    <td>@Model.MaHdvNavigation.TenHdv</td>
+                </tr>
+                <tr>
+                    <td>Lịch trình chi tiết:</td>
+                    <td>@Html.Raw(Model.MoTa)</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <div>
+            <a class="btn btn-outline-primary btn-icon-text col-md-5" asp-area="Admin" asp-controller="AdminTour" asp-action="Edit" asp-route-id="@Model.MaTour">
+                <i class="mdi mdi-file-check btn-icon-prepend"></i> Sửa
+            </a>
+            <a style="float:right" class="btn btn-outline-warning btn-icon-text col-md-5" asp-area="Admin" asp-controller="AdminTour" asp-action="Index">
+                <i class="mdi mdi-reload btn-icon-prepend"></i> Trở về
+            </a>
+        </div>
+    </div>
+</div>

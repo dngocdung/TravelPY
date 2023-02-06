@@ -1,0 +1,66 @@
+﻿@model TravelPY.Models.TaiKhoan
+
+@{
+    ViewData["Title"] = "Chỉnh sửa tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<h3>Chỉnh sửa tài khoản</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MaTaiKhoan" />
+            <div class="form-group">
+                <label asp-for="TenTaiKhoan" class="control-label">Tên tài khoản</label>
+                <input asp-for="TenTaiKhoan" class="form-control" type="text" />
+                <span asp-validation-for="TenTaiKhoan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sdt" class="control-label">Số điện thoại</label>
+                <input asp-for="Sdt" class="form-control" type="text" />
+                <span asp-validation-for="Sdt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" type="text" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div>
+                <label class="control-label">
+                    Trạng thái
+                    @*<input class="form-check-input" asp-for="TrangThai" /> @Html.DisplayNameFor(model => model.TrangThai)*@
+                </label>
+                <input type="checkbox" asp-for="TrangThai" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MaVaiTro" class="control-label">Quyền truy cập</label>
+                <select asp-for="MaVaiTro" class="form-control" asp-items="ViewBag.MaVaiTro"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgayTao" class="control-label">Ngày tạo</label>
+                <input asp-for="NgayTao" class="form-control" />
+                <span asp-validation-for="NgayTao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastLogin" class="control-label">Lần cuối đăng nhập</label>
+                <input asp-for="LastLogin" class="form-control" />
+                <span asp-validation-for="LastLogin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-primary btn-icon-text col-md-5">
+                    <i class="mdi mdi-file-check btn-icon-prepend"></i> Sửa
+                </button>
+                <button style="float:right;" asp-action="Index" class="btn btn-outline-warning btn-icon-text col-md-5">
+                    <i class="mdi mdi-reload btn-icon-prepend"></i> Trở về
+                </button>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+

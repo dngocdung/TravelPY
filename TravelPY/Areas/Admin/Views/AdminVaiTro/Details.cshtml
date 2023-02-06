@@ -1,0 +1,47 @@
+﻿@model TravelPY.Models.VaiTro
+
+@{
+    ViewData["Title"] = "Thông tin quyền truy cập";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a asp-area="Admin" asp-controller="AdminVaiTro" asp-action="Index" class="breadcrumb-item">Danh sách quyền truy cập</a>
+            <span class="breadcrumb-item active">Thông tin quyền truy cập</span>
+        </nav>
+    </div>
+</div>
+
+<div class="card-body">
+    <h4 class="card-title">Thông tin quyền truy cập</h4>
+    <div class="table-responsive col-md-4">
+        <table class="table text-white">
+            <tbody>
+                <tr>
+                    <td>Mã vai trò:</td>
+                    <td class="font-weight-semibold">@Model.MaVaiTro</td>
+                </tr>
+                <tr>
+                    <td>Tên quyền truy cập:</td>
+                    <td>@Model.TenVaiTro</td>
+                </tr>
+                <tr>
+                    <td>Mô tả:</td>
+                    <td>@Model.MoTa</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <div>
+            <a class="btn btn-outline-primary btn-icon-text col-md-5" asp-area="Admin" asp-controller="AdminVaiTro" asp-action="Edit" asp-route-id="@Model.MaVaiTro">
+                <i class="mdi mdi-file-check btn-icon-prepend"></i> Sửa
+            </a>
+            <a style="float:right" class="btn btn-outline-warning btn-icon-text col-md-5" asp-area="Admin" asp-controller="AdminVaiTro" asp-action="Index">
+                <i class="mdi mdi-reload btn-icon-prepend"></i> Trở về
+            </a>
+        </div>
+    </div>
+</div>

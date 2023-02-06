@@ -1,0 +1,41 @@
+﻿@model TravelPY.Models.VaiTro
+
+@{
+    ViewData["Title"] = "Tạo mới";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<h3>Tạo quyền truy cập</h3>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenVaiTro" class="control-label">Tên Quyền Truy Cập</label>
+                <input asp-for="TenVaiTro" class="form-control" type="text" />
+                <span asp-validation-for="TenVaiTro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoTa" class="control-label">Mô Tả</label>
+                <input asp-for="MoTa" class="form-control" type="text" />
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-primary btn-icon-text col-md-5">
+                    <i class="mdi mdi-file-check btn-icon-prepend"></i> Tạo mới
+                </button>
+                <button style="float:right;" asp-action="Index" class="btn btn-outline-warning btn-icon-text col-md-5">
+                    <i class="mdi mdi-reload btn-icon-prepend"></i> Trở về
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<TravelPY.Models.TaiKhoan>
+
+@{
+    ViewData["Title"] = "Quản lí tìa khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+<h3>QUẢN LÍ TÀI KHOẢN</h3>
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <span class="breadcrumb-item active">Danh sách tài khoản</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+
+        <div class="row m-b-30">
+            <div class="col-lg-12">
+                <div class="d-md-flex">
+                    @*<div class="m-b-10 m-r-15">
+                    <select class="custom-select" style="min-width: 200px;" asp-items="ViewBag.QuyenTruyCap">
+                    <option value="0" disabled selected>Chọn quyền truy cập</option>
+                    </select>
+
+                    </div>*@
+                    <div class="m-b-10">
+                        <select class="custom-select" style="min-width: 200px;" asp-items="ViewBag.lsTrangThai">
+                            <option value="" disabled selected>Chọn trạng thái</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </br>
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminTaiKhoan" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Tạo mới tài khoản</span></a>
+            </div>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Mã Tài Khoản</th>
+                        <th>Tên Tài Khoản</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Email</th>
+                        <th>Quyền Truy Cập</th>
+                        <th>Trạng Thái</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.MaTaiKhoan</td>
+                                <td>@item.TenTaiKhoan</td>
+                                <td>@item.Sdt</td>
+                                <td>@item.Email</td>
+                                <td>@item.MaVaiTroNavigation.MoTa</td>
+
+                                <td>
+                                    @if (item.TrangThai == true)
+                                    {
+
+                                        <div class="">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                                Đang hoạt động
+                                            </label>
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                                Không hoạt động
+                                            </label>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-area="Admin" asp-controller="AdminTaiKhoan" asp-action="Details" asp-route-id="@item.MaTaiKhoan" class="btn btn-outline-primary">Chi tiết</a>
+                                    <a asp-area="Admin" asp-controller="AdminTaiKhoan" asp-action="Edit" asp-route-id="@item.MaTaiKhoan" class="btn btn-outline-warning">Sửa</a>
+                                    <a asp-area="Admin" asp-controller="AdminTaiKhoan" asp-action="Delete" asp-route-id="@item.MaTaiKhoan" class="btn btn-outline-danger">Xoá</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+

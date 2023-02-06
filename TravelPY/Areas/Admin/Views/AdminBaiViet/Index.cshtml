@@ -1,0 +1,147 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<TravelPY.Models.BaiViet>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Quản lí Bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+<h3>QUẢN LÍ BÀI VIẾT</h3>
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <span class="breadcrumb-item active">Danh sách BaiViet : trang @ViewBag.CurrentPage</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+
+        <div class="row m-b-30">
+            <div class="col-md-8">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="input-affix m-v-10">
+                            <i class="prefix-icon anticon anticon-search opacity-04"></i>
+                            <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Tìm kiếm bài viết">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-affix m-v-10">
+                            <select class="custom-select" id="txtCatID" name="txtCatID" style="min-width: 200px;" asp-items="ViewBag.MaPage">
+                                <option selected>Chọn Page</option>
+                                <option value="0">Chọn tất cả</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm mới bài viết</span></a>
+            </div>
+        </div>
+        </br>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Mã Bài Viết</th>
+                        <th style="max-width:200px">Tiêu Đề</th>
+                        <th>Ngày Tạo</th>
+                        <th>Tác Giả</th>
+                        <th>Thuộc Page</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.MaBaiViet</td>
+                                <td style="max-width:200px">@item.TieuDe</td>
+                                <td>@item.NgayTao</td>
+                                <td>@item.MaTaiKhoanNavigation.TenTaiKhoan</td>
+                                <td>@item.MaPageNavigation.TenPage</td>
+
+                                <td>
+                                    <a asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Details" asp-route-id="@item.MaBaiViet" class="btn btn-outline-primary">Chi tiết</a>
+                                    <a asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Edit" asp-route-id="@item.MaBaiViet" class="btn btn-outline-warning">Sửa</a>
+                                    <a asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Delete" asp-route-id="@item.MaBaiViet" class="btn btn-outline-danger">Xoá</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div aria-label="Page navigation example">
+                <ul class="pagination float-right mt-1">
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminBaiViet" asp-route-MaDanhMuc="@ViewBag.CurrentMaPage" asp-action="Index" />
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            jQuery("#txtCatID").change(function () {
+                var maDanhMuc = jQuery(this).children(":selected").attr("value");
+                maDanhMuc = parseFloat(maDanhMuc);
+                $('#txtCatID option')
+                    .removeAttr('selected');
+                $("#txtCatID > [value=" + maDanhMuc + "]").attr("selected", "true");
+                $.ajax({
+                    url: '/Admin/AdminBaiViet/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        Page: maDanhMuc
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: '~/Admin/Search/FindProduct/',
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    }
+                });
+            });
+            $('#dataTable-1').DataTable(
+                {
+                    autoWidth: true,
+                    "lengthMenu": [
+                        [16, 32, 64, -1],
+                        [16, 32, 64, "All"]
+                    ]
+                });
+        });
+    </script>
+
+}
+
+
+

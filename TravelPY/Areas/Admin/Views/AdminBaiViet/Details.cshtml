@@ -1,0 +1,91 @@
+﻿@model TravelPY.Models.BaiViet
+
+@{
+    ViewData["Title"] = "Thông tin bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<h4>Thông tin bài viết</h4>
+<hr />
+
+<div class="card-body">
+    <h4 class="card-title">Thông tin bài viết</h4>
+    <div class="table-responsive">
+        <table class="table text-white">
+            <tbody>
+                <tr>
+                    <td>Mã bài viết:</td>
+                    <td class="font-weight-semibold">@Model.MaBaiViet</td>
+                </tr>
+                <tr>
+                    <td>Tiêu đề:</td>
+                    <td>@Model.TieuDe</td>
+                </tr>
+                <tr>
+                    <td>Hình ảnh:</td>
+                    <td>
+                        <img width="200" height="200" src="~/images/news/@Model.HinhAnh" alt="@Model.TieuDe" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ngày tạo:</td>
+                    <td>@Model.NgayTao</td>
+                </tr>
+                <tr>
+                    <td>Tác giả:</td>
+                    <td>@Model.MaTaiKhoanNavigation.TenTaiKhoan</td>
+                </tr>
+                <tr>
+                    <td>Trạng thái:</td>
+                    <td>
+                        @if (Model.Publisher == true)
+                        {
+
+                            <div class="">
+                                <label class="form-check-label">
+
+                                    <input type="checkbox" checked disabled data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                    Đang hoạt động
+                                </label>
+                            </div>
+
+                        }
+                        else
+                        {
+
+                            <div class="">
+                                <label class="form-check-label">
+
+                                    <input type="checkbox" disabled data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                    Không hoạt động
+                                </label>
+                            </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Thuộc trang:</td>
+                    <td>@Model.MaPageNavigation.TenPage</td>
+                </tr>
+                <tr>
+                    <td>Alias:</td>
+                    <td>@Model.Alias</td>
+                </tr>
+                <tr>
+                    <td>Nội dung:</td>
+                    <td>@Html.Raw(Model.NoiDung)</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <div>
+            <a class="btn btn-outline-primary btn-icon-text col-md-5" asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Edit" asp-route-id="@Model.MaBaiViet">
+                <i class="mdi mdi-file-check btn-icon-prepend"></i> Sửa
+            </a>
+            <a style="float:right" class="btn btn-outline-warning btn-icon-text col-md-5" asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Index">
+                <i class="mdi mdi-reload btn-icon-prepend"></i> Trở về
+            </a>
+        </div>
+    </div>
+</div>
