@@ -18,7 +18,7 @@ namespace Travel.Controllers
             _logger = logger;
             _context = context;
         }
-
+        // Trang chủ
         public IActionResult Index()
         {
             HomeViewVM model = new HomeViewVM();
