@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-namespace Travel.ModelViews
+namespace TravelPY.ModelViews
 {
     public class DangNhapVM
     {
