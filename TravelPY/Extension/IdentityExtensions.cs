@@ -9,7 +9,7 @@ namespace TravelPY.Extension
 {
     public static class IdentityExtensions
     {
-        public static string GetAccountID(this IIdentity identity)
+        /*public static string GetAccountID(this IIdentity identity)
         {
             var claim = ((ClaimsIdentity)identity).FindFirst("AccountId");
             return (claim != null) ? claim.Value : string.Empty;
@@ -31,7 +31,7 @@ namespace TravelPY.Extension
             var claim = ((ClaimsIdentity)identity).FindFirst("Avatar");
             // Test for null to avoid issues during local testing
             return (claim != null) ? claim.Value : string.Empty;
-        }
+        }*/
         public static string GetSpecificClaim(this ClaimsPrincipal claimsPrincipal, string claimType)
         {
             var claim = claimsPrincipal.Claims.FirstOrDefault(x => x.Type == claimType);

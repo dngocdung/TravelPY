@@ -11,6 +11,7 @@ namespace TravelPY.Extension
     {
         public static string ToMD5(this string str)
         {
+            //Mã hoá mật khẩu
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
             byte[] bHash = md5.ComputeHash(Encoding.UTF8.GetBytes(str));
             StringBuilder sbHash = new StringBuilder();

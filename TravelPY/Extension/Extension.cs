@@ -8,6 +8,7 @@ namespace TravelPY.Extension
 {
     public static class Extension
     {
+        // Chuyển đổi từ số sang VND
         public static string ToVnd(this double donGia)
         {
             return donGia.ToString("#,##0") + " đ";
