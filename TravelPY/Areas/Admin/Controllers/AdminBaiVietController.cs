@@ -44,12 +44,30 @@ namespace TravelPY.Areas.Admin.Controllers
             //Phan trang cho bai viet
             var pageNumber = page;
             var pageSize = Utilities.PAGE_SIZE;
-            var lsBaiViets = _context.BaiViets
+            List<BaiViet> lsBaiViets = new List<BaiViet>();
+            if(MaPage!=0)
+            {
+                lsBaiViets = _context.BaiViets
+                .AsNoTracking()
+                .Where(b => b.MaPage == MaPage)
+                .Include(b => b.MaPageNavigation)
+                .Include(b => b.MaTaiKhoanNavigation)               
+                .OrderBy(x => x.MaBaiViet).ToList();
+            }    
+            else
+            {
+                lsBaiViets = _context.BaiViets
+                .AsNoTracking()
+                .Include(b => b.MaPageNavigation)
+                .Include(b => b.MaTaiKhoanNavigation)               
+                .OrderBy(x => x.MaBaiViet).ToList();
+            }    
+            /*var lsBaiViets = _context.BaiViets
                 .Include(b => b.MaPageNavigation)
                 .Include(b => b.MaTaiKhoanNavigation)
                 .AsNoTracking()
-                .OrderBy(x => x.MaBaiViet);
-            PagedList<BaiViet> models = new PagedList<BaiViet>(lsBaiViets, pageNumber, pageSize);
+                .OrderBy(x => x.MaBaiViet);*/
+            PagedList<BaiViet> models = new PagedList<BaiViet>(lsBaiViets.AsQueryable(), pageNumber, pageSize);
             ViewBag.CurrentMaPage = MaPage;
             ViewBag.CurrentPage = pageNumber;
             ViewData["MaPage"] = new SelectList(_context.Pages, "MaPage", "TenPage");
