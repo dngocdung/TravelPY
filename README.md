@@ -7,6 +7,7 @@ Chức năng cơ bản:
 Chức năng Admin:
 - Tìm kiếm/lọc, thêm/sửa/xoá Tour, bài viết,...
 - Phân trang cho các danh sách như Tour, tài khoản, khách hàng...
+- Upload hình ảnh
 
 Hình ảnh:
 - Database Diagrams:
