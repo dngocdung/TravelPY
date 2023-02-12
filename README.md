@@ -12,4 +12,8 @@ Chức năng Admin:
 Hình ảnh:
 - Database Diagrams:
 ![Screenshot (27)](https://user-images.githubusercontent.com/81901126/218094183-d370eaec-ae69-42b3-ada3-fc19be9f0476.png)
+- Admin:
++ Admin Bài viết
+![Screenshot (28)](https://user-images.githubusercontent.com/81901126/218286599-5f975da1-14a3-49fa-b264-3d0e59d592cb.png)
+
 
