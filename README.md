@@ -15,5 +15,7 @@ Hình ảnh:
 - Admin:
 + Admin Bài viết
 ![Screenshot (28)](https://user-images.githubusercontent.com/81901126/218286599-5f975da1-14a3-49fa-b264-3d0e59d592cb.png)
+![Screenshot (29)](https://user-images.githubusercontent.com/81901126/219332598-c3bed2ed-520e-4de1-9354-06cc15319ce4.png)
+
 
 
