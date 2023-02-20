@@ -17,8 +17,6 @@ public partial class DatTour
 
     public string? GhiChu { get; set; }
 
-    public bool ThanhToan { get; set; }
-
     public int? MaThanhToan { get; set; }
 
     public DateTime? NgayThanhToan { get; set; }
@@ -31,11 +29,9 @@ public partial class DatTour
 
     public int? PhuongXa { get; set; }
 
-    public int? MaKhachSan { get; set; }
+    public int? TongTien { get; set; }
 
     public virtual ICollection<ChiTietDatTour> ChiTietDatTours { get; } = new List<ChiTietDatTour>();
 
     public virtual KhachHang? MaKhachHangNavigation { get; set; }
-
-    public virtual KhachSan? MaKhachSanNavigation { get; set; }
 }

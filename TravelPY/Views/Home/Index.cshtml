@@ -1,8 +1,224 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model TravelPY.ModelViews.HomeViewVM
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+    List<Tour> lsTours = ViewBag.AllTours;
+}
+<style>
+    .border-left-orange {
+        border-left: 3px solid orangered;
+        padding-left: 10px;
+    }
+</style>
+<div class="hero-wrap js-fullheight" style="background-image: url('assets/images/bg-home.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
+            <div class="col-md-7 ftco-animate">
+                <span class="subheading">Welcome to Hoa Vàng - Cỏ Xanh</span>
+                <h1 class="mb-4">Hoa Vàng - Cỏ Xanh Công ty Du lịch <br /> miền Trung Phú Yên</h1>
+                <p class="caps">Hoa Vàng - Cỏ Xanh đồng hành cùng các bạn trên mọi nẻo đường Phú Yên</p>
+            </div>
+            <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
+                <span class="fa fa-play"></span>
+            </a>
+        </div>
+    </div>
 </div>
+<section class="ftco-section ftco-no-pb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="search-wrap-1 ftco-animate">
+                    <form action="#" class="search-property-1">
+                        <div class="row no-gutters">
+                            <div class="col-lg d-flex">
+                                <div class="form-group p-4 border-0">
+                                    <label for="#">Destination</label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="fa fa-search"></span></div>
+                                        <input type="text" class="form-control" placeholder="Search place">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg d-flex">
+                                <div class="form-group p-4">
+                                    <label for="#">Check-in date</label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="fa fa-calendar"></span></div>
+                                        <input type="text" class="form-control checkin_date" placeholder="Check In Date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg d-flex">
+                                <div class="form-group p-4">
+                                    <label for="#">Check-out date</label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="fa fa-calendar"></span></div>
+                                        <input type="text" class="form-control checkout_date" placeholder="Check Out Date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg d-flex">
+                                <div class="form-group p-4">
+                                    <label for="#">Price Limit</label>
+                                    <div class="form-field">
+                                        <div class="select-wrap">
+                                            <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                                            <select name="" id="" class="form-control">
+                                                <option value="">$5,000</option>
+                                                <option value="">$10,000</option>
+                                                <option value="">$50,000</option>
+                                                <option value="">$100,000</option>
+                                                <option value="">$200,000</option>
+                                                <option value="">$300,000</option>
+                                                <option value="">$400,000</option>
+                                                <option value="">$500,000</option>
+                                                <option value="">$600,000</option>
+                                                <option value="">$700,000</option>
+                                                <option value="">$800,000</option>
+                                                <option value="">$900,000</option>
+                                                <option value="">$1,000,000</option>
+                                                <option value="">$2,000,000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg d-flex">
+                                <div class="form-group d-flex w-100 border-0">
+                                    <div class="form-field w-100 align-items-center d-flex">
+                                        <input type="submit" value="Search" class="align-self-stretch form-control btn btn-primary">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="all-items" role="tabpanel" aria-labelledby="all-items-tab">
+                    @await Html.PartialAsync("_ListProductPartialView", lsTours)
+                </div>
+                @foreach (var item in Model.Tours)
+                {
+                    <div class="tab-pane fade" id="@item.danhmuc.Alias" role="tabpanel" aria-labelledby="fresh-fruits-tab">
+                        @await Html.PartialAsync("_ListProductPartialView", item.lsTours)
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col text-center">
+                <div class="block-27">
+                    <ul>
+                        <li><a href="#">&lt;</a></li>
+                        <li class="active"><span>1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&gt;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-about img" style="background-image: url('assets/images/Home/bg-about.jpg');">
+    <div class="overlay"></div>
+    <div class="container py-md-5">
+        <div class="row py-md-5">
+            <div class="col-md d-flex align-items-center justify-content-center">
+                <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
+                    <span class="fa fa-play"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+@*Sứ mệnh tầm nhìn*@
+<section class="ftco-section ftco-about ftco-no-pt img">
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-12 about-intro">
+                <div class="row">
+                    <div class="col-md-6 d-flex align-items-stretch">
+                        <div class="img d-flex w-100 align-items-center justify-content-center" style="background-image:url('assets/images/bg-home-2.jpg');">
+                        </div>
+                    </div>
+                    <div class="col-md-6 pl-md-5 py-5">
+                        <div class="row justify-content-start pb-3">
+                            <div class="col-md-12 heading-section ftco-animate" style="color:black;">
+                                <span class="subheading">Sứ mệnh</span>
+                                <p>Đi cùng Hoa Vàng - Cỏ Xanh trên mỗi hành trình, các bạn sẽ mở rộng trái tim và đôi mắt. Đi, nhìn, cảm nhận và hạnh phúc</p>
+                                <span class="subheading">Tầm nhìn</span>
+                                <h6 class="border-left-orange">ĐỐI VỚI KHÁCH HÀNG</h6>
+                                <p>Khiến tất cả các khách hàng sau khi đã đi tour của Hoa Vàng - Cỏ Xanh sẽ yêu và gắn bó với Phú Yên</p>
+                                <h6 class="border-left-orange">ĐỐI VỚI ĐỐI THỦ CẠNH TRANH</h6>
+                                <p>Hoa Vàng - Cỏ Xanh sẽ là một ví dụ điển hình về sản phẩm tour chất lượng trên thị trường</p>
+                                <h6 class="border-left-orange">ĐỐI VỚI THỊ TRƯỜNG</h6>
+                                <p>Hoa Vàng - Cỏ Xanh là một trong những đơn vị đứng đầu tỉnh Phú Yên về mảng daily tour: Tour 01 ngày Phú Yên và Tour Dài Ngày Phú Yên</p>
+                                <p><a href="#" class="btn btn-primary">Book Your Destination</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*Kinh nghiệm du lịch*@
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center pb-4">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+
+                <h4>KINH NGHIỆM DU LỊCH</h4>
+                <p>Thông tin bổ ích về địa điểm và ẩm thực</p>
+            </div>
+        </div>
+        <div class="row d-flex">
+            @if (Model.BaiViets != null && Model.BaiViets.Count() > 0)
+            {
+                foreach (var item in Model.BaiViets)
+                {
+                    string url = $"/tin-tuc/{item.MaBaiViet}.html";
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry justify-content-end" style="min-width:350px;">
+                            <a href="@url" class="block-20" style="background-image: url('images/news/@item.HinhAnh');">
+                            </a>
+                            <div class="text" style="border-radius:20px; min-height:150px;">
+                                <div class="d-flex align-items-center mb-4 topp">
+                                    <div class="one">
+                                        <span class="day">@item.NgayTao.Value.Day</span>
+                                    </div>
+                                    <div class="two">
+                                        <span class="yr">@item.NgayTao.Value.Month</span>
+                                        <span class="mos">@item.NgayTao.Value.Year</span>
+                                    </div>
+                                    @*<div class="one">
+                            <span class="yr">@item.MaPageNavigation.TenPage</span>
+                            </div>*@
+                                </div>
+
+                                <h6 class="heading text-center"><a href="@url">@item.TieuDe</a></h6>
+
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,45 @@
+﻿@model List<DatTour>
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>Ngày đặt tour</th>
+                    <th>Ngày thanh toán</th>
+                    
+                    <th>Tổng tiền</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><a class="account-order-id" href="javascript:void(0)">#@item.MaDatTour</a></td>
+                        <td>@item.NgayDatTour</td>
+                        <td>@item.NgayThanhToan</td>
+                        
+                        
+                        <td>@item.TongTien VNĐ</td>
+                        <td>
+                            <a href="javascript:void(0)" class="xemdonhang"><span>Xem đơn hàng</span></a>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+        <br />
+        <br />
+        <br />
+        <br />
+        <hr />
+        <div id="records_table">
+
+        </div>
+    </div>
+}
+else
+{
+    <p>Chưa có đơn hàng!</p>
+}

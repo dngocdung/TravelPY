@@ -106,10 +106,6 @@ public partial class DbToursContext : DbContext
             entity.HasOne(d => d.MaKhachHangNavigation).WithMany(p => p.DatTours)
                 .HasForeignKey(d => d.MaKhachHang)
                 .HasConstraintName("FK_DatTour_KhachHang");
-
-            entity.HasOne(d => d.MaKhachSanNavigation).WithMany(p => p.DatTours)
-                .HasForeignKey(d => d.MaKhachSan)
-                .HasConstraintName("FK_DatTour_KhachSan");
         });
 
         modelBuilder.Entity<HuongDanVien>(entity =>

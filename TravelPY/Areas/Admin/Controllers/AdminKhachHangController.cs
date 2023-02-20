@@ -29,7 +29,7 @@ namespace TravelPY.Areas.Admin.Controllers
             var pageSize = Utilities.PAGE_SIZE;
             var lsKhachHangs = _context.KhachHangs.Include(k => k.Location)
                 .AsNoTracking()
-                .OrderBy(x => x.MaKhachHang);
+                .OrderBy(x => x.NgayTao);
             PagedList<KhachHang> models = new PagedList<KhachHang>(lsKhachHangs, pageNumber, pageSize);
 
             ViewBag.CurrentPage = pageNumber;

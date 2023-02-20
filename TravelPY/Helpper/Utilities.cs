@@ -42,7 +42,7 @@ namespace TravelPY.Helpper
             }
         }
 
-        public static int PAGE_SIZE = 10;
+        public static int PAGE_SIZE = 5;
         public static void CreateIfMissing(string path)
         {
             bool folderExists = Directory.Exists(path);
@@ -92,6 +92,7 @@ namespace TravelPY.Helpper
             return false;
 
         }
+        //pass + salt(chuỗi ngẫu nhiên) ==> MD5 => chuỗi lưu vào db
         public static string GetRandomKey(int length = 5)
         {
             //chuỗi mẫu (pattern)

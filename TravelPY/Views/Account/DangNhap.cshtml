@@ -1,0 +1,97 @@
+@model TravelPY.ModelViews.DangNhapVM
+
+@{
+    ViewData["Title"] = "Đăng nhập tài khoản";
+    //Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@*<style>
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #6a11cb;
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }
+</style>*@
+
+@*<main class="main-content">
+    <div class="login-register-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 pt-10 pt-lg-0">
+                    <form asp-controller="Account" asp-action="DangNhap" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="login-form">
+                            <h4 class="login-title">Đăng nhập</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Địa chỉ Email</label>
+                                    <input type="email" asp-for="UserName" placeholder="Địa chỉ Email">
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Mật khẩu</label>
+                                    <input type="password" asp-for="MatKhau" placeholder="Mật khẩu">
+                                    <span asp-validation-for="MatKhau" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-custom-size lg-size btn-secondary btn-primary-hover rounded-0">Đăng nhập</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>*@
+
+<section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+        <form asp-action="DangNhap" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <h3 class="mb-5">Sign in</h3>
+
+                            <div class="form-outline mb-4">
+                                <input type="email" asp-for="UserName" class="form-control form-control-lg" />
+                                <label class="form-label" asp-for="UserName">Email</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input type="password" asp-for="MatKhau" class="form-control form-control-lg" />
+                                <label class="form-label" asp-for="MatKhau">Password</label>
+                            </div>
+
+                            <!-- Checkbox -->
+                            @*<div class="form-check d-flex justify-content-start mb-4">
+                                <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+                                <label class="form-check-label" for="form1Example3"> Remember password </label>
+                            </div>*@
+
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+
+                            <hr class="my-4">
+
+                            <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
+                                    type="submit">
+                                <i class="fab fa-google me-2"></i> Sign in with google
+                            </button>
+                            <button class="btn btn-lg btn-block btn-primary mb-2" style="background-color: #3b5998;"
+                                    type="submit">
+                                <i class="fab fa-facebook-f me-2"></i>Sign in with facebook
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

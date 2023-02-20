@@ -6,7 +6,7 @@ using TravelPY.Models;
 using TravelPY.ModelViews;
 
 
-namespace Travel.Controllers
+namespace TravelPY.Controllers
 {
     public class HomeController : Controller
     {

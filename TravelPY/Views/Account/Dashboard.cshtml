@@ -1,0 +1,134 @@
+@model TravelPY.Models.KhachHang
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<DatTour> DanhSachDonHang = ViewBag.DonHang;
+    var total = DanhSachDonHang.Sum(x => x.TongTien);
+    TravelPY.ModelViews.ChangePasswordVM changePassword = new TravelPY.ModelViews.ChangePasswordVM();
+}
+<div class="hero-wrap js-fullheight" style="background-image: url('images/news/an-uong-1.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
+            <div class="col-md-7 ftco-animate">
+                <span class="subheading">Welcome to Hoa Vàng - Cỏ Xanh</span>
+                <h1 class="mb-4">Hoa Vàng - Cỏ Xanh Kinh nghiệm ăn uống</h1>
+                <p class="caps">Cẩm nang để biết nên đi đâu ăn gì, ở đâu</p>
+            </div>
+            <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
+                <span class="fa fa-play"></span>
+            </a>
+        </div>
+    </div>
+</div>
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height" data-bg-image="assets/images/breadcrumb/bg/1-1-1920x373.jpg">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <h2 class="breadcrumb-heading">Product Related</h2>
+                        <ul>
+                            <li>
+                                <a href="/">Trang chủ <i class="pe-7s-angle-right"></i></a>
+                            </li>
+                            <li>Tài khoản của tôi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="account-page-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <ul class="nav myaccount-tab-trigger" id="account-page-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="account-dashboard-tab" data-bs-toggle="tab" href="#account-orders" role="tab" aria-controls="account-dashboard" aria-selected="true">Thông tin tài khoản</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="#account-orders.html" role="tab" aria-controls="account-orders" aria-selected="false">Danh sách đơn hàng</a>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" id="account-details-tab" data-bs-toggle="tab" href="doi-mat-khau.html" role="tab" aria-selected="false">Thay đổi mật khẩu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="account-logout-tab" href="dang-xuat.html" role="tab" aria-selected="false">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-9">
+                    <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
+                        <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel" aria-labelledby="account-dashboard-tab">
+                            <div class="myaccount-dashboard">
+                                <p>
+                                    Xin chào, <b>@Model.TenKhachHang</b>
+                                </p>
+                                <p>Email: @Model.Email</p>
+                                <p>Số điện thoại: @Model.Sdt</p>
+                                <p>Địa chỉ: @Model.DiaChi</p>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
+                            <div class="myaccount-orders">
+                                <h4 class="small-title">DANH SÁCH ĐƠN HÀNG</h4>
+                                @await Html.PartialAsync("TourPartialView", DanhSachDonHang)
+                            </div>
+                        </div>
+                        @*<div class="tab-pane fade" id="account-address" role="tabpanel" aria-labelledby="account-address-tab">
+                            <div class="myaccount-address">
+                                <p>The following addresses will be used on the checkout page by default.</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="small-title">BILLING ADDRESS</h4>
+                                        <address>
+                                            @Model.Email
+                                        </address>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="small-title">SHIPPING ADDRESS</h4>
+                                        <address>
+                                            @Model.Email
+                                        </address>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="tab-pane fade" id="account-details" role="tabpanel" aria-labelledby="account-details-tab">
+                            @await Html.PartialAsync("ChangePasswordPartialView", changePassword)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!--
+    xem thoong tin don hang cua trang user
+-->
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        $(".xemdonhang").click(function () {
+            var madonhang = $(this).attr("data-madonhang")
+            $.ajax({
+                url: '/DonHang/Details',
+                datatype: "json",
+                type: "POST",
+                data: { id: madonhang },
+                async: true,
+                success: function (results) {
+                    $("#records_table").html("");
+                    $("#records_table").html(results);
+                },
+                error: function (xhr) {
+                    alert('error');
+                }
+            });
+        });
+    });
+</script>
+}

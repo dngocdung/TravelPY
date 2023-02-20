@@ -1,49 +1,457 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TravelPY</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/TravelPY.styles.css" asp-append-version="true" />
+    <title>Hoa Vàng - Cỏ Xanh</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/~/assets/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/assets/css/animate.css">
+
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="~/assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/assets/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="~/assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <style>
+        /*.navbar-nav > li > a {
+            font-family: Arial,Helvetica,sans-serif;
+            color: orangered;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown .dropdown-menu {
+            transition: all 0.5s;
+            overflow: hidden;
+            transform-origin: top center;
+            transform: scale(1, 0);
+            display: block;
+            margin-top: 0px;
+            border: 0px solid rgba(0, 0, 0, 0.15) !important;
+            background-color: red;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            transform: scale(1);
+        }
+
+        .dropdown .dropdown-menu {
+            transform: scale(1, 0);
+            display: none;
+        }
+        /* line 130, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_menu.scss */
+        /*.dropdown:hover .dropdown-menu {
+            transform: scale(1);
+            display: block;
+        }
+
+        .dropdown .dropdown-menu {
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -ms-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        .dropdown .dropdown-item {
+            text-transform: capitalize;
+        }*/
+
+        /*$main-color: #6394F8;
+                $light-text: #ABB0BE;
+
+
+                *, *:before, *:after {
+                    box-sizing: border-box;
+                }
+
+                body {
+                    font: 14px/22px "Lato", Arial, sans-serif;
+                    background: #6394F8;
+                }
+
+                .lighter-text {
+                    color: #ABB0BE;
+                }
+
+                .main-color-text {
+                    color: $main-color;
+                }
+
+                nav {
+                    padding: 20px 0 40px 0;
+                    background: #F8F8F8;
+                    font-size: 16px;
+                    .navbar-left
+
+                {
+                    float: left;
+                }
+
+                .navbar-right {
+                    float: right;
+                }
+
+                ul {
+                    li
+
+                {
+                    display: inline;
+                    padding-left: 20px;
+                    a
+
+                {
+                    color: #777777;
+                    text-decoration: none;
+                    &:hover
+
+                {
+                    color: black;
+                }
+
+                }
+                }
+                }
+                }
+
+                .container {
+                    margin: auto;
+                    width: 80%;
+                }
+
+                .badge {
+                    background-color: #6394F8;
+                    border-radius: 10px;
+                    color: white;
+                    display: inline-block;
+                    font-size: 12px;
+                    line-height: 1;
+                    padding: 3px 7px;
+                    text-align: center;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                }
+
+                .shopping-cart {
+                    margin: 20px 0;
+                    float: right;
+                    background: white;
+                    width: 320px;
+                    position: relative;
+                    border-radius: 3px;
+                    padding: 20px;
+                    .shopping-cart-header
+
+                {
+                    border-bottom: 1px solid #E8E8E8;
+                    padding-bottom: 15px;
+                    .shopping-cart-total
+
+                {
+                    float: right;
+                }
+
+                }
+
+                .shopping-cart-items {
+                    padding-top: 20px;
+                    li
+
+                {
+                    margin-bottom: 18px;
+                }
+
+                img {
+                    float: left;
+                    margin-right: 12px;
+                }
+
+                .item-name {
+                    display: block;
+                    padding-top: 10px;
+                    font-size: 16px;
+                }
+
+                .item-price {
+                    color: $main-color;
+                    margin-right: 8px;
+                }
+
+                .item-quantity {
+                    color: $light-text;
+                }
+
+                }
+                }
+
+                .shopping-cart:after {
+                    bottom: 100%;
+                    left: 89%;
+                    border: solid transparent;
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                    border-bottom-color: white;
+                    border-width: 8px;
+                    margin-left: -8px;
+                }
+
+                .cart-icon {
+                    color: #515783;
+                    font-size: 24px;
+                    margin-right: 7px;
+                    float: left;
+                }
+
+                .button {
+                    background: $main-color;
+                    color: white;
+                    text-align: center;
+                    padding: 12px;
+                    text-decoration: none;
+                    display: block;
+                    border-radius: 3px;
+                    font-size: 16px;
+                    margin: 25px 0 15px 0;
+                    &:hover
+
+                {
+                    background: lighten($main-color, 3%);
+                }
+
+                }
+
+                .clearfix:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                }*/
+
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TravelPY</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Privacy</a>
-                        </li>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" asp-area="Admin" asp-controller="Home" asp-action="Index">Pacific<span>Travel Agency</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto fw-bold">
+                    <li class="nav-item active"><a asp-controller="Home" asp-action="Index" class="nav-link">TRANG CHỦ</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">GIỚI THIỆU</a></li>
+                    <li class="nav-item"><a href="tour.html" class="nav-link">TOUR PHÚ YÊN</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="baiviets.html" class="nav-link">KINH NGHIỆM DU LỊCH <i class="fa-solid fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="baiviets.html">Ăn Uống</a>
+                            <a class="dropdown-item" href="single-blog.html">Địa Điểm</a>
+                            <a class="dropdown-item" href="single-blog.html">Khách Sạn</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">LIÊN HỆ</a></li>
+                    <li class="dropdown d-none d-md-block">
+                        <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button" id="settingButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="pe-7s-users"></i>
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a class="dropdown-item" href="/tai-khoan-cua-toi.html">Tài khoản của tôi</a></li>
+                                <li><a class="dropdown-item" href="dang-xuat.html">Đăng xuất</a></li>
+                            }
+                            else
+                            {
+                                <li><a class="dropdown-item" href="/dang-ky.html">Đăng ký tài khoản</a></li>
+                                <li><a class="dropdown-item" href="/dang-nhap.html">Đăng nhập</a></li>
+                            }
+                        </ul>
+                    </li>
+
+                    @*<ul class="navbar-right">
+                    <li>
+                    <a href="#" id="cart">
+                    <i class="fa fa-shopping-cart"></i> Cart
+                    <span class="badge">
+                    <li id="numberCart" class="minicart-wrap me-3 me-lg-0">
+                    @await Component.InvokeAsync("NumberCart")
+                    </li>
+                    </span>
+                    </a>
+                    </li>
+
+                    </ul>*@
+                    @*<div class="container">
+
+
+                    <ul class="navbar-right">
+                    <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
+                    </ul> <!--end navbar-right -->
+                    </div> <!--end container -->*@
+                    @*<div class="container">
+                    <div class="shopping-cart">
+                    <div class="shopping-cart-header">
+                    <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+                    <div class="shopping-cart-total">
+                    <span class="lighter-text">Total:</span>
+                    <span class="main-color-text">$2,229.97</span>
+                    </div>
+                    </div> <!--end shopping-cart-header -->
+
+                    <ul class="shopping-cart-items">
+                    <li class="clearfix">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
+                    <span class="item-name">Sony DSC-RX100M III</span>
+                    <span class="item-price">$849.99</span>
+                    <span class="item-quantity">Quantity: 01</span>
+                    </li>
+
+                    <li class="clearfix">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item2.jpg" alt="item1" />
+                    <span class="item-name">KS Automatic Mechanic...</span>
+                    <span class="item-price">$1,249.99</span>
+                    <span class="item-quantity">Quantity: 01</span>
+                    </li>
+
+                    <li class="clearfix">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item3.jpg" alt="item1" />
+                    <span class="item-name">Kindle, 6" Glare-Free To...</span>
+                    <span class="item-price">$129.99</span>
+                    <span class="item-quantity">Quantity: 01</span>
+                    </li>
                     </ul>
+
+                    <a href="#" class="button">Checkout</a>
+                    </div> <!--end shopping-cart -->
+                    </div> <!--end container -->*@
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END nav -->
+
+
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="ftco-footer bg-bottom ftco-no-pt" style="background-color: #E67300; color: #000000">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md pt-5">
+                    <div class="ftco-footer-widget pt-md-5 mb-4">
+                        <h2 class="ftco-heading-2">Công ty Cổ Phần Du Lịch Hoa Vàng - Cỏ Xanh </h2>
+                        <p>Công ty CP Du Lịch Thương Mại Quy Nhơn me travel là một trong những công ty đầu tiên tại Quy Nhơn và Phú Yên tổ chức các tour trải nghiệm thú vị như câu mực, cắm trại đêm, đốt lửa trại…</p>
+                        <p>Đi cùng Hoa Vàng - Cỏ Xanh travel trên mỗi hành trình, các bạn sẽ mở rộng trái tim và đôi mắt. Đi, nhìn, cảm nhận và hạnh phúc</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+                            <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md pt-5">
+                    <div class="ftco-footer-widget pt-md-5 mb-4">
+                        <h2 class="ftco-heading-2">THÔNG TIN LIÊN HỆ</h2></br>
+                        <ul class="list-unstyled">
+                            <li><a href=""><i class="fa-solid fa-house-chimney"></i> 210 Nguyễn Thị Định, Tp.Quy Nhơn, Bình Định</a></li>
+                            <li><a href=""><i class="fa-solid fa-phone"></i> 0702743839</a></li>
+                            <li><a href=""><i class="fa-solid fa-envelope"></i> dndung.a8tqtpy@gmail.com</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md pt-5">
+                    <div class="ftco-footer-widget pt-md-5 mb-4">
+                        <h2 class="ftco-heading-2">THÔNG TIN CHINH SÁCH</h2></br>
+                        <ul class="list-unstyled">
+                            <li><a href="#"><i class="fa-solid fa-link"></i> Bảo hiểm du lịch</a></li>
+                            <li><a href="#"><i class="fa-solid fa-link"></i> Chính sách bảo mật</a></li>
+                            <li><a href="#"><i class="fa-solid fa-link"></i> Chính sách hoàn huỷ</a></li>
+                            <li><a href="#"><i class="fa-solid fa-link"></i> Bản quyền ảnh và video</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md pt-5">
+                    <div class="ftco-footer-widget pt-md-5 mb-4">
+                        <h2 class="ftco-heading-2">HỖ TRỢ KHÁCH HÀNG</h2></br>
+
+                        <ul class="list-unstyled">
+                            <li><a href="#"><i class="fa-solid fa-link"></i> FAQ</a></li>
+                            <li><a href="#"><i class="fa-solid fa-link"></i> Ý kiến khách hàng</a></li>
+                            <li><a href="#"><i class="fa-solid fa-link"></i> Hướng dẫn đặt Tour và thanh toán</a></li>
+                            <li><a href="#"><i class="fa-solid fa-link"></i> Sitemap</a></li>
+                            <li><a href="#"><i class="fa-solid fa-link"></i> Ảnh và Video</a></li>
+                        </ul>
+
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - TravelPY - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        &copy;<script>document.write(new Date().getFullYear());</script> Hoa Vàng - Cỏ Xanh | Khám Phá Du Lịch Phú Yên <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Dang Ngoc Dung</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+    @section Scripts{
+        <script>
+            (function () {
+
+                $("#cart").on("click", function () {
+                    $(".shopping-cart").fadeToggle("fast");
+                });
+
+            })();
+        </script>
+    }
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery.easing.1.3.js"></script>
+    <script src="~/assets/js/jquery.waypoints.min.js"></script>
+    <script src="~/assets/js/jquery.stellar.min.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/js/jquery.animateNumber.min.js"></script>
+    <script src="~/assets/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="~/assets/js/google-map.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="https://kit.fontawesome.com/9c60762c80.js" crossorigin="anonymous"></script>
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", required:false)
+    @await RenderSectionAsync("Styles", required: false)
 </body>
 </html>

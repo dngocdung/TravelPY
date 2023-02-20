@@ -14,6 +14,4 @@ public partial class KhachSan
     public string? DiaChi { get; set; }
 
     public double? Gia { get; set; }
-
-    public virtual ICollection<DatTour> DatTours { get; } = new List<DatTour>();
 }
