@@ -78,7 +78,7 @@ namespace TravelPY.Areas.Admin.Controllers
         //Chuan hoa duong dan khi chon danh muc
         public IActionResult Filtter(int MaPage = 0)
         {
-            var url = $"/Admin/AdminBaiViet?MaBaiViet={MaPage}";
+            var url = $"/Admin/AdminBaiViet?MaPage={MaPage}";
             if (MaPage == 0)
             {
                 url = $"/Admin/AdminBaiViet";
@@ -157,8 +157,8 @@ namespace TravelPY.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaPage"] = new SelectList(_context.Pages, "MaPage", "MaPage", baiViet.MaPage);
-            ViewData["MaTaiKhoan"] = new SelectList(_context.TaiKhoans, "MaTaiKhoan", "MaTaiKhoan", baiViet.MaTaiKhoan);
+            ViewData["MaPage"] = new SelectList(_context.Pages, "MaPage", "TenPage", baiViet.MaPage);
+            ViewData["MaTaiKhoan"] = new SelectList(_context.TaiKhoans, "MaTaiKhoan", "TenTaiKhoan", baiViet.MaTaiKhoan);
             return View(baiViet);
         }
 

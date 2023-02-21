@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<TravelPY.Models.Page>
-
 @{
     ViewData["Title"] = "Danh sách Page";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
@@ -29,6 +28,7 @@
                         <td>@item.MaPage</td>
                         <td>@item.TenPage</td>
                         <td>@item.SoBaiViet</td>
+                        
                         <td>
                             <a asp-area="Admin" asp-controller="AdminPage" asp-action="Details" asp-route-id="@item.MaPage" class="btn btn-outline-primary">Chi tiết</a>
                             <a asp-area="Admin" asp-controller="AdminPage" asp-action="Edit" asp-route-id="@item.MaPage" class="btn btn-outline-warning">Sửa</a>

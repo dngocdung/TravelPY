@@ -88,7 +88,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "MaKhachHang", datTour.MaKhachHang);
+            ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "TenKhachHang", datTour.MaKhachHang);
             //ViewData["MaKhachSan"] = new SelectList(_context.KhachSans, "MaKhachSan", "MaKhachSan", datTour.MaKhachSan);
             return View(datTour);
         }
@@ -106,7 +106,7 @@ namespace TravelPY.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "MaKhachHang", datTour.MaKhachHang);
+            ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "TenKhachHang", datTour.MaKhachHang);
             //ViewData["MaKhachSan"] = new SelectList(_context.KhachSans, "MaKhachSan", "MaKhachSan", datTour.MaKhachSan);
             return View(datTour);
         }
@@ -143,7 +143,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "MaKhachHang", datTour.MaKhachHang);
+            ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "TenKhachHang", datTour.MaKhachHang);
             //ViewData["MaKhachSan"] = new SelectList(_context.KhachSans, "MaKhachSan", "MaKhachSan", datTour.MaKhachSan);
             return View(datTour);
         }

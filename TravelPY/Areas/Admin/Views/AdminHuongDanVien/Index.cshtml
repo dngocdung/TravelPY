@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TravelPY.Models.HuongDanVien>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenHdv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgaySinhHdv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChiHdv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sdt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhAnh)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenHdv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgaySinhHdv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChiHdv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sdt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HinhAnh)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaHdv">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MaHdv">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaHdv">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

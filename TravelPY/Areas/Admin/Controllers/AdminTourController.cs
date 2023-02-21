@@ -94,8 +94,8 @@ namespace TravelPY.Areas.Admin.Controllers
         // GET: Admin/AdminTour/Create
         public IActionResult Create()
         {
-            ViewData["MaDanhMuc"] = new SelectList(_context.DanhMucs, "MaDanhMuc", "MaDanhMuc");
-            ViewData["MaHdv"] = new SelectList(_context.HuongDanViens, "MaHdv", "MaHdv");
+            ViewData["MaDanhMuc"] = new SelectList(_context.DanhMucs, "MaDanhMuc", "TenDanhMuc");
+            ViewData["MaHdv"] = new SelectList(_context.HuongDanViens, "MaHdv", "TenHdv");
             return View();
         }
 
@@ -143,8 +143,8 @@ namespace TravelPY.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaDanhMuc"] = new SelectList(_context.DanhMucs, "MaDanhMuc", "MaDanhMuc", tour.MaDanhMuc);
-            ViewData["MaHdv"] = new SelectList(_context.HuongDanViens, "MaHdv", "MaHdv", tour.MaHdv);
+            ViewData["MaDanhMuc"] = new SelectList(_context.DanhMucs, "MaDanhMuc", "TenDanhMuc", tour.MaDanhMuc);
+            ViewData["MaHdv"] = new SelectList(_context.HuongDanViens, "MaHdv", "TenHdv", tour.MaHdv);
             return View(tour);
         }
 
@@ -193,8 +193,8 @@ namespace TravelPY.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaDanhMuc"] = new SelectList(_context.DanhMucs, "MaDanhMuc", "MaDanhMuc", tour.MaDanhMuc);
-            ViewData["MaHdv"] = new SelectList(_context.HuongDanViens, "MaHdv", "MaHdv", tour.MaHdv);
+            ViewData["MaDanhMuc"] = new SelectList(_context.DanhMucs, "MaDanhMuc", "TenDanhMuc", tour.MaDanhMuc);
+            ViewData["MaHdv"] = new SelectList(_context.HuongDanViens, "MaHdv", "TenHdv", tour.MaHdv);
             return View(tour);
         }
 

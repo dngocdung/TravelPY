@@ -55,7 +55,7 @@ namespace TravelPY.Areas.Admin.Controllers
         // GET: Admin/AdminTaiKhoan/Create
         public IActionResult Create()
         {
-            ViewData["MaVaiTro"] = new SelectList(_context.VaiTros, "MaVaiTro", "MaVaiTro");
+            ViewData["MaVaiTro"] = new SelectList(_context.VaiTros, "MaVaiTro", "TenVaiTro");
             return View();
         }
 
@@ -73,7 +73,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 _notyfServices.Success("Tạo mới tài khoản thành công");
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaVaiTro"] = new SelectList(_context.VaiTros, "MaVaiTro", "MaVaiTro", taiKhoan.MaVaiTro);
+            ViewData["MaVaiTro"] = new SelectList(_context.VaiTros, "MaVaiTro", "TenVaiTro", taiKhoan.MaVaiTro);
             return View(taiKhoan);
         }
 
@@ -90,7 +90,7 @@ namespace TravelPY.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaVaiTro"] = new SelectList(_context.VaiTros, "MaVaiTro", "MaVaiTro", taiKhoan.MaVaiTro);
+            ViewData["MaVaiTro"] = new SelectList(_context.VaiTros, "MaVaiTro", "TenVaiTro", taiKhoan.MaVaiTro);
             return View(taiKhoan);
         }
 
@@ -127,7 +127,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaVaiTro"] = new SelectList(_context.VaiTros, "MaVaiTro", "MaVaiTro", taiKhoan.MaVaiTro);
+            ViewData["MaVaiTro"] = new SelectList(_context.VaiTros, "MaVaiTro", "TenVaiTro", taiKhoan.MaVaiTro);
             return View(taiKhoan);
         }
 

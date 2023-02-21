@@ -1,0 +1,49 @@
+﻿@model TravelPY.Models.HuongDanVien
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>HuongDanVien</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenHdv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenHdv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NgaySinhHdv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgaySinhHdv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DiaChiHdv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DiaChiHdv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sdt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sdt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HinhAnh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HinhAnh)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaHdv">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

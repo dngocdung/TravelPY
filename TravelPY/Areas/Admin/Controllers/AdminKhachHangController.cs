@@ -57,7 +57,7 @@ namespace TravelPY.Areas.Admin.Controllers
         // GET: Admin/AdminKhachHang/Create
         public IActionResult Create()
         {
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId");
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name");
             return View();
         }
 
@@ -74,7 +74,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", khachHang.LocationId);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", khachHang.LocationId);
             return View(khachHang);
         }
 
@@ -91,7 +91,7 @@ namespace TravelPY.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", khachHang.LocationId);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", khachHang.LocationId);
             return View(khachHang);
         }
 
@@ -127,7 +127,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", khachHang.LocationId);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", khachHang.LocationId);
             return View(khachHang);
         }
 

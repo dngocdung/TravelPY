@@ -25,7 +25,7 @@
                     <div class="col-md-6">
                         <div class="input-affix m-v-10">
                             <i class="prefix-icon anticon anticon-search opacity-04"></i>
-                            <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                            <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm Fail">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -57,7 +57,7 @@
 
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="records_table">
                     @if (Model != null)
                     {
                         foreach (var item in Model)
