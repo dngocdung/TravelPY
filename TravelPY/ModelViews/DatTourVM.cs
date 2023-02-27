@@ -5,7 +5,7 @@ namespace TravelPY.ModelViews
 {
     public class DatTourVM
     {
-        //[Key]
+        [Key]
         public int MaKhachHang { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập Họ và Tên")]

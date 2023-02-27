@@ -1,40 +1,56 @@
 ﻿@using PagedList.Core.Mvc
-@model PagedList.Core.IPagedList<TravelPY.Models.DatTour>
+@model PagedList.Core.IPagedList<TravelPY.Models.KhachHang>
 @{
     int CurrentPage = ViewBag.CurrentPage;
-    ViewData["Title"] = "Danh sách đơn hàng" + CurrentPage;
+    ViewData["Title"] = "Danh sách khách hàng" + CurrentPage;
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
 }
-
 
 <div class="page-header">
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
             <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
-            <span class="breadcrumb-item active">Danh sách đơn hàng : trang @CurrentPage</span>
+            <span class="breadcrumb-item active">Danh sách khách hàng : trang @CurrentPage</span>
         </nav>
     </div>
 </div>
 <div class="card">
     <div class="card-body">
         <div class="row m-b-30">
-            <div class="col-lg-8">
-                <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminDatTour" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm danh mục</span></a>
+            <div class="col-lg-12">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <select class="custom-select" style="min-width: 180px;">
+                            <option selected>Catergory</option>
+                            <option value="all">All</option>
+                            <option value="homeDeco">Home Decoration</option>
+                            <option value="eletronic">Eletronic</option>
+                            <option value="jewellery">Jewellery</option>
+                        </select>
+                    </div>
+                    <div class="m-b-10">
+                        <select class="custom-select" style="min-width: 180px;">
+                            <option selected>Status</option>
+                            <option value="all">All</option>
+                            <option value="inStock">In Stock </option>
+                            <option value="outOfStock">Out of Stock</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-4 text-right">
-            </div>
-        </div>
 
+        </div>
         <div class="table-responsive">
             <table class="table table-hover e-commerce-table">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Tên khách hàng</th>
-                        <th>Ngày mua</th>
-                        <th>Tổng tiền</th>
-                        <th>Trạng thái</th>
+                        <th>Họ và tên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
 
+                        <th>Địa chỉ</th>
+                        <th>#</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,54 +58,31 @@
                     {
                         foreach (var item in Model)
                         {
-
                             <tr>
-                                <td>@item.MaDatTour</td>
-                                <td>@item.MaKhachHangNavigation.TenKhachHang</td>
-                                <td>@item.NgayDatTour</td>
-                                @*<td>@item.OrderDetails.Sum(x =>x.TotalMoney).Value.ToString("#,##0") VNĐ</td>*@
-                                <td>@item.TongTien VNĐ</td>
-                                @*<td>@item.TransactStatus.Status</td>*@
+                                <td>@item.MaKhachHang</td>
 
+                                <td>@item.TenKhachHang</td>
+                                <td>@item.Sdt</td>
+                                <td>@item.Email</td>
 
+                                <td>@item.DiaChi</td>
 
                                 <td>
-                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminDatTour" asp-action="Details" asp-route-id="@item.MaDatTour">Chi tiết</a>
-                                    <a data-target="#modal-header" data-toggle="modal" class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminDatTour" asp-action="ChangeStatus" asp-route-id="@item.MaDatTour">Cập nhật trạng thái</a>
-                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminDatTour" asp-action="Edit" asp-route-id="@item.MaDatTour">Chỉnh sửa</a>
-                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminDatTour" asp-action="Delete" asp-route-id="@item.MaDatTour">Xóa</a>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminKhachHang" asp-action="Details" asp-route-id="@item.MaKhachHang">Chi tiết</a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminKhachHang" asp-action="Edit" asp-route-id="@item.MaKhachHang">Sửa</a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminKhachHang" asp-action="Delete" asp-route-id="@item.MaKhachHang">Xóa</a>
                                 </td>
                             </tr>
                         }
                     }
-                </tbody>
 
+                </tbody>
             </table>
             <div aria-label="Page navigation example">
                 <ul class="pagination">
-                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminDatTour" asp-action="Index" />
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminKhachHang" asp-action="Index" />
                 </ul>
             </div>
         </div>
     </div>
 </div>
-<div id="modal-header" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        </div>
-    </div>
-</div>
-@section Scripts {
-    <script>
-        $('#modal-header').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Button that triggered the modal
-            var url = button.attr("href");
-            var modal = $(this);
-            // note that this will replace the content of modal-content ever time the modal is opened
-            modal.find('.modal-content').load(url);
-        });
-    </script>
-
-}
-
-

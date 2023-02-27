@@ -36,7 +36,7 @@ namespace TravelPY.Controllers
                 var khachhang = _context.KhachHangs.AsNoTracking().SingleOrDefault(x => x.MaKhachHang == Convert.ToInt32(taikhoanID));
                 if (khachhang == null) return NotFound();
                 var donhang = await _context.DatTours
-                    //.Include(x => x.TransactStatus)
+                    .Include(x => x.MaTrangThaiNavigation)
                     .FirstOrDefaultAsync(m => m.MaDatTour == id && Convert.ToInt32(taikhoanID) == m.MaKhachHang);
                 if (donhang == null) return NotFound();
 

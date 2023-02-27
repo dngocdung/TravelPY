@@ -46,6 +46,7 @@
     <div class="checkout-area section-space-y-axis-100">
         <div class="container">
             <form asp-controller="Checkout" asp-action="Index" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input hidden asp-for="MaKhachHang" />
                 <div class="row">
                     <div class="col-lg-6 col-12">
@@ -57,21 +58,31 @@
                                     <div class="checkout-form-list">
                                         <label>Họ và Tên</label>
                                         <input asp-for="TenKhachHang" placeholder="Họ và Tên" type="text">
+                                        <span asp-validation-for="TenKhachHang" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Số điện thoại <span class="required">*</span></label>
                                         <input asp-for="SDT" placeholder="Số điện thoại" type="text">
+                                        <span asp-validation-for="SDT" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Địa chỉ nhận hàng <span class="required">*</span></label>
                                         <input asp-for="DiaChi" placeholder="Địa chỉ nhận hàng" type="text">
+                                        <span asp-validation-for="DiaChi" class="text-danger"></span>
                                     </div>
                                 </div>
-                                @*<div class="col-md-4">
+                                <div class="col-md-12">
+                                    <div class="chekout-form-list">
+                                        <label>Ghi chú</label>
+                                        <input asp-for="Note" placeholder="Ghi chú" type="text">
+                                        <span asp-validation-for="Note" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="country-select">
                                         <label>Tỉnh Thành <span class="required">*</span></label>
                                         <select asp-for="TinhThanh" class="myniceselect nice-select wide" asp-items="ViewBag.lsTinhThanh">
@@ -94,7 +105,8 @@
                                             <option value="0" disabled selected>Phường/Xã</option>
                                         </select>
                                     </div>
-                                </div>*@
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -224,7 +236,7 @@
                         var strQuanHuyen = '<option value="" disabled selected>Quận / Huyện</option>';
                         $("QuanHuyen").append(strQuanHuyen);
                         $.each(QuanHuyens, function(i, item){
-                            var option = '<option value = "' + item.locationId + '">' + item.name + '<option>';
+                            var option = '<option value = "' + item.locationId + '">' + item.namewithtype + '<option>';
                             $("#QuanHuyen").appemd(option);
                         });
                         $('select').niceSelect('update');
@@ -244,7 +256,7 @@
                         $("#PhuongXa").append(readonly);
                         
                         $.each(PhuongXaList, function(i, item){
-                            var option = '<option value = "' + item.locationId + '">' + item.name + '<option>';
+                                    var option = '<option value = "' + item.locationId + '">' + item.namewithtype + '<option>';
                             $("#PhuongXa").appemd(option);
                         });
                         $('select').niceSelect('update');

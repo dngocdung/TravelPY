@@ -37,6 +37,8 @@ public partial class DbToursContext : DbContext
 
     public virtual DbSet<Tour> Tours { get; set; }
 
+    public virtual DbSet<TrangThai> TrangThais { get; set; }
+
     public virtual DbSet<VaiTro> VaiTros { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -95,17 +97,23 @@ public partial class DbToursContext : DbContext
 
         modelBuilder.Entity<DatTour>(entity =>
         {
-            entity.HasKey(e => e.MaDatTour).HasName("PK_DatTours");
+            entity.HasKey(e => e.MaDatTour);
 
             entity.ToTable("DatTour");
 
             entity.Property(e => e.LocationId).HasColumnName("LocationID");
             entity.Property(e => e.NgayDatTour).HasColumnType("datetime");
+            entity.Property(e => e.NgayDi).HasColumnType("datetime");
             entity.Property(e => e.NgayThanhToan).HasColumnType("datetime");
 
             entity.HasOne(d => d.MaKhachHangNavigation).WithMany(p => p.DatTours)
                 .HasForeignKey(d => d.MaKhachHang)
                 .HasConstraintName("FK_DatTour_KhachHang");
+
+            entity.HasOne(d => d.MaTrangThaiNavigation).WithMany(p => p.DatTours)
+                .HasForeignKey(d => d.MaTrangThai)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DatTour_TrangThai");
         });
 
         modelBuilder.Entity<HuongDanVien>(entity =>
@@ -137,11 +145,13 @@ public partial class DbToursContext : DbContext
 
             entity.ToTable("KhachHang");
 
+            entity.Property(e => e.Avatar).HasMaxLength(255);
             entity.Property(e => e.DiaChi).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.LastLogin).HasColumnType("datetime");
             entity.Property(e => e.LocationId).HasColumnName("LocationID");
             entity.Property(e => e.MatKhau).HasMaxLength(50);
-            entity.Property(e => e.NgaySinh).HasColumnType("date");
+            entity.Property(e => e.NgaySinh).HasColumnType("datetime");
             entity.Property(e => e.NgayTao).HasColumnType("datetime");
             entity.Property(e => e.Salt)
                 .HasMaxLength(10)
@@ -150,7 +160,7 @@ public partial class DbToursContext : DbContext
                 .HasMaxLength(12)
                 .IsFixedLength()
                 .HasColumnName("SDT");
-            entity.Property(e => e.TenKhachHang).HasMaxLength(50);
+            entity.Property(e => e.TenKhachHang).HasMaxLength(255);
 
             entity.HasOne(d => d.Location).WithMany(p => p.KhachHangs)
                 .HasForeignKey(d => d.LocationId)
@@ -197,6 +207,9 @@ public partial class DbToursContext : DbContext
             entity.Property(e => e.LastLogin).HasColumnType("datetime");
             entity.Property(e => e.MatKhau).HasMaxLength(50);
             entity.Property(e => e.NgayTao).HasColumnType("datetime");
+            entity.Property(e => e.Salt)
+                .HasMaxLength(10)
+                .IsFixedLength();
             entity.Property(e => e.Sdt)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -230,6 +243,15 @@ public partial class DbToursContext : DbContext
             entity.HasOne(d => d.MaHdvNavigation).WithMany(p => p.Tours)
                 .HasForeignKey(d => d.MaHdv)
                 .HasConstraintName("FK_Tour_HuongDanVien");
+        });
+
+        modelBuilder.Entity<TrangThai>(entity =>
+        {
+            entity.HasKey(e => e.MaTrangThai);
+
+            entity.ToTable("TrangThai");
+
+            entity.Property(e => e.TenTrangThai).HasMaxLength(50);
         });
 
         modelBuilder.Entity<VaiTro>(entity =>

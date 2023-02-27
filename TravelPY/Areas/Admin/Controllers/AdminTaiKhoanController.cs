@@ -64,7 +64,7 @@ namespace TravelPY.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaTaiKhoan,TenTaiKhoan,Sdt,Email,TrangThai,MaVaiTro,NgayTao,LastLogin,MatKhau")] TaiKhoan taiKhoan)
+        public async Task<IActionResult> Create([Bind("MaTaiKhoan,TenTaiKhoan,Sdt,Email,TrangThai,MaVaiTro,NgayTao,LastLogin,MatKhau,Salt")] TaiKhoan taiKhoan)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace TravelPY.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaTaiKhoan,TenTaiKhoan,Sdt,Email,TrangThai,MaVaiTro,NgayTao,LastLogin,MatKhau")] TaiKhoan taiKhoan)
+        public async Task<IActionResult> Edit(int id, [Bind("MaTaiKhoan,TenTaiKhoan,Sdt,Email,TrangThai,MaVaiTro,NgayTao,LastLogin,MatKhau,Salt")] TaiKhoan taiKhoan)
         {
             if (id != taiKhoan.MaTaiKhoan)
             {

@@ -66,7 +66,7 @@ namespace TravelPY.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaKhachHang,TenKhachHang,Sdt,Email,DiaChi,MatKhau,NgaySinh,NgayTao,Salt,LocationId,Tinh,PhuongXa")] KhachHang khachHang)
+        public async Task<IActionResult> Create([Bind("MaKhachHang,TenKhachHang,Sdt,Email,DiaChi,MatKhau,NgaySinh,NgayTao,Salt,LocationId,QuanHuyen,PhuongXa,LastLogin,Avatar,TrangThai")] KhachHang khachHang)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace TravelPY.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaKhachHang,TenKhachHang,Sdt,Email,DiaChi,MatKhau,NgaySinh,NgayTao,Salt,LocationId,Tinh,PhuongXa")] KhachHang khachHang)
+        public async Task<IActionResult> Edit(int id, [Bind("MaKhachHang,TenKhachHang,Sdt,Email,DiaChi,MatKhau,NgaySinh,NgayTao,Salt,LocationId,QuanHuyen,PhuongXa,LastLogin,Avatar,TrangThai")] KhachHang khachHang)
         {
             if (id != khachHang.MaKhachHang)
             {

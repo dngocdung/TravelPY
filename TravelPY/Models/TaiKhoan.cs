@@ -23,6 +23,8 @@ public partial class TaiKhoan
 
     public string? MatKhau { get; set; }
 
+    public string? Salt { get; set; }
+
     public virtual ICollection<BaiViet> BaiViets { get; } = new List<BaiViet>();
 
     public virtual VaiTro? MaVaiTroNavigation { get; set; }

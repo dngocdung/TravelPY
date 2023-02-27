@@ -32,6 +32,8 @@ namespace TravelPY.Areas.Admin.Controllers
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = Utilities.PAGE_SIZE;
             var lsDatTours = _context.DatTours
+                .Include(d => d.MaKhachHangNavigation)
+                .Include(d => d.MaTrangThaiNavigation)
                 .AsNoTracking()
                 .OrderBy(x => x.NgayDatTour);
             PagedList<DatTour> models = new PagedList<DatTour>(lsDatTours, pageNumber, pageSize);
@@ -51,7 +53,7 @@ namespace TravelPY.Areas.Admin.Controllers
 
             var datTour = await _context.DatTours
                 .Include(d => d.MaKhachHangNavigation)
-                //.Include(d => d.MaKhachSanNavigation)
+                .Include(d => d.MaTrangThaiNavigation)
                 .FirstOrDefaultAsync(m => m.MaDatTour == id);
             if (datTour == null)
             {
@@ -67,11 +69,82 @@ namespace TravelPY.Areas.Admin.Controllers
             return View(datTour);
         }
 
+
+        public async Task<IActionResult> ChangeStatus(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.DatTours                
+                .Include(x => x.MaKhachHangNavigation)
+                //.Include(x => x.MaTrangThaiNavigation)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.MaDatTour == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            //ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "MaKhachHang", order.MaKhachHang);
+            ViewData["MaTrangThai"] = new SelectList(_context.TrangThais, "MaTrangThai", "TenTrangThai", order.MaTrangThai);
+            return PartialView("ChangeStatus", order);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangeStatus(int id, [Bind("MaDatTour,NgayDi,MaKhachHang,SoCho,NgayDatTour,GhiChu,ThanhToan,MaThanhToan,NgayThanhToan,DiaChi,LocationId,QuanHuyen,PhuongXa,TongTien,MaTrangThai,Delated,Paid")] DatTour datTour)
+        {
+            if (id != datTour.MaDatTour)
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid)
+            {
+                try
+                {
+                    var donhang = await _context.DatTours                       
+                        .Include(x => x.MaKhachHangNavigation)
+                        //.Include(x=>x.MaTrangThaiNavigation)
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(x => x.MaDatTour == id);
+                    if (donhang != null)
+                    {
+                        donhang.Paid = datTour.Paid;
+                        donhang.Deleted = datTour.Deleted;
+                        donhang.MaTrangThai = datTour.MaTrangThai;
+                        if (donhang.Paid == true)
+                        {
+                            donhang.NgayThanhToan = DateTime.Now;
+                        }
+                        if (donhang.MaTrangThai == 4) donhang.Deleted = true;
+                        if (donhang.MaTrangThai == 2) donhang.NgayDi = DateTime.Now;
+                    }
+                    _context.Update(donhang);
+                    await _context.SaveChangesAsync();
+                    _notyfService.Success("Cập nhật trạng thái đơn hàng thành công");
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!DatTourExists(datTour.MaDatTour))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            //ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "MaKhachHang", datTour.MaKhachHang);
+            ViewData["MaTrangThai"] = new SelectList(_context.TrangThais, "MaTrangThai", "TenTrangThai", datTour.MaTrangThai);
+            return PartialView("ChangeStatus", datTour);
+        }
         // GET: Admin/AdminDatTour/Create
         public IActionResult Create()
         {
             ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "MaKhachHang");
-            //ViewData["MaKhachSan"] = new SelectList(_context.KhachSans, "MaKhachSan", "MaKhachSan");
+            ViewData["MaTrangThai"] = new SelectList(_context.TrangThais, "MaTrangThai", "TenTrangThai");
             return View();
         }
 
@@ -80,7 +153,7 @@ namespace TravelPY.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaDatTour,MaTour,MaKhachHang,SoCho,NgayDatTour,GhiChu,ThanhToan,MaThanhToan,NgayThanhToan,DiaChi,LocationId,Tinh,PhuongXa,TongTien")] DatTour datTour)
+        public async Task<IActionResult> Create([Bind("MaDatTour,NgayDi,MaKhachHang,SoCho,NgayDatTour,GhiChu,ThanhToan,MaThanhToan,NgayThanhToan,DiaChi,LocationId,QuanHuyen,PhuongXa,TongTien,MaTrangThai,Delated,Paid")] DatTour datTour)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +162,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "TenKhachHang", datTour.MaKhachHang);
-            //ViewData["MaKhachSan"] = new SelectList(_context.KhachSans, "MaKhachSan", "MaKhachSan", datTour.MaKhachSan);
+            ViewData["MaTrangThai"] = new SelectList(_context.TrangThais, "MaTrangThai", "TenTrangThai", datTour.MaTrangThai);
             return View(datTour);
         }
 
@@ -107,7 +180,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 return NotFound();
             }
             ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "TenKhachHang", datTour.MaKhachHang);
-            //ViewData["MaKhachSan"] = new SelectList(_context.KhachSans, "MaKhachSan", "MaKhachSan", datTour.MaKhachSan);
+            ViewData["MaTrangThai"] = new SelectList(_context.TrangThais, "MaTrangThai", "TenTrangThai", datTour.MaTrangThai);
             return View(datTour);
         }
 
@@ -116,7 +189,7 @@ namespace TravelPY.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaDatTour,MaTour,MaKhachHang,SoCho,NgayDatTour,GhiChu,ThanhToan,MaThanhToan,NgayThanhToan,DiaChi,LocationId,Tinh,PhuongXa,TongTien")] DatTour datTour)
+        public async Task<IActionResult> Edit(int id, [Bind("MaDatTour,NgayDi,MaKhachHang,SoCho,NgayDatTour,GhiChu,ThanhToan,MaThanhToan,NgayThanhToan,DiaChi,LocationId,QuanHuyen,PhuongXa,TongTien,MaTrangThai,Deleted,Paid")] DatTour datTour)
         {
             if (id != datTour.MaDatTour)
             {
@@ -144,7 +217,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "TenKhachHang", datTour.MaKhachHang);
-            //ViewData["MaKhachSan"] = new SelectList(_context.KhachSans, "MaKhachSan", "MaKhachSan", datTour.MaKhachSan);
+            ViewData["MaTrangThai"] = new SelectList(_context.TrangThais, "MaTrangThai", "TenTrangThai", datTour.MaTrangThai);
             return View(datTour);
         }
 
@@ -158,7 +231,7 @@ namespace TravelPY.Areas.Admin.Controllers
 
             var datTour = await _context.DatTours
                 .Include(d => d.MaKhachHangNavigation)
-                //.Include(d => d.MaKhachSanNavigation)
+                .Include(d => d.MaTrangThaiNavigation)
                 .FirstOrDefaultAsync(m => m.MaDatTour == id);
             if (datTour == null)
             {
@@ -179,17 +252,11 @@ namespace TravelPY.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.DatTours == null)
-            {
-                return Problem("Entity set 'DbToursContext.DatTours'  is null.");
-            }
-            var datTour = await _context.DatTours.FindAsync(id);
-            if (datTour != null)
-            {
-                _context.DatTours.Remove(datTour);
-            }
-            
+            var order = await _context.DatTours.FindAsync(id);
+            order.Deleted = true;
+            _context.Update(order);
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa đơn hàng thành công");
             return RedirectToAction(nameof(Index));
         }
 

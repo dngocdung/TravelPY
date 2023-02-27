@@ -33,11 +33,11 @@ namespace TravelPY.Controllers
         }
         [HttpGet]
         [Route("checkout.html", Name = "Checkout")]
-        public IActionResult Index()
+        public IActionResult Index(string returnUrl = null)
         {
             //Lay gio hang ra de xu ly
             var cart = HttpContext.Session.Get<List<CartItem>>("GioHang");
-            var taikhoanID = HttpContext.Session.GetString("MaKhachHang");
+            var taikhoanID = HttpContext.Session.GetString("MaKhachHang"); //Check tai khoan da login chua
             DatTourVM model = new DatTourVM();
             if (taikhoanID != null)
             {
@@ -47,8 +47,9 @@ namespace TravelPY.Controllers
                 model.Email = khachhang.Email;
                 model.SDT = khachhang.Sdt;
                 model.DiaChi = khachhang.DiaChi;
+                
             }
-            ViewData["lsTinhThanh"] = new SelectList(_context.Locations.Where(x => x.Levels == 1).OrderBy(x => x.Type).ToList(), "Location", "Name");
+            ViewData["lsTinhThanh"] = new SelectList(_context.Locations.Where(x => x.Levels == 1).OrderBy(x => x.Type).ToList(), "LocationId", "Name");
             ViewBag.GioHang = cart;
             return View(model);
         }
@@ -70,10 +71,21 @@ namespace TravelPY.Controllers
                 model.SDT = khachhang.Sdt;
                 model.DiaChi = khachhang.DiaChi;
 
-                //khachhang.LocationId = muaHang.TinhThanh;
-                khachhang.Tinh = muaHang.QuanHuyen;
+                khachhang.LocationId = muaHang.TinhThanh;
+                khachhang.QuanHuyen = muaHang.QuanHuyen;
                 khachhang.PhuongXa = muaHang.PhuongXa;
                 khachhang.DiaChi = muaHang.DiaChi;
+
+                /*khachhang.MaKhachHang = model.MaKhachHang;
+                khachhang.TenKhachHang = model.TenKhachHang;
+                khachhang.Email = model.Email;
+                khachhang.Sdt = model.SDT;
+                khachhang.DiaChi = model.DiaChi;
+
+                khachhang.LocationId = muaHang.TinhThanh;
+                khachhang.QuanHuyen = muaHang.QuanHuyen;
+                khachhang.PhuongXa = muaHang.PhuongXa;
+                khachhang.DiaChi = muaHang.DiaChi;*/
                 _context.Update(khachhang);
                 _context.SaveChanges();
             }
@@ -86,13 +98,15 @@ namespace TravelPY.Controllers
                     donhang.MaKhachHang = model.MaKhachHang;
                     donhang.DiaChi = model.DiaChi;
                     donhang.LocationId = model.TinhThanh;
-                    donhang.Tinh = model.QuanHuyen;
+                    donhang.QuanHuyen = model.QuanHuyen;
                     donhang.PhuongXa = model.PhuongXa;
-
+                      
+                    
                     donhang.NgayDatTour = DateTime.Now;
-                    //donhang.TransactStatusId = 1;//Don hang moi
-                    //donhang.Deleted = false;
-                    //donhang.Paid = false;
+                    donhang.MaTrangThai = 1;//Don hang moi
+                    donhang.Deleted = false;
+                    donhang.Paid = false;
+                    
                     donhang.GhiChu = Utilities.StripHTML(model.Note);
                     donhang.TongTien = Convert.ToInt32(cart.Sum(x => x.TotalMoney));
                     _context.Add(donhang);
@@ -123,11 +137,11 @@ namespace TravelPY.Controllers
             }
             catch
             {
-                ViewData["lsTinhThanh"] = new SelectList(_context.Locations.Where(x => x.Levels == 1).OrderBy(x => x.Type).ToList(), "Location", "Name");
+                ViewData["lsTinhThanh"] = new SelectList(_context.Locations.Where(x => x.Levels == 1).OrderBy(x => x.Type).ToList(), "LocationId", "Name");
                 ViewBag.GioHang = cart;
                 return View(model);
             }
-            ViewData["lsTinhThanh"] = new SelectList(_context.Locations.Where(x => x.Levels == 1).OrderBy(x => x.Type).ToList(), "Location", "Name");
+            ViewData["lsTinhThanh"] = new SelectList(_context.Locations.Where(x => x.Levels == 1).OrderBy(x => x.Type).ToList(), "LocationId", "Name");
             ViewBag.GioHang = cart;
             return View(model);
         }
@@ -152,7 +166,7 @@ namespace TravelPY.Controllers
                 successVM.Phone = khachhang.Sdt;
                 successVM.Address = khachhang.DiaChi;
                 successVM.PhuongXa = GetNameLocation(donhang.PhuongXa.Value);
-                successVM.TinhThanh = GetNameLocation(donhang.Tinh.Value);
+                successVM.TinhThanh = GetNameLocation(donhang.QuanHuyen.Value);
                 return View(successVM);
             }
             catch
