@@ -41,7 +41,7 @@ namespace TravelPY.Controllers
             DatTourVM model = new DatTourVM();
             if (taikhoanID != null)
             {
-                var khachhang = _context.KhachHangs.AsNoTracking().SingleOrDefault(x => x.MaKhachHang == Convert.ToInt32(taikhoanID));
+                var khachhang = _context.KhachHangs.AsNoTracking().Include(x=>x.Location).SingleOrDefault(x => x.MaKhachHang == Convert.ToInt32(taikhoanID));
                 model.MaKhachHang = khachhang.MaKhachHang;
                 model.TenKhachHang = khachhang.TenKhachHang;
                 model.Email = khachhang.Email;
@@ -64,17 +64,19 @@ namespace TravelPY.Controllers
             DatTourVM model = new DatTourVM();
             if (taikhoanID != null)
             {
-                var khachhang = _context.KhachHangs.AsNoTracking().SingleOrDefault(x => x.MaKhachHang == Convert.ToInt32(taikhoanID));
+                var khachhang = _context.KhachHangs.AsNoTracking().Include(x=>x.Location).SingleOrDefault(x => x.MaKhachHang == Convert.ToInt32(taikhoanID));
+                khachhang.LocationId = muaHang.TinhThanh;
+                khachhang.QuanHuyen = muaHang.QuanHuyen;
+                khachhang.PhuongXa = muaHang.PhuongXa;
+                khachhang.DiaChi = muaHang.DiaChi;
+
                 model.MaKhachHang = khachhang.MaKhachHang;
                 model.TenKhachHang = khachhang.TenKhachHang;
                 model.Email = khachhang.Email;
                 model.SDT = khachhang.Sdt;
                 model.DiaChi = khachhang.DiaChi;
 
-                khachhang.LocationId = muaHang.TinhThanh;
-                khachhang.QuanHuyen = muaHang.QuanHuyen;
-                khachhang.PhuongXa = muaHang.PhuongXa;
-                khachhang.DiaChi = muaHang.DiaChi;
+                
 
                 /*khachhang.MaKhachHang = model.MaKhachHang;
                 khachhang.TenKhachHang = model.TenKhachHang;
@@ -120,7 +122,7 @@ namespace TravelPY.Controllers
                         orderDetail.MaTour = item.product.MaTour;
                         //orderDetail.Amount = item.amount;
                         orderDetail.ThanhToan = donhang.TongTien;
-                        orderDetail.Gia = item.product.Gia;
+                        orderDetail.GiaGiam = item.product.GiaGiam;
                         orderDetail.NgayTao = DateTime.Now;
                         _context.Add(orderDetail);
                     }
@@ -166,7 +168,9 @@ namespace TravelPY.Controllers
                 successVM.Phone = khachhang.Sdt;
                 successVM.Address = khachhang.DiaChi;
                 successVM.PhuongXa = GetNameLocation(donhang.PhuongXa.Value);
-                successVM.TinhThanh = GetNameLocation(donhang.QuanHuyen.Value);
+                successVM.QuanHuyen = GetNameLocation(donhang.QuanHuyen.Value);
+
+                successVM.TinhThanh = GetNameLocation(donhang.LocationId.Value);
                 return View(successVM);
             }
             catch

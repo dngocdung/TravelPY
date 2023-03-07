@@ -37,7 +37,7 @@
                                     <thead>
                                         <tr>
                                             <th class="product_remove">Xóa</th>
-                                            <th class="product-thumbnail">Ảnh đại diện</th>
+                                            
                                             <th class="cart-product-name">Sản phẩm</th>
                                             <th class="product-price">Đơn giá</th>
                                             <th class="product-quantity">Số lượng</th>
@@ -53,11 +53,7 @@
                                                     <td class="product_remove">
                                                         <input type="button" value="X" class="removecart btn btn-primary" data-mahh="@item.product.MaTour" />
                                                     </td>
-                                                    <td class="product-thumbnail">
-                                                        <a href="javascript:void(0)">
-                                                            <img src="~/images/tours/@item.product.HinhAnh">
-                                                        </a>
-                                                    </td>
+                                                    
                                                     <td class="product-name"><a href="javascript:void(0)">@item.product.TenTour</a></td>
                                                     <td class="product-price"><span class="amount">@item.product.GiaGiam.Value.ToString("#,##0") VNĐ</span></td>
                                                     <td class="quantity">

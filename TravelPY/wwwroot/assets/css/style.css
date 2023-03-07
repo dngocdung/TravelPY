@@ -3685,7 +3685,7 @@ input[type="button"].btn-block {
         margin-left: 0;
     }
 
-.dropdown-menu {
+/*.dropdown-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -3703,7 +3703,7 @@ input[type="button"].btn-block {
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
-}
+}*/
 
 .dropdown-menu-left {
     right: auto;
@@ -3892,9 +3892,9 @@ input[type="button"].btn-block {
         background-color: transparent;
     }
 
-.dropdown-menu.show {
+/*.dropdown-menu.show {
     display: block;
-}
+}*/
 
 .dropdown-header {
     display: block;

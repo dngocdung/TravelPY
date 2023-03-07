@@ -19,115 +19,15 @@
     <link rel="stylesheet" href="~/assets/css/flaticon.css">
     <link rel="stylesheet" href="~/assets/css/style.css">
     <link rel="stylesheet" href="~/assets/css/nav.css">
-    
-
-    
-    
-
-    
+    <style>
+        .nav-item .dropdown:hover > .dropdown-menu
+        {
+            display:block;
+        }
+    </style>
+ 
 </head>
 <body>
-    @*<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" asp-area="Admin" asp-controller="Home" asp-action="Index">Pacific<span>Travel Agency</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto fw-bold">
-                    <li class="nav-item active"><a asp-controller="Home" asp-action="Index" class="nav-link">TRANG CHỦ</a></li>
-                    <li class="nav-item"><a href="login.html" class="nav-link">GIỚI THIỆU</a></li>
-                    <li class="nav-item"><a href="tour.html" class="nav-link">TOUR PHÚ YÊN</a></li>
-                    <li class="nav-item dropdown">
-                        <a href="baiviets.html" class="nav-link">KINH NGHIỆM DU LỊCH <i class="fa-solid fa-chevron-down"></i></a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="baiviets.html">Ăn Uống</a>
-                            <a class="dropdown-item" href="single-blog.html">Địa Điểm</a>
-                            <a class="dropdown-item" href="single-blog.html">Khách Sạn</a>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">LIÊN HỆ</a></li>
-                    <li class="dropdown d-none d-md-block">
-                        <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button" id="settingButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="pe-7s-users"></i>
-                            <i class="fa-solid fa-user-graduate"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li><a class="dropdown-item" href="/tai-khoan-cua-toi.html">Tài khoản của tôi</a></li>
-                                <li><a class="dropdown-item" href="dang-xuat.html">Đăng xuất</a></li>
-                            }
-                            else
-                            {
-                                <li><a class="dropdown-item" href="/dang-ky.html">Đăng ký tài khoản</a></li>
-                                <li><a class="dropdown-item" href="/dang-nhap.html">Đăng nhập</a></li>
-                            }
-                        </ul>
-                    </li>
-
-                    @*<ul class="navbar-right">
-                        <li>
-                            <a href="#" id="cart">
-                                <i class="fa fa-shopping-cart"></i> Cart
-                                <span class="badge">
-                        <li id="numberCart" class="minicart-wrap me-3 me-lg-0">
-                                        @await Component.InvokeAsync("NumberCart")
-                        </li>
-                        </span>
-                        </a>
-                        </li>
-
-                    </ul>
-                    <div class="container">
-
-
-                        <ul class="navbar-right">
-                            <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
-                        </ul> <!--end navbar-right -->
-                    </div> <!--end container -->
-                    <div class="container">
-                        <div class="shopping-cart">
-                            <div class="shopping-cart-header">
-                                <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
-                                <div class="shopping-cart-total">
-                                    <span class="lighter-text">Total:</span>
-                                    <span class="main-color-text">$2,229.97</span>
-                                </div>
-                            </div> <!--end shopping-cart-header -->
-
-                            <ul class="shopping-cart-items">
-                                <li class="clearfix">
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                                    <span class="item-name">Sony DSC-RX100M III</span>
-                                    <span class="item-price">$849.99</span>
-                                    <span class="item-quantity">Quantity: 01</span>
-                                </li>
-
-                                <li class="clearfix">
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item2.jpg" alt="item1" />
-                                    <span class="item-name">KS Automatic Mechanic...</span>
-                                    <span class="item-price">$1,249.99</span>
-                                    <span class="item-quantity">Quantity: 01</span>
-                                </li>
-
-                                <li class="clearfix">
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item3.jpg" alt="item1" />
-                                    <span class="item-name">Kindle, 6" Glare-Free To...</span>
-                                    <span class="item-price">$129.99</span>
-                                    <span class="item-quantity">Quantity: 01</span>
-                                </li>
-                            </ul>
-
-                            <a href="#" class="button">Checkout</a>
-                        </div> <!--end shopping-cart -->
-                    </div> <!--end container -->
-                </ul>
-            </div>
-        </div>
-    </nav>*@
-    <!-- END nav -->
 
     <div class="page-wrapper">
         <div class="nav-wrapper">
@@ -169,8 +69,8 @@
                         
                     </li>
                     <a href="cart.html"><i class="fa-sharp fa-solid fa-cart-plus"></i></a>
-                    <i class="fas fa-search" id="search-icon"></i>
-                    <input class="search-input" type="text" placeholder="Search..">
+                    @*<i class="fas fa-search" id="search-icon"></i>
+                    <input class="search-input" type="text" placeholder="Search..">*@
                 </ul>
             </nav>
             <div class="grad-bar"></div>

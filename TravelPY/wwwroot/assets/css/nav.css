@@ -72,6 +72,9 @@ h2 {
 }
 
 
+.nav-item .dropdown:hover > dropdown-menu {
+    display: block;
+}
 .navbar {
     display: grid;
     grid-template-columns: 1fr 3fr;
