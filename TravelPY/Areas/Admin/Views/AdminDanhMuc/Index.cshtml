@@ -1,60 +1,62 @@
 ﻿@model IEnumerable<TravelPY.Models.DanhMuc>
-@*Chưa chỉnh sửa*@
+
 @{
+    int Total = ViewBag.Total;
+    int CurrentPage = ViewBag.CurrentPage;
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
-}
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenDanhMuc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mota)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoTour)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Alias)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HinhAnh)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenDanhMuc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mota)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoTour)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Alias)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HinhAnh)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaDanhMuc">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaDanhMuc">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaDanhMuc">Delete</a>
-            </td>
-        </tr>
 }
-    </tbody>
-</table>
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <span class="breadcrumb-item active">Danh sách Danh Mục : trang @ViewBag.CurrentPage</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminDanhMuc" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Tạo mới danh mục mới</span></a>
+            </div>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Mã Danh Mục</th>
+                        <th>Tên Danh Mục</th>
+                        <th>Mô tả</th>
+                        <th>Số Tour</th>                       
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.MaDanhMuc</td>
+                                <td>@item.TenDanhMuc</td>
+                                <td>@item.Mota</td>
+                                @*<td>@item.SoTour</td>*@
+                                <td>@ViewBag.Total</td>
+                                
+                                <td>
+                                    <a asp-area="Admin" asp-controller="AdminDanhMuc" asp-action="Details" asp-route-id="@item.MaDanhMuc" class="btn btn-outline-primary">Chi tiết</a>
+                                    <a asp-area="Admin" asp-controller="AdminDanhMuc" asp-action="Edit" asp-route-id="@item.MaDanhMuc" class="btn btn-outline-warning">Sửa</a>
+                                    <a asp-area="Admin" asp-controller="AdminDanhMuc" asp-action="Delete" asp-route-id="@item.MaDanhMuc" class="btn btn-outline-danger">Xoá</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

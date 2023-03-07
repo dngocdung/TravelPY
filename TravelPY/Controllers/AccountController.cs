@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TravelPY.Extension;
@@ -64,7 +65,9 @@ namespace TravelPY.Controllers
                 var khachhang = _context.KhachHangs.AsNoTracking().SingleOrDefault(x => x.MaKhachHang == Convert.ToInt32(taikhoanID));
                 if (khachhang != null)
                 {
-                    var lsDonHang = _context.DatTours                      
+                    var lsDonHang = _context.DatTours  
+                        .Include(x=>x.MaTrangThaiNavigation)
+                        .Include(x=>x.MaKhachHangNavigation)
                         .AsNoTracking()
                         .Where(x => x.MaKhachHang == khachhang.MaKhachHang)
                         .OrderByDescending(x => x.NgayDatTour)
@@ -76,6 +79,11 @@ namespace TravelPY.Controllers
             }
             return RedirectToAction("DangNhap");
         }
+
+        [Route("thong-tin-don-hang.html", Name = "ThongTin")]
+        public IActionResult TourPartialView()
+        { return View(); }
+
         [HttpGet]
         [AllowAnonymous]
         [Route("dang-ky.html", Name = "DangKy")]
@@ -170,7 +178,7 @@ namespace TravelPY.Controllers
                     string pass = (customer.MatKhau + khachhang.Salt.Trim()).ToMD5();
                     if (khachhang.MatKhau != pass)
                     {
-                        _notyfService.Success("Thông tin đăng nhập chưa chính xác");
+                        _notyfService.Warning("Thông tin đăng nhập chưa chính xác");
                         return View(customer);
                     }
                     //kiem tra xem account co bi disable hay khong
@@ -254,5 +262,8 @@ namespace TravelPY.Controllers
             _notyfService.Success("Thay đổi mật khẩu không thành công");
             return RedirectToAction("Dashboard", "Account");
         }
+
+        
+        
     }
 }

@@ -31,9 +31,16 @@ namespace TravelPY.Areas.Admin.Controllers
             var lsDanhMucs = _context.DanhMucs
                 .AsNoTracking()
                 .OrderBy(x => x.MaDanhMuc);
+            var lsTour = _context.Tours.AsNoTracking().OrderBy(x => x.MaTour);
+            var soTour = 0;
+            foreach(var item in lsTour)
+            {
+                
+                soTour++;
+            }    
             PagedList<DanhMuc> models = new PagedList<DanhMuc>(lsDanhMucs, pageNumber, pageSize);
-
             ViewBag.CurrentPage = pageNumber;
+            ViewBag.Total = soTour;
             return View(models);
 
         }

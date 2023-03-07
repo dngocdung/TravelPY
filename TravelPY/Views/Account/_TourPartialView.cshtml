@@ -1,4 +1,7 @@
 ﻿@model List<DatTour>
+@*@model List<TravelPY.Models.DatTour>*@
+
+
 @if (Model != null && Model.Count() > 0)
 {
     <div class="table-responsive">
@@ -9,6 +12,7 @@
                     <th>Ngày đặt tour</th>
                     <th>Ngày thanh toán</th>
                     
+                    
                     <th>Tổng tiền</th>
                 </tr>
                 @foreach (var item in Model)
@@ -17,6 +21,7 @@
                         <td><a class="account-order-id" href="javascript:void(0)">#@item.MaDatTour</a></td>
                         <td>@item.NgayDatTour</td>
                         <td>@item.NgayThanhToan</td>
+                        
                         
                         
                         <td>@item.TongTien VNĐ</td>

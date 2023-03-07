@@ -4,57 +4,58 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
 }
+<h3>QUẢN LÍ PAGE  --Update</h3>
 
-<h1>Index</h1>
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <span class="breadcrumb-item active">Danh sách tài khoản</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminHuongDanvien" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Tạo mới tài khoản</span></a>
+            </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenHdv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgaySinhHdv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiaChiHdv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sdt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HinhAnh)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenHdv)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgaySinhHdv)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiaChiHdv)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sdt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HinhAnh)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaHdv">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaHdv">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaHdv">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Mã Tài Khoản</th>
+                        <th>Tên Tài Khoản</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Địa chỉ</th>
+                        
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.MaHdv</td>
+                                <td>@item.TenHdv</td>
+                                <td>@item.Sdt</td>
+                                <td>@item.DiaChiHdv</td>
+                                
+                                <td>
+                                    <a asp-area="Admin" asp-controller="AdminHuongDanvien" asp-action="Details" asp-route-id="@item.MaHdv" class="btn btn-outline-primary">Chi tiết</a>
+                                    <a asp-area="Admin" asp-controller="AdminHuongDanvien" asp-action="Edit" asp-route-id="@item.MaHdv" class="btn btn-outline-warning">Sửa</a>
+                                    <a asp-area="Admin" asp-controller="AdminHuongDanvien" asp-action="Delete" asp-route-id="@item.MaHdv" class="btn btn-outline-danger">Xoá</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

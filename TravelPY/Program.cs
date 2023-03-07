@@ -18,9 +18,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
                 .AddCookie(p =>
                 {
                     p.Cookie.Name = "UserLoginCookie";
-                    p.ExpireTimeSpan = TimeSpan.FromDays(1);
-                    //p.LoginPath = "/dang-nhap.html";
-                    //p.LogoutPath = "/dang-xuat/html";
+                    p.ExpireTimeSpan = TimeSpan.FromDays(10);
+                    //p.LoginPath = "/login.html";
+                    //p.LogoutPath = "/logout.html";
                     p.AccessDeniedPath = "/not-found.html";
                 });
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 3; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });

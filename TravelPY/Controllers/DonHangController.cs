@@ -22,7 +22,7 @@ namespace TravelPY.Controllers
             _context = context;
             _notyfService = notyfService;
         }
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,11 +37,15 @@ namespace TravelPY.Controllers
                 if (khachhang == null) return NotFound();
                 var donhang = await _context.DatTours
                     .Include(x => x.MaTrangThaiNavigation)
+                    .Include(x => x.MaKhachHangNavigation)
+
                     .FirstOrDefaultAsync(m => m.MaDatTour == id && Convert.ToInt32(taikhoanID) == m.MaKhachHang);
                 if (donhang == null) return NotFound();
 
                 var chitietdonhang = _context.ChiTietDatTours
                     .Include(x => x.MaTourNavigation)
+                    .Include(x => x.MaDatTourNavigation)
+                    .Include(x => x.MaTourNavigation.MaHdvNavigation)
                     .AsNoTracking()
                     .Where(x => x.MaDatTour == id)
                     .OrderBy(x => x.MaChiTiet)

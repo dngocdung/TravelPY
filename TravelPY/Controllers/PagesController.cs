@@ -19,6 +19,7 @@ namespace TravelPY.Controllers
         }
 
         // GET: Pages
+        [Route("pages.html", Name = ("Page"))]
         public async Task<IActionResult> Index()
         {
               return View(await _context.Pages.ToListAsync());

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PagedList.Core;
-
+using TravelPY.Helpper;
 using TravelPY.Models;
 
 namespace TravelPY.Controllers
@@ -27,7 +27,7 @@ namespace TravelPY.Controllers
             try
             {
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-                var pageSize = 10;
+                var pageSize = Utilities.PAGE_SIZE;
                 var lsTours = _context.Tours
                     .Include(t => t.MaDanhMucNavigation)
                 .Include(t => t.MaHdvNavigation)

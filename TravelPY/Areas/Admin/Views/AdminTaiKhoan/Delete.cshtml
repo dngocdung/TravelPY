@@ -10,7 +10,7 @@
     <h4 class="card-title">Xác nhận xóa tài khoản</h4>
     </br>
     <h6 class="text-warning">Bạn muốn xoá tài khoản --@Model.TenTaiKhoan-- ?</h6>
-    <div class="table-responsive col-md-4">
+    <div class="table-responsive col-md-6">
         <table class="table text-white">
 
             <tbody>
@@ -76,12 +76,12 @@
                         <form asp-action="Delete">
                             <input type="hidden" asp-for="MaTaiKhoan" />
 
-                            <input type="submit" value="Xác nhận xóa" class="btn btn-outline-danger btn-icon-text" style="height:31.4px;">
-
+                            <input type="submit" value="Xác nhận xóa" class="btn btn-outline-danger btn-icon-text col-md-10" style="height:31.4px;">
+                            
                         </form>
                     </td>
                     <td>
-                        <a class="btn btn-outline-warning btn-icon-text w-100" asp-area="Admin" asp-controller="AdminTaiKhoan" asp-action="Index">
+                        <a class="btn btn-outline-warning btn-icon-text col-md-10 row-mb-10" asp-area="Admin" asp-controller="AdminTaiKhoan" asp-action="Index">
                             <i class="mdi mdi-reload btn-icon-prepend"></i> Trở về
                         </a>
                     </td>

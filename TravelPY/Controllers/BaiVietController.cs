@@ -22,6 +22,7 @@ namespace TravelPY.Controllers
             var lsBaiViets = _context.BaiViets
                 .Include(b => b.MaPageNavigation)
                 .Include(b => b.MaTaiKhoanNavigation)
+                .Where(b=>b.MaPage == 1)
                 .AsNoTracking()
                 .OrderByDescending(x => x.NgayTao);
             PagedList<BaiViet> models = new PagedList<BaiViet>(lsBaiViets, pageNumber, pageSize);

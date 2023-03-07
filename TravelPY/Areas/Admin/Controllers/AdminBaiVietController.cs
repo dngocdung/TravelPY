@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using PagedList.Core;
 using TravelPY.Helpper;
 using TravelPY.Models;
@@ -13,6 +15,8 @@ using TravelPY.Models;
 namespace TravelPY.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize()]
+    
     public class AdminBaiVietController : Controller
     {
         private readonly DbToursContext _context;
@@ -24,8 +28,17 @@ namespace TravelPY.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminBaiViet
+        [AllowAnonymous]
         public IActionResult Index(int page = 1, int MaPage = 0)
         {
+            /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
+            var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
+            if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });
+
+            var account = _context.TaiKhoans.AsNoTracking().FirstOrDefault(x => x.MaTaiKhoan == int.Parse(taikhoanID));
+            if (account == null) return NotFound();*/
+
+
             //Danh sach bai viet
             var collection = _context.BaiViets
                 .Include(b => b.MaPageNavigation)
@@ -61,12 +74,22 @@ namespace TravelPY.Areas.Admin.Controllers
                 .Include(b => b.MaPageNavigation)
                 .Include(b => b.MaTaiKhoanNavigation)               
                 .OrderBy(x => x.MaBaiViet).ToList();
-            }    
-            /*var lsBaiViets = _context.BaiViets
-                .Include(b => b.MaPageNavigation)
-                .Include(b => b.MaTaiKhoanNavigation)
-                .AsNoTracking()
-                .OrderBy(x => x.MaBaiViet);*/
+            }
+
+            /*if (account.MaVaiTro == 1) //Admin
+            {
+                lsBaiViets = _context.BaiViets
+                .Include(p => p.MaTaiKhoanNavigation).Include(p => p.MaPageNavigation)
+                .OrderByDescending(x => x.MaBaiViet).ToList();
+            }
+            else //Không phải Admin
+            {
+                lsBaiViets = _context.BaiViets
+                .Include(p => p.MaTaiKhoanNavigation).Include(p => p.MaPageNavigation)
+                .Where(x => x.MaTaiKhoan == account.MaTaiKhoan)
+                .OrderByDescending(x => x.MaBaiViet).ToList();
+            }*/
+            
             PagedList<BaiViet> models = new PagedList<BaiViet>(lsBaiViets.AsQueryable(), pageNumber, pageSize);
             ViewBag.CurrentMaPage = MaPage;
             ViewBag.CurrentPage = pageNumber;
@@ -78,17 +101,24 @@ namespace TravelPY.Areas.Admin.Controllers
         //Chuan hoa duong dan khi chon danh muc
         public IActionResult Filtter(int MaPage = 0)
         {
-            var url = $"/Admin/AdminBaiViet?MaPage={MaPage}";
+            var url = $"/Admin/AdminBaiViet/Index?MaPage={MaPage}";
             if (MaPage == 0)
             {
-                url = $"/Admin/AdminBaiViet";
+                url = $"/Admin/AdminBaiViet/Index";
             }
             return Json(new { status = "success", redirectUrl = url });
-        }      
+        }
 
         // GET: Admin/AdminBaiViet/Details/5
+        //[AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
+            /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
+            var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
+            if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });*/
+
+            
+
             if (id == null || _context.BaiViets == null)
             {
                 return NotFound();
@@ -107,8 +137,15 @@ namespace TravelPY.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminBaiViet/Create
+        //[AllowAnonymous]
         public IActionResult Create()
         {
+            /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
+            var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
+            if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });*/
+
+            
+
             ViewData["MaPage"] = new SelectList(_context.Pages, "MaPage", "TenPage");
             ViewData["MaTaiKhoan"] = new SelectList(_context.TaiKhoans, "MaTaiKhoan", "TenTaiKhoan");
             return View();
@@ -118,9 +155,16 @@ namespace TravelPY.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaBaiViet,TieuDe,HinhAnh,Publisher,NoiDung,NgayTao,MaTaiKhoan,MaPage,Alias")] BaiViet baiViet, Microsoft.AspNetCore.Http.IFormFile fHinhAnh)
         {
+            /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
+            var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
+            if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });
+
+            var account = _context.TaiKhoans.AsNoTracking().FirstOrDefault(x => x.MaTaiKhoan == int.Parse(taikhoanID));
+            if (account == null) return NotFound();*/
             if (ModelState.IsValid)
             {
                 if (fHinhAnh != null)
@@ -145,8 +189,13 @@ namespace TravelPY.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminBaiViet/Edit/5
+        //[AllowAnonymous]
         public async Task<IActionResult> Edit(int? id)
         {
+            /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
+            var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
+            if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });*/
+
             if (id == null || _context.BaiViets == null)
             {
                 return NotFound();
@@ -166,6 +215,7 @@ namespace TravelPY.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MaBaiViet,TieuDe,HinhAnh,Publisher,NoiDung,NgayTao,MaTaiKhoan,MaPage,Alias")] BaiViet baiViet, Microsoft.AspNetCore.Http.IFormFile fHinhAnh)
         {
@@ -174,8 +224,26 @@ namespace TravelPY.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
+            var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
+            if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });
+
+            var account = _context.TaiKhoans.AsNoTracking().FirstOrDefault(x => x.MaTaiKhoan == int.Parse(taikhoanID));
+            if (account == null) return NotFound();*/
+
+            /*if (account.MaTaiKhoan != 8)
             {
+                if (baiViet.MaTaiKhoan != account.MaTaiKhoan) return RedirectToAction(nameof(Index));
+            }*/
+
+            if (!ModelState.IsValid)
+            {
+                /*post.AccountId = account.AccountId;
+                post.Author = account.FullName;
+                if (post.CatId == null) post.CatId = 1;
+                post.CreatedDate = DateTime.Now;
+                post.Alias = Utilities.SEOUrl(post.Title);
+                //post.Views = 0;*/
                 try
                 {
                     if (fHinhAnh != null)
@@ -186,7 +254,7 @@ namespace TravelPY.Areas.Admin.Controllers
                     }
                     if (string.IsNullOrEmpty(baiViet.HinhAnh)) baiViet.HinhAnh = "default.jpg";
                     baiViet.Alias = Utilities.SEOUrl(baiViet.TieuDe);
-
+                    baiViet.NgayTao = DateTime.Now;
                     _context.Update(baiViet);
                     await _context.SaveChangesAsync();
                     _notyfService.Success("Sửa thành công");
@@ -211,6 +279,7 @@ namespace TravelPY.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminBaiViet/Delete/5
+        //[AllowAnonymous]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.BaiViets == null)
@@ -232,6 +301,7 @@ namespace TravelPY.Areas.Admin.Controllers
 
         // POST: Admin/AdminBaiViet/Delete/5
         [HttpPost, ActionName("Delete")]
+        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

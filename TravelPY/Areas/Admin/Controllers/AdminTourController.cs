@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +15,7 @@ using TravelPY.Models;
 namespace TravelPY.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminTourController : Controller
     {
         private readonly DbToursContext _context;
@@ -26,8 +29,16 @@ namespace TravelPY.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminTour
+        
         public IActionResult Index(int page = 1, int MaDanhMuc = 0)
         {
+            /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
+            var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
+            if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });
+
+            var account = _context.TaiKhoans.AsNoTracking().FirstOrDefault(x => x.MaTaiKhoan == int.Parse(taikhoanID));
+            if (account == null) return NotFound();*/
+
             var pageNumber = page;
             var pageSize = Utilities.PAGE_SIZE;
 
@@ -58,6 +69,7 @@ namespace TravelPY.Areas.Admin.Controllers
             ViewBag.CurrentPage = pageNumber;
 
             ViewData["DanhMuc"] = new SelectList(_context.DanhMucs, "MaDanhMuc", "TenDanhMuc");
+            ViewData["Hdv"] = new SelectList(_context.HuongDanViens, "MaHdv", "TenHdv");
 
             return View(models);
         }
@@ -160,7 +172,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

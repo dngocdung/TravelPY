@@ -7,54 +7,12 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenPage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NoiDung)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HinhAnh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoBaiViet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Alias)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenPage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoiDung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HinhAnh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoBaiViet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Alias)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaPage">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaPage">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaPage">Delete</a>
-            </td>
-        </tr>
+@if(Model != null && Model.Count() > 0)
+{
+    foreach(var item in Model)
+    {
+        <div class="one">
+            <span class="day">@item.TenPage</span>
+        </div>
+    }
 }
-    </tbody>
-</table>

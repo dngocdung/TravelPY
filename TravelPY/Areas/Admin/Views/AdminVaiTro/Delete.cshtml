@@ -5,17 +5,16 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
 }
 
-<h1>Xoá quyền truy cập</h1>
 
 <h3>Bạn muốn xoá quyền truy cập này?</h3>
 <div class="card-body">
     <h4 class="card-title">Xác nhận xóa quyền truy cập</h4>
-    <div class="table-responsive col-md-4">
+    <div class="table-responsive col-md-6">
         <table class="table text-white">
             <tbody>
                 <tr>
                     <td>ID:</td>
-                    <td class="text-dark font-weight-semibold">@Model.MaVaiTro</td>
+                    <td class="font-weight-semibold">@Model.MaVaiTro</td>
                 </tr>
                 <tr>
                     <td>Tên quyền truy cập:</td>
@@ -32,6 +31,11 @@
                             <input type="hidden" asp-for="MaVaiTro" />
                             <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
                         </form>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-warning btn-icon-text col-md-10 row-mb-20" asp-area="Admin" asp-controller="AdminVaiTro" asp-action="Index">
+                                <i class="mdi mdi-reload btn-icon-prepend"></i> Trở về
+                            </a>
                     </td>
                 </tr>
             </tbody>

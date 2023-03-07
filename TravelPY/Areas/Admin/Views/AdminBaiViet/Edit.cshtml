@@ -11,10 +11,11 @@
 <h4>Thêm mới bài viết</h4>
 <hr />
 <div class="card-body">
-    <form class="needs-validation" asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Edit" method="post" enctype="multipart/form-data">
+    <form class="needs-validation" asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Edit" asp-route-id="@Model.MaBaiViet" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="MaBaiViet" />
         <input type="hidden" asp-for="HinhAnh" />
+        <input type="hidden" asp-for="NgayTao" />
         <div class="form-row">
             <div class="col-md-6 mb-3">
                 <label asp-for="TieuDe" class="control-label">Tiêu Đề</label>

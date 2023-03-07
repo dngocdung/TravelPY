@@ -7,7 +7,8 @@
     var total = DanhSachDonHang.Sum(x => x.TongTien);
     TravelPY.ModelViews.ChangePasswordVM changePassword = new TravelPY.ModelViews.ChangePasswordVM();
 }
-<div class="hero-wrap js-fullheight" style="background-image: url('images/news/an-uong-1.jpg');">
+
+@*<div class="hero-wrap js-fullheight" style="background-image: url('images/news/an-uong-1.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
@@ -21,19 +22,19 @@
             </a>
         </div>
     </div>
-</div>
-<main class="main-content">
+</div>*@
+@*<main class="main-content">
     <div class="breadcrumb-area breadcrumb-height" data-bg-image="assets/images/breadcrumb/bg/1-1-1920x373.jpg">
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col-lg-12">
                     <div class="breadcrumb-item">
-                        <h2 class="breadcrumb-heading">Product Related</h2>
+                        <h2 class="breadcrumb-heading">Tài khoản của tôi</h2>
                         <ul>
                             <li>
                                 <a href="/">Trang chủ <i class="pe-7s-angle-right"></i></a>
                             </li>
-                            <li>Tài khoản của tôi</li>
+                            <li>Quản lý thông tin hồ sơ để bảo mật tài khoản</li>
                         </ul>
                     </div>
                 </div>
@@ -45,17 +46,18 @@
             <div class="row">
                 <div class="col-lg-3">
                     <ul class="nav myaccount-tab-trigger" id="account-page-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="account-dashboard-tab" data-bs-toggle="tab" href="tai-khoan-cua-toi.html" role="tab" aria-controls="account-dashboard" aria-selected="true">Thông tin tài khoản</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="cart.html" role="tab" aria-controls="account-orders" aria-selected="false">Danh sách đơn hàng</a>
-                        </li> 
-                        <li class="nav-item">
-                            <a class="nav-link" id="account-details-tab" data-bs-toggle="tab" href="doi-mat-khau.html" role="tab" aria-selected="false">Thay đổi mật khẩu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="account-logout-tab" href="dang-xuat.html" role="tab" aria-selected="false">Đăng xuất</a>
+                        <li class="nav-item dropdown">
+                            <a href="#profile" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                                <i class="fe fe-user fe-16"></i>
+                                <span class="ml-3 item-text">Profile</span>
+                            </a>
+                            <ul class="collapse list-unstyled pl-4 w-100" id="profile">
+                                <a class="nav-link pl-3" href="./profile.html"><span class="ml-1">Overview</span></a>
+                                <a class="nav-link pl-3" href="./tai-khoan-cua-toi.html"><span class="ml-1">Tài khoản của tôi</span></a>
+                                <a class="nav-link pl-3" asp-controller="Account" asp-action="TourPartialView"><span class="ml-1">Thông tin đơn hàng</span></a>
+                                <a class="nav-link pl-3" asp-controller="Account" asp-action="ChangePassword"><span class="ml-1">Thay đổi mật khẩu</span></a>
+                                <a class="nav-link pl-3" href="./cart.html"><span class="ml-1">Giỏ hàng</span></a>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -71,13 +73,69 @@
                                 <p>Địa chỉ: @Model.DiaChi</p>
                             </div>
                         </div>
+
+                        @*<div class="row">
+                            <div class="col-md-4">
+                                <form asp-area="Admin" asp-controller="AdminKhachHang" asp-action="Edit">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="MaKhachHang" />
+                                    <div class="form-group">
+                                        <label asp-for="TenKhachHang" class="control-label"></label>
+                                        <input asp-for="TenKhachHang" class="form-control" />
+                                        <span asp-validation-for="TenKhachHang" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Sdt" class="control-label"></label>
+                                        <input asp-for="Sdt" class="form-control" />
+                                        <span asp-validation-for="Sdt" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Email" class="control-label"></label>
+                                        <input asp-for="Email" class="form-control" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="DiaChi" class="control-label"></label>
+                                        <input asp-for="DiaChi" class="form-control" />
+                                        <span asp-validation-for="DiaChi" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label asp-for="NgaySinh" class="control-label"></label>
+                                        <input asp-for="NgaySinh" class="form-control" />
+                                        <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label asp-for="LocationId" class="control-label"></label>
+                                        <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
+                                        <span asp-validation-for="LocationId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="QuanHuyen" class="control-label"></label>
+                                        <input asp-for="QuanHuyen" class="form-control" />
+                                        <span asp-validation-for="QuanHuyen" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="PhuongXa" class="control-label"></label>
+                                        <input asp-for="PhuongXa" class="form-control" />
+                                        <span asp-validation-for="PhuongXa" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                         <div class="tab-pane fade" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
                             <div class="myaccount-orders">
                                 <h4 class="small-title">DANH SÁCH ĐƠN HÀNG</h4>
-                                @await Html.PartialAsync("TourPartialView", DanhSachDonHang)
+                                @await Html.PartialAsync("_TourPartialView", DanhSachDonHang)
                             </div>
                         </div>
-                        @*<div class="tab-pane fade" id="account-address" role="tabpanel" aria-labelledby="account-address-tab">
+                        <div class="tab-pane fade" id="account-address" role="tabpanel" aria-labelledby="account-address-tab">
                             <div class="myaccount-address">
                                 <p>The following addresses will be used on the checkout page by default.</p>
                                 <div class="row">
@@ -95,40 +153,266 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>*@
+                        </div>
                         <div class="tab-pane fade" id="account-details" role="tabpanel" aria-labelledby="account-details-tab">
-                            @await Html.PartialAsync("ChangePasswordPartialView", changePassword)
+                            @await Html.PartialAsync("_ChangePasswordPartialView", changePassword)
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</main>*@
 
+<section class="py-5 my-5">
+    <div class="container">
+        <h1 class="mb-5">Hồ sơ của tôi</h1>
+        <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+            <div class="profile-tab-nav border-right p-4 p-md-5">
+                <div class="p-4">
+                    <div class="img-circle text-center mb-3">
+                        <img src="img/user2.jpg" alt="Image" class="shadow">
+                    </div>
+                    <h4 class="text-center">@Model.TenKhachHang</h4>
+                </div>
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
+                        <i class="fa fa-home text-center mr-1"></i>
+                        Tài khoản của tôi
+                    </a>
+                    <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+                        <i class="fa fa-key text-center mr-1"></i>
+                        Thay đổi mật khẩu
+                    </a>
+                    @*<a class="nav-link" id="security-tab" data-toggle="pill" href="#security" role="tab" aria-controls="security" aria-selected="false">
+                        <i class="fa fa-user text-center mr-1"></i>
+                        Security
+                    </a>*@
+                    <a class="nav-link" id="application-tab" data-toggle="pill" href="#application" role="tab" aria-controls="application" aria-selected="false">
+                        <i class="fa fa-tv text-center mr-1"></i>
+                        Thông tin đon hàng
+                    </a>
+                    <a class="nav-link" id="notification-tab" data-toggle="pill" href="#notification" role="tab" aria-controls="notification" aria-selected="false">
+                        <i class="fa fa-bell text-center mr-1"></i>
+                        Đăng xuất
+                    </a>
+                </div>
+            </div>
+            <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                    <h3 class="mb-4">Hồ sơ của tôi</h3>
+
+                    <form asp-controller="Checkout" asp-action="Index" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="MaKhachHang" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tên</label>
+                                    <input type="text" class="form-control" asp-for="TenKhachHang">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ngày sinh</label>
+                                    <input type="date" class="form-control" asp-for="NgaySinh">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" asp-for="Email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input type="text" class="form-control" asp-for="Sdt">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Địa chỉ</label>
+                                    <textarea class="form-control" rows="4" asp-for="DiaChi"></textarea>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div>
+                            <button class="btn btn-primary">Update</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                    <h3 class="mb-4">Password Settings</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Old password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>New password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Confirm new password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary">Update</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </div>
+                </div>
+                @*<div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+                    <h3 class="mb-4">Security Settings</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Login</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Two-factor auth</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="recovery">
+                                    <label class="form-check-label" for="recovery">
+                                        Recovery
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary">Update</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </div>
+                </div>*@
+                <div class="tab-pane fade" id="application" role="tabpanel" aria-labelledby="application-tab">
+                    <h4 class="small-title">DANH SÁCH ĐƠN HÀNG</h4>
+                    @if (DanhSachDonHang != null && DanhSachDonHang.Count() > 0)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Ngày đặt tour</th>
+                                        <th>Ngày thanh toán</th>
+                                        <th>Trạng thái</th>
+
+
+                                        <th>Tổng tiền</th>
+                                    </tr>
+                                    @foreach (var item in DanhSachDonHang)
+                                    {
+                                        <tr>
+                                            <td><a class="account-order-id" href="javascript:void(0)">#@item.MaDatTour</a></td>
+                                            <td>@item.NgayDatTour</td>
+                                            <td>@item.NgayThanhToan</td>
+                                            <td>@item.MaTrangThaiNavigation.TenTrangThai</td>
+
+
+
+                                            <td>@item.TongTien VNĐ</td>
+                                            <td>
+                                                <a href="javascript:void(0)" class="xemdonhang" data-madonhang="@item.MaDatTour"><span>Xem đơn hàng</span></a>
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <hr />
+                            <div id="records_table">
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>Chưa có đơn hàng!</p>
+                    }
+                </div>
+                <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
+                    <h3 class="mb-4">Notification Settings</h3>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="notification1">
+                            <label class="form-check-label" for="notification1">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum accusantium accusamus, neque cupiditate quis
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="notification2">
+                            <label class="form-check-label" for="notification2">
+                                hic nesciunt repellat perferendis voluptatum totam porro eligendi.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="notification3">
+                            <label class="form-check-label" for="notification3">
+                                commodi fugiat molestiae tempora corporis. Sed dignissimos suscipit
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary">Update</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!--
     xem thoong tin don hang cua trang user
 -->
 @section Scripts{
-<script>
-    $(document).ready(function () {
-        $(".xemdonhang").click(function () {
-            var madonhang = $(this).attr("data-madonhang")
-            $.ajax({
-                url: '/DonHang/Details',
-                datatype: "json",
-                type: "POST",
-                data: { id: madonhang },
-                async: true,
-                success: function (results) {
-                    $("#records_table").html("");
-                    $("#records_table").html(results);
-                },
-                error: function (xhr) {
-                    alert('error');
-                }
+    <script>
+        $(document).ready(function () {
+            $(".xemdonhang").click(function () {
+                var madonhang = $(this).attr("data-madonhang")
+                $.ajax({
+                    url: '/DonHang/Details',
+                    datatype: "json",
+                    type: "POST",
+                    data: { id: madonhang },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 }

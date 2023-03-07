@@ -19,6 +19,7 @@ namespace TravelPY.Controllers
             _context = context;
         }
         // Trang chủ
+        //[Route("trang-chu.html", Name = "Home")]
         public IActionResult Index()
         {
             HomeViewVM model = new HomeViewVM();

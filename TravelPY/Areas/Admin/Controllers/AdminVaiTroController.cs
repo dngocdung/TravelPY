@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,7 @@ using TravelPY.Models;
 namespace TravelPY.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminVaiTroController : Controller
     {
         private readonly DbToursContext _context;
@@ -22,9 +25,16 @@ namespace TravelPY.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminVaiTro
+        //[AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-              return View(await _context.VaiTros.ToListAsync());
+            /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
+            var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
+            if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });
+
+            var account = _context.TaiKhoans.AsNoTracking().FirstOrDefault(x => x.MaTaiKhoan == int.Parse(taikhoanID));
+            if (account == null) return NotFound();*/
+            return View(await _context.VaiTros.ToListAsync());
         }
 
         // GET: Admin/AdminVaiTro/Details/5

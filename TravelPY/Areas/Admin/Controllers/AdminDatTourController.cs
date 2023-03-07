@@ -35,7 +35,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 .Include(d => d.MaKhachHangNavigation)
                 .Include(d => d.MaTrangThaiNavigation)
                 .AsNoTracking()
-                .OrderBy(x => x.NgayDatTour);
+                .OrderByDescending(x => x.NgayDatTour);
             PagedList<DatTour> models = new PagedList<DatTour>(lsDatTours, pageNumber, pageSize);
 
             ViewBag.CurrentPage = pageNumber;
@@ -66,9 +66,31 @@ namespace TravelPY.Areas.Admin.Controllers
                 .OrderBy(x => x.MaChiTiet)
                 .ToList();
             ViewBag.ChiTiet = Chitietdonhang;
+
+            string phuongxa = GetNameLocation(datTour.PhuongXa.Value);
+            string Quanhuyen = GetNameLocation(datTour.QuanHuyen.Value);
+            string TinhThanh = GetNameLocation(datTour.LocationId.Value);
+            string fullAddress = $"{datTour.DiaChi}, {phuongxa}, {Quanhuyen}, {TinhThanh}";
+            ViewBag.FullName = fullAddress;
             return View(datTour);
         }
 
+        public string GetNameLocation(int idlocation)
+        {
+            try
+            {
+                var location = _context.Locations.AsNoTracking().SingleOrDefault(x => x.LocationId == idlocation);
+                if (location != null)
+                {
+                    return location.NameWithType;
+                }
+            }
+            catch
+            {
+                return string.Empty;
+            }
+            return string.Empty;
+        }
 
         public async Task<IActionResult> ChangeStatus(int? id)
         {
