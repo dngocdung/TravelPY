@@ -49,10 +49,12 @@ namespace TravelPY.Controllers
                 else
                 {
                     Tour hh = _context.Tours.SingleOrDefault(p => p.MaTour == productID);
+                    
                     item = new CartItem
                     {
                         amount = amount.HasValue ? amount.Value : 1,
-                        product = hh
+                        product = hh,
+                        
                     };
                     cart.Add(item);//Them vao gio
                 }

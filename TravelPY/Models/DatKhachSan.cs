@@ -11,7 +11,7 @@ public partial class DatKhachSan
 
     public int? MaKhachSan { get; set; }
 
-    public int? MaPhong { get; set; }
+    public int? MaChiTietKs { get; set; }
 
     public DateTime? NgayDat { get; set; }
 
@@ -23,9 +23,9 @@ public partial class DatKhachSan
 
     public int? NumChildrens { get; set; }
 
+    public int? Gia { get; set; }
+
+    public virtual ICollection<ChiTietDatK> ChiTietDatKs { get; } = new List<ChiTietDatK>();
+
     public virtual KhachHang? MaKhachHangNavigation { get; set; }
-
-    public virtual KhachSan? MaKhachSanNavigation { get; set; }
-
-    public virtual Phong? MaPhongNavigation { get; set; }
 }

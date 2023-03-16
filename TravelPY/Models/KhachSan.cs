@@ -21,7 +21,7 @@ public partial class KhachSan
 
     public string? Alias { get; set; }
 
-    public virtual ICollection<DatKhachSan> DatKhachSans { get; } = new List<DatKhachSan>();
+    public virtual ICollection<ChiTietDatK> ChiTietDatKs { get; } = new List<ChiTietDatK>();
 
     public virtual ICollection<Phong> Phongs { get; } = new List<Phong>();
 }

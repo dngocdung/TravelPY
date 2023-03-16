@@ -1,0 +1,70 @@
+﻿@*@model TravelPY.Models.DatKhachSan
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>DatKhachSan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaKhachHang" class="control-label"></label>
+                <select asp-for="MaKhachHang" class ="form-control" asp-items="ViewBag.MaKhachHang"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaKhachSan" class="control-label"></label>
+                <input asp-for="MaKhachSan" class="form-control" />
+                <span asp-validation-for="MaKhachSan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaChiTietKs" class="control-label"></label>
+                <select asp-for="MaChiTietKs" class ="form-control" asp-items="ViewBag.MaChiTietKs"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgayDat" class="control-label"></label>
+                <input asp-for="NgayDat" class="form-control" />
+                <span asp-validation-for="NgayDat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgayDen" class="control-label"></label>
+                <input asp-for="NgayDen" class="form-control" />
+                <span asp-validation-for="NgayDen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgayDi" class="control-label"></label>
+                <input asp-for="NgayDi" class="form-control" />
+                <span asp-validation-for="NgayDi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumAdults" class="control-label"></label>
+                <input asp-for="NumAdults" class="form-control" />
+                <span asp-validation-for="NumAdults" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumChildrens" class="control-label"></label>
+                <input asp-for="NumChildrens" class="form-control" />
+                <span asp-validation-for="NumChildrens" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gia" class="control-label"></label>
+                <input asp-for="Gia" class="form-control" />
+                <span asp-validation-for="Gia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+*@

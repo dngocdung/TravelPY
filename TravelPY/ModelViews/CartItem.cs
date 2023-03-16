@@ -9,7 +9,6 @@ namespace TravelPY.ModelViews
         public Phong phong { get; set; }
         public int amount { get; set; }
         public double TotalMoney => amount * product.GiaGiam.Value;
-        public double RoomMoney => amount* phong.Gia.Value;
-        public double Tong => TotalMoney + RoomMoney;
+        
     }
 }

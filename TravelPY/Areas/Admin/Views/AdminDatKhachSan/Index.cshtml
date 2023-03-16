@@ -1,0 +1,84 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<TravelPY.Models.DatKhachSan>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách đặt khách sạn" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <span class="breadcrumb-item active">Danh sách đơn hàng : trang @CurrentPage</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminDatKhachSan" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm Tour</span></a>
+            </div>
+            <div class="col-lg-4 text-right">
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên khách hàng</th>
+                        
+                        <th>Ngày mua</th>
+                        <th>Ngày đến</th>
+                        <th>Ngày đi</th>
+                        
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@item.MaDatKs</td>
+                                <td>@item.MaKhachHangNavigation.TenKhachHang</td>
+                                <td>@item.NgayDat</td>
+                                <td>@item.NgayDen</td>
+                                <td>@item.NgayDi</td>
+                                
+                                
+
+
+
+                                <td>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminDatKhachSan" asp-action="Details" asp-route-id="@item.MaDatKs">Chi tiết</a>
+                                    
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminDatKhachSan" asp-action="Edit" asp-route-id="@item.MaDatKs">Chỉnh sửa</a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminDatKhachSan" asp-action="Delete" asp-route-id="@item.MaDatKs">Xóa</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+            <div aria-label="Page navigation example">
+                <ul class="pagination">
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminDatKhachSan" asp-action="Index" />
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-header" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

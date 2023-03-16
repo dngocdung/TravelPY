@@ -15,7 +15,7 @@ namespace TravelPY.ModelViews
         public string SDT { get; set; }
         [Required(ErrorMessage = "Ngày sinh")]
         public DateTime? NgaySinh { get; set; }
-        [Required(ErrorMessage = "Địa chỉ nhận hàng")]
+        [Required(ErrorMessage = "Địa chỉ khách hàng")]
         public string DiaChi { get; set; }
         [Required(ErrorMessage = "Vui lòng chọn Tỉnh/Thành")]
         public int TinhThanh { get; set; }
@@ -25,5 +25,7 @@ namespace TravelPY.ModelViews
         public int PhuongXa { get; set; }
         public int PaymentID { get; set; }
         public string Note { get; set; }
+
+        
     }
 }
