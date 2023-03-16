@@ -1,0 +1,63 @@
+﻿@model TravelPY.Models.KhachSan
+
+@{
+    ViewData["Title"] = "Chi tiết khách sạn";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
+}
+
+
+
+<div class="card-body">
+    <h4 class="card-title">Thông tin khách sạn</h4>
+    <div class="table-responsive">
+        <table class="table text-white">
+            <tbody>
+                <tr>
+                    <td>Mã khách sạn:</td>
+                    <td class="font-weight-semibold">@Model.MaKhachSan</td>
+                </tr>
+                <tr>
+                    <td>Tên khách sạn:</td>
+                    <td>@Model.TenKhachSan</td>
+                </tr>
+                <tr>
+                    <td>Hình ảnh:</td>
+                    <td>
+                        <img width="200" height="200" src="~/AdminAssetsOne/images/khachsans/@Model.HinhAnh" alt="@Model.HinhAnh" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tổng số phòng:</td>
+                    <td>@Model.SoPhong</td>
+                </tr>
+                <tr>
+                    <td>Số điện thoại:</td>
+                    <td>@Model.Sdt</td>
+                </tr>
+                
+                <tr>
+                    <td>Địa chỉ:</td>
+                    <td>@Model.DiaChi</td>
+                </tr>
+                <tr>
+                    <td>Alias:</td>
+                    <td>@Model.Alias</td>
+                </tr>
+                <tr>
+                    <td>Nội dung:</td>
+                    <td>@Html.Raw(Model.MoTa)</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <div>
+            <a class="btn btn-outline-primary btn-icon-text col-md-5" asp-area="Admin" asp-controller="AdminKhachSan" asp-action="Edit" asp-route-id="@Model.MaKhachSan">
+                <i class="mdi mdi-file-check btn-icon-prepend"></i> Sửa
+            </a>
+            <a style="float:right" class="btn btn-outline-warning btn-icon-text col-md-5" asp-area="Admin" asp-controller="AdminKhachSan" asp-action="Index">
+                <i class="mdi mdi-reload btn-icon-prepend"></i> Trở về
+            </a>
+        </div>
+    </div>
+</div>

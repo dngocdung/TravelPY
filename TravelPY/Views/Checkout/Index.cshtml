@@ -66,7 +66,7 @@
                                         <span asp-validation-for="Note" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                @*<div class="col-md-4">
                                     <div class="country-select">
                                         <label>Tỉnh Thành <span class="required">*</span></label>
                                         <select asp-for="TinhThanh" class="myniceselect nice-select wide" asp-items="ViewBag.lsTinhThanh">
@@ -89,7 +89,7 @@
                                             <option value="0" disabled selected>Phường/Xã</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div>*@
                                 
                             </div>
                         </div>
@@ -146,7 +146,7 @@
                                             <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
                                                 <div class="card-body">
                                                     <p>
-                                                        Khách hàng sẽ thanh toán khi nhận hàng
+                                                        Khách hàng sẽ thanh toán khi hành trình bắt đầu!
                                                     </p>
                                                 </div>
                                             </div>
@@ -164,8 +164,8 @@
                                                     <p>
                                                         Thông tin tài khoản ngân hàng
                                                     </p>
-                                                    <p>Chủ tài khoản: Dương Phương Duy</p>
-                                                    <p>Số tài khoản: 0963102916 - Ngân hàng VietcomBank</p>
+                                                    <p>Chủ tài khoản: Dang Ngoc Dung</p>
+                                                    <p>Số tài khoản: 0000000000 - Ngân hàng ViettinBank</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -180,15 +180,15 @@
                                             <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
                                                 <div class="card-body">
                                                     <p>Thông tin MOMO</p>
-                                                    <p>Chủ tài khoản: Dương Phương Duy</p>
-                                                    <p>Số điện thoại: 0963102916</p>
+                                                    <p>Chủ tài khoản: Dang Ngoc Dung</p>
+                                                    <p>Số điện thoại: 0702743839</p>
 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="order-button-payment">
-                                        <input value="XÁC NHẬN ĐẶT HÀNG" type="submit">
+                                        <input class="btn btn-success" value="XÁC NHẬN ĐẶT HÀNG" type="submit">
                                     </div>
                                 </div>
                             </div>

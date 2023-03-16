@@ -6,33 +6,33 @@
     int PageCurrent = ViewBag.CurrentPage;
     int PageNext = PageCurrent + 1;
 }
-@*<div class="hero-wrap js-fullheight" style="background-image: url('images/news/cha-ram-tom-dat-dac-san-noi-tieng-cua-tinh-binh-dinh.png');">
-    
-    <div class="overlay"></div>
+<div class="hero-wrap js-fullheight" style="background-image: url('images/news/cha-ram-tom-dat-dac-san-noi-tieng-cua-tinh-binh-dinh.png');">
+
+    @*<div class="overlay"></div>
     <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
-            <div class="col-md-7 ftco-animate">
-                <span class="subheading">Welcome to Hoa Vàng - Cỏ Xanh</span>
-                <h1 class="mb-4">Hoa Vàng - Cỏ Xanh Kinh nghiệm ăn uống</h1>
-                <p class="caps">Cẩm nang để biết nên đi đâu ăn gì, ở đâu</p>
-            </div>
-            <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
-                <span class="fa fa-play"></span>
-            </a>
-        </div>
+    <div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
+    <div class="col-md-7 ftco-animate">
+    <span class="subheading">Welcome to Hoa Vàng - Cỏ Xanh</span>
+    <h1 class="mb-4">Hoa Vàng - Cỏ Xanh Kinh nghiệm ăn uống</h1>
+    <p class="caps">Cẩm nang để biết nên đi đâu ăn gì, ở đâu</p>
     </div>
-</div>*@
+    <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
+    <span class="fa fa-play"></span>
+    </a>
+    </div>
+    </div>*@
+</div>
 
 
 <section class="ftco-section">
     <div class="container">
         <div class="row d-flex">
-            
-            @if(Model != null && Model.Count() > 0)
+
+            @if (Model != null && Model.Count() > 0)
             {
-                foreach(var item in Model)
+                foreach (var item in Model)
                 {
-                    string url = $"/tin-tuc/{item.Alias}/{item.MaBaiViet}.html";
+                    string url = $"/{item.Alias}/{item.MaBaiViet}.html";
                     <div class="col-md-4 d-flex ftco-animate">
                         <div class="blog-entry justify-content-end" style="min-width:350px;">
                             <a href="@url" class="block-20" style="background-image: url('images/news/@item.HinhAnh');">
@@ -50,10 +50,10 @@
                                         <span class="yr">@item.MaPageNavigation.TenPage</span>
                                     </div>
                                 </div>
-                                
+
                                 <h6 class="heading text-center"><a href="@url">@item.TieuDe</a></h6>
 
-                                
+
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         @if (PageCurrent > 1)
                         {
                             <li class="page-item">
-                                <a class="page-link" href="/baiviets.html?page=@(PageCurrent - 1)" aria-label="Previous">
+                                <a class="page-link" href="/kinh-nghiem-du-lich.html?page=@(PageCurrent - 1)" aria-label="Previous">
                                     <span class="fa fa-chevron-left"></span>
                                 </a>
                             </li>
@@ -75,16 +75,16 @@
                         else
                         {
                             <li class="page-item">
-                                <a class="page-link" href="/baiviets.html" aria-label="Previous">
+                                <a class="page-link" href="/kinh-nghiem-du-lich.html" aria-label="Previous">
                                     <span class="fa fa-chevron-left"></span>
                                 </a>
                             </li>
                         }
 
-                        <li class="page-item active"><a class="page-link" href="/baiviets.html?page=@PageCurrent">@PageCurrent</a></li>
-                        <li class="page-item"><a class="page-link" href="/baiviets.html?page=@PageNext">@PageNext</a></li>
+                        <li class="page-item active"><a class="page-link" href="/kinh-nghiem-du-lich.html?page=@PageCurrent">@PageCurrent</a></li>
+                        <li class="page-item"><a class="page-link" href="/kinh-nghiem-du-lich.html?page=@PageNext">@PageNext</a></li>
                         <li class="page-item">
-                            <a class="page-link" href="/baiviets.html?page=@PageNext" aria-label="Next">
+                            <a class="page-link" href="/kinh-nghiem-du-lich.html?page=@PageNext" aria-label="Next">
                                 <span class="fa fa-chevron-right"></span>
                             </a>
                         </li>
@@ -115,8 +115,41 @@
                     <li>Khu du lịch Quy Nhơn, hòn khô Quy Nhơn</li>
                     <li>Du lịch đá đĩa, du lịch Kỳ Co, du lịch Quy Nhơn Phú Yên</li>
                 </ol>
-               
+
             </p>
         </div>
     </div>
 </section>
+@*@section Scripts{
+    <script>
+        $(document).ready(function () {
+            jQuery("#txtCatID").change(function () {
+                var maDanhMuc = jQuery(this).children(":selected").attr("value");
+                maDanhMuc = parseFloat(maDanhMuc);
+                $('#txtCatID option')
+                    .removeAttr('selected');
+                $("#txtCatID > [value=" + maDanhMuc + "]").attr("selected", "true");
+                $.ajax({
+                    url: '/BaiViet/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        MaPage: maDanhMuc
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+
+
+        });
+    </script>
+
+}*@

@@ -19,12 +19,12 @@ namespace TravelPY.Controllers
             _context = context;
         }
         // Trang chủ
-        //[Route("trang-chu.html", Name = "Home")]
+        //[Route("/trang-chu.html", Name = "Home")]
         public IActionResult Index()
         {
             HomeViewVM model = new HomeViewVM();
-
-            var lsTours = _context.Tours.AsNoTracking()
+            //Danh sách Tour đang hoạt động
+            var lsTours = _context.Tours.AsNoTracking().Include(x => x.MaDanhMucNavigation)
                 .Where(x => x.TrangThai == true)
                 .OrderByDescending(x => x.MaTour)
                 .ToList();
@@ -85,5 +85,7 @@ namespace TravelPY.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        
     }
 }

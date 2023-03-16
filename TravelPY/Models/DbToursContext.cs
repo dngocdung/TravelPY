@@ -21,6 +21,8 @@ public partial class DbToursContext : DbContext
 
     public virtual DbSet<DanhMuc> DanhMucs { get; set; }
 
+    public virtual DbSet<DatKhachSan> DatKhachSans { get; set; }
+
     public virtual DbSet<DatTour> DatTours { get; set; }
 
     public virtual DbSet<HuongDanVien> HuongDanViens { get; set; }
@@ -29,9 +31,13 @@ public partial class DbToursContext : DbContext
 
     public virtual DbSet<KhachSan> KhachSans { get; set; }
 
+    public virtual DbSet<LoaiPhong> LoaiPhongs { get; set; }
+
     public virtual DbSet<Location> Locations { get; set; }
 
     public virtual DbSet<Page> Pages { get; set; }
+
+    public virtual DbSet<Phong> Phongs { get; set; }
 
     public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
 
@@ -93,6 +99,30 @@ public partial class DbToursContext : DbContext
             entity.Property(e => e.Alias).HasMaxLength(255);
             entity.Property(e => e.HinhAnh).HasMaxLength(255);
             entity.Property(e => e.TenDanhMuc).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<DatKhachSan>(entity =>
+        {
+            entity.HasKey(e => e.MaDatKs);
+
+            entity.ToTable("DatKhachSan");
+
+            entity.Property(e => e.MaDatKs).HasColumnName("MaDatKS");
+            entity.Property(e => e.NgayDat).HasColumnType("datetime");
+            entity.Property(e => e.NgayDen).HasColumnType("date");
+            entity.Property(e => e.NgayDi).HasColumnType("date");
+
+            entity.HasOne(d => d.MaKhachHangNavigation).WithMany(p => p.DatKhachSans)
+                .HasForeignKey(d => d.MaKhachHang)
+                .HasConstraintName("FK_DatKhachSan_KhachHang");
+
+            entity.HasOne(d => d.MaKhachSanNavigation).WithMany(p => p.DatKhachSans)
+                .HasForeignKey(d => d.MaKhachSan)
+                .HasConstraintName("FK_DatKhachSan_KhachSan");
+
+            entity.HasOne(d => d.MaPhongNavigation).WithMany(p => p.DatKhachSans)
+                .HasForeignKey(d => d.MaPhong)
+                .HasConstraintName("FK_DatKhachSan_Phong");
         });
 
         modelBuilder.Entity<DatTour>(entity =>
@@ -173,8 +203,25 @@ public partial class DbToursContext : DbContext
 
             entity.ToTable("KhachSan");
 
+            entity.Property(e => e.Alias).HasMaxLength(255);
             entity.Property(e => e.DiaChi).HasMaxLength(255);
+            entity.Property(e => e.HinhAnh).HasMaxLength(255);
+            entity.Property(e => e.Sdt)
+                .HasMaxLength(15)
+                .IsFixedLength()
+                .HasColumnName("SDT");
             entity.Property(e => e.TenKhachSan).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<LoaiPhong>(entity =>
+        {
+            entity.HasKey(e => e.MaLoai);
+
+            entity.ToTable("LoaiPhong");
+
+            entity.Property(e => e.LoaiPhong1)
+                .HasMaxLength(50)
+                .HasColumnName("LoaiPhong");
         });
 
         modelBuilder.Entity<Location>(entity =>
@@ -195,6 +242,21 @@ public partial class DbToursContext : DbContext
             entity.Property(e => e.Alias).HasMaxLength(255);
             entity.Property(e => e.HinhAnh).HasMaxLength(255);
             entity.Property(e => e.TenPage).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<Phong>(entity =>
+        {
+            entity.HasKey(e => e.MaPhong);
+
+            entity.ToTable("Phong");
+
+            entity.HasOne(d => d.MaKhachSanNavigation).WithMany(p => p.Phongs)
+                .HasForeignKey(d => d.MaKhachSan)
+                .HasConstraintName("FK_Phong_KhachSan");
+
+            entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.Phongs)
+                .HasForeignKey(d => d.MaLoai)
+                .HasConstraintName("FK_Phong_LoaiPhong");
         });
 
         modelBuilder.Entity<TaiKhoan>(entity =>

@@ -32,15 +32,17 @@ namespace TravelPY.Areas.Admin.Controllers
                 .AsNoTracking()
                 .OrderBy(x => x.MaDanhMuc);
             var lsTour = _context.Tours.AsNoTracking().OrderBy(x => x.MaTour);
-            var soTour = 0;
+            var soTour1N = 0;
+            var soTourDN = 0;
             foreach(var item in lsTour)
             {
-                
-                soTour++;
+                if(item.MaDanhMuc == 1) soTour1N++;
+                else if(item.MaDanhMuc == 2) soTourDN++;
             }    
             PagedList<DanhMuc> models = new PagedList<DanhMuc>(lsDanhMucs, pageNumber, pageSize);
             ViewBag.CurrentPage = pageNumber;
-            ViewBag.Total = soTour;
+            ViewBag.soTour1N = soTour1N;
+            ViewBag.SoTourDN = soTourDN;
             return View(models);
 
         }

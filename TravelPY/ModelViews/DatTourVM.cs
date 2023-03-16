@@ -13,6 +13,8 @@ namespace TravelPY.ModelViews
         public string Email { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
         public string SDT { get; set; }
+        [Required(ErrorMessage = "Ngày sinh")]
+        public DateTime? NgaySinh { get; set; }
         [Required(ErrorMessage = "Địa chỉ nhận hàng")]
         public string DiaChi { get; set; }
         [Required(ErrorMessage = "Vui lòng chọn Tỉnh/Thành")]

@@ -68,7 +68,10 @@ namespace TravelPY.Controllers
                 khachhang.LocationId = muaHang.TinhThanh;
                 khachhang.QuanHuyen = muaHang.QuanHuyen;
                 khachhang.PhuongXa = muaHang.PhuongXa;
-                khachhang.DiaChi = muaHang.DiaChi;
+                //khachhang.DiaChi = muaHang.DiaChi;
+                
+                
+                
 
                 model.MaKhachHang = khachhang.MaKhachHang;
                 model.TenKhachHang = khachhang.TenKhachHang;
@@ -78,16 +81,7 @@ namespace TravelPY.Controllers
 
                 
 
-                /*khachhang.MaKhachHang = model.MaKhachHang;
-                khachhang.TenKhachHang = model.TenKhachHang;
-                khachhang.Email = model.Email;
-                khachhang.Sdt = model.SDT;
-                khachhang.DiaChi = model.DiaChi;
-
-                khachhang.LocationId = muaHang.TinhThanh;
-                khachhang.QuanHuyen = muaHang.QuanHuyen;
-                khachhang.PhuongXa = muaHang.PhuongXa;
-                khachhang.DiaChi = muaHang.DiaChi;*/
+                
                 _context.Update(khachhang);
                 _context.SaveChanges();
             }
@@ -98,18 +92,20 @@ namespace TravelPY.Controllers
                     //Khoi tao don hang
                     DatTour donhang = new DatTour();
                     donhang.MaKhachHang = model.MaKhachHang;
+                    
                     donhang.DiaChi = model.DiaChi;
                     donhang.LocationId = model.TinhThanh;
                     donhang.QuanHuyen = model.QuanHuyen;
                     donhang.PhuongXa = model.PhuongXa;
-                      
                     
+
                     donhang.NgayDatTour = DateTime.Now;
                     donhang.MaTrangThai = 1;//Don hang moi
                     donhang.Deleted = false;
                     donhang.Paid = false;
                     
-                    donhang.GhiChu = Utilities.StripHTML(model.Note);
+                    //donhang.GhiChu = Utilities.StripHTML(model.Note);
+                    donhang.GhiChu = Utilities.StripHTML(muaHang.Note);
                     donhang.TongTien = Convert.ToInt32(cart.Sum(x => x.TotalMoney));
                     _context.Add(donhang);
                     _context.SaveChanges();
@@ -120,7 +116,7 @@ namespace TravelPY.Controllers
                         ChiTietDatTour orderDetail = new ChiTietDatTour();
                         orderDetail.MaDatTour = donhang.MaDatTour;
                         orderDetail.MaTour = item.product.MaTour;
-                        //orderDetail.Amount = item.amount;
+                        
                         orderDetail.ThanhToan = donhang.TongTien;
                         orderDetail.GiaGiam = item.product.GiaGiam;
                         orderDetail.NgayTao = DateTime.Now;

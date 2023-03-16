@@ -22,7 +22,15 @@ namespace TravelPY.Areas.Admin.Controllers
         // GET: Admin/AdminPage
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Pages.ToListAsync());
+            var so = _context.BaiViets
+                .AsNoTracking()
+                .Include(b => b.MaPageNavigation)
+                .Include(b => b.MaTaiKhoanNavigation)
+                .Where(b => b.MaBaiViet == 1)
+                .Count();
+            //.OrderBy(x => x.MaBaiViet).ToList();
+            ViewBag.So = so;
+            return View(await _context.Pages.ToListAsync());
         }
 
         // GET: Admin/AdminPage/Details/5

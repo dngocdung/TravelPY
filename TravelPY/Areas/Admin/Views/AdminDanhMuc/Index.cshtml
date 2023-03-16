@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<TravelPY.Models.DanhMuc>
 
 @{
-    int Total = ViewBag.Total;
+    int soTour1N = ViewBag.soTour1N;
+    int soTourDN = ViewBag.soTourDN;
     int CurrentPage = ViewBag.CurrentPage;
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
@@ -30,7 +31,7 @@
                         <th>Mã Danh Mục</th>
                         <th>Tên Danh Mục</th>
                         <th>Mô tả</th>
-                        <th>Số Tour</th>                       
+                        <th>Số Tour</th>
                         <th>Action</th>
 
                     </tr>
@@ -44,9 +45,20 @@
                                 <td>@item.MaDanhMuc</td>
                                 <td>@item.TenDanhMuc</td>
                                 <td>@item.Mota</td>
-                                @*<td>@item.SoTour</td>*@
-                                <td>@ViewBag.Total</td>
                                 
+                                <td>
+                                    @if (@item.MaDanhMuc == 1)
+                                    {
+                                        @soTour1N
+                                    }
+                                    else if (@item.MaDanhMuc == 2)
+                                    {
+                                        @soTourDN
+                                    }
+                                </td>
+
+
+
                                 <td>
                                     <a asp-area="Admin" asp-controller="AdminDanhMuc" asp-action="Details" asp-route-id="@item.MaDanhMuc" class="btn btn-outline-primary">Chi tiết</a>
                                     <a asp-area="Admin" asp-controller="AdminDanhMuc" asp-action="Edit" asp-route-id="@item.MaDanhMuc" class="btn btn-outline-warning">Sửa</a>

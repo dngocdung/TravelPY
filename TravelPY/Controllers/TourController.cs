@@ -21,8 +21,8 @@ namespace TravelPY.Controllers
         }
 
         // GET: Tour
-        [Route("tour.html", Name = ("ShopProduct"))]
-        public IActionResult Index(int? page)
+        [Route("/1-ngay.html", Name = ("Tour1N"))]
+        public IActionResult Tour1N(int? page)
         {
             try
             {
@@ -32,6 +32,7 @@ namespace TravelPY.Controllers
                     .Include(t => t.MaDanhMucNavigation)
                 .Include(t => t.MaHdvNavigation)
                     .AsNoTracking()
+                    .Where(t=>t.MaDanhMuc==1)
                     .OrderByDescending(x => x.MaTour);
                 PagedList<Tour> models = new PagedList<Tour>(lsTours, pageNumber, pageSize);
 
@@ -45,7 +46,32 @@ namespace TravelPY.Controllers
 
 
         }
-        [Route("danhmuc/{Alias}", Name = ("DanhSachTour"))]
+        [Route("/dai-ngay.html", Name = ("TourDN"))]
+        public IActionResult TourDN(int? page)
+        {
+            try
+            {
+                var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+                var pageSize = Utilities.PAGE_SIZE;
+                var lsTours = _context.Tours
+                    .Include(t => t.MaDanhMucNavigation)
+                .Include(t => t.MaHdvNavigation)
+                    .AsNoTracking()
+                    .Where(t => t.MaDanhMuc == 2)
+                    .OrderByDescending(x => x.MaTour);
+                PagedList<Tour> models = new PagedList<Tour>(lsTours, pageNumber, pageSize);
+
+                ViewBag.CurrentPage = pageNumber;
+                return View(models);
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+        }
+        /*[Route("danhmuc/{Alias}", Name = ("DanhSachTour"))]
         public IActionResult List(string Alias, int page = 1)
         {
             try
@@ -71,7 +97,7 @@ namespace TravelPY.Controllers
             }
 
 
-        }
+        }*/
         // GET: Tour/Details/5
         [Route("/tour/{Alias}/{id}.html", Name = ("ChiTietTour"))]
         public IActionResult Details(int id)

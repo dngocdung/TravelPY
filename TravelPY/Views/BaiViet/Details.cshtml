@@ -1,13 +1,14 @@
 ﻿@model TravelPY.Models.BaiViet
+
 @{
     ViewData["Title"] = Model.TieuDe;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string url = $"/tin-tuc/{Model.Alias}/{Model.MaBaiViet}.html";
+    string url = $"/{Model.Alias}/{Model.MaBaiViet}.html";
     
     List<BaiViet> Baivietlienquan = ViewBag.Baivietlienquan;
 }
 
-<img style="height: 500px; width:100%; background-position: left-center; display: block; " src="~/assets/images/anuong/an-uong-1.jpg" />
+<img style="height: 500px; width:100%; background-position: left-center; display: block; " src="~/images/news/@Model.HinhAnh" />
 @*<div class="hero-wrap js-fullheight" style="background-image: url('assets/images/Home/banh-hoi1.jpg');">
     <div class="overlay"></div>
     <div class="container">
@@ -32,9 +33,9 @@
                 @Html.Raw(Model.NoiDung)
                 <div class="tag-widget post-tag-container mb-5 mt-5">
                     <div class="tagcloud">
-                        <a href="#" class="tag-cloud-link">Ăn Uống</a>
-                        <a href="#" class="tag-cloud-link">Địa Điểm</a>
-                        <a href="#" class="tag-cloud-link">Khách Sạn</a>
+                        <a href="/an-uong.html" class="tag-cloud-link">Ăn Uống</a>
+                        <a href="/dia-diem.html" class="tag-cloud-link">Địa Điểm</a>
+                        <a href="/khach-san.html" class="tag-cloud-link">Khách Sạn</a>
                         
                     </div>
                 </div>
@@ -65,16 +66,34 @@
                 <div class="sidebar-box ftco-animate">
                     <div class="categories">
                         <h3>Danh mục bài viết</h3>
-                        <li><a href="#">Ăn Uống <span>(12)</span></a></li>
-                        <li><a href="#">Đại Điểm <span>(22)</span></a></li>
-                        <li><a href="#">Khách Sạn <span>(37)</span></a></li>
+                        <li><a href="/an-uong.html">Ăn Uống <span></span></a></li>
+                        <li><a href="/dia-diem.html">Đại Điểm <span>(22)</span></a></li>
+                        <li><a href="/khach-san.html">Khách Sạn <span>(37)</span></a></li>
                         
                     </div>
                 </div>
 
                 <div class="sidebar-box ftco-animate">
                     <h3>Bài viết liên quan</h3>
-                    <div class="block-21 mb-4 d-flex">
+                    @if (Baivietlienquan != null && Baivietlienquan.Count() > 0)
+                    {
+                    @foreach(var item in Baivietlienquan)
+                    {
+                        string _url = $"/{item.Alias}/{item.MaBaiViet}.html";
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url('/images//news/@item.HinhAnh');"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="@_url">@item.TieuDe</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="fa fa-calendar"></span>@item.NgayTao</a></div>
+                                    <div><a href="#"><span class="fa fa-user"></span>@item.MaPageNavigation.TenPage</a></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    }}
+
+                    @*<div class="block-21 mb-4 d-flex">
                         <a class="blog-img mr-4" style="background-image: url('assets/images//news/image_1.jpg');"></a>
                         <div class="text">
                             <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
@@ -106,7 +125,7 @@
                                 <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
 
                 

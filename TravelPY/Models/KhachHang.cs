@@ -35,6 +35,8 @@ public partial class KhachHang
 
     public bool TrangThai { get; set; }
 
+    public virtual ICollection<DatKhachSan> DatKhachSans { get; } = new List<DatKhachSan>();
+
     public virtual ICollection<DatTour> DatTours { get; } = new List<DatTour>();
 
     public virtual Location? Location { get; set; }

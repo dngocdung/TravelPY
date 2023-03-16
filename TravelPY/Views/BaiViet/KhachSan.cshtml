@@ -1,0 +1,123 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<TravelPY.Models.BaiViet>
+@{
+    ViewData["Title"] = "Blog - " + ViewBag.CurrentPage;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int PageCurrent = ViewBag.CurrentPage;
+    int PageNext = PageCurrent + 1;
+}
+<div class="hero-wrap js-fullheight" style="background-image: url('images/news/cha-ram-tom-dat-dac-san-noi-tieng-cua-tinh-binh-dinh.png');">
+
+    @*<div class="overlay"></div>
+    <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
+    <div class="col-md-7 ftco-animate">
+    <span class="subheading">Welcome to Hoa Vàng - Cỏ Xanh</span>
+    <h1 class="mb-4">Hoa Vàng - Cỏ Xanh Kinh nghiệm ăn uống</h1>
+    <p class="caps">Cẩm nang để biết nên đi đâu ăn gì, ở đâu</p>
+    </div>
+    <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
+    <span class="fa fa-play"></span>
+    </a>
+    </div>
+    </div>*@
+</div>
+
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row d-flex">
+
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    string url = $"/{item.Alias}/{item.MaBaiViet}.html";
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry justify-content-end" style="min-width:350px;">
+                            <a href="@url" class="block-20" style="background-image: url('images/news/@item.HinhAnh');">
+                            </a>
+                            <div class="text" style="border-radius:20px; min-height:150px;">
+                                <div class="d-flex align-items-center mb-4 topp">
+                                    <div class="one">
+                                        <span class="day">@item.NgayTao.Value.Day</span>
+                                    </div>
+                                    <div class="two">
+                                        <span class="yr">@item.NgayTao.Value.Month</span>
+                                        <span class="mos">@item.NgayTao.Value.Year</span>
+                                    </div>
+                                    <div class="one">
+                                        <span class="yr">@item.MaPageNavigation.TenPage</span>
+                                    </div>
+                                </div>
+
+                                <h6 class="heading text-center"><a href="@url">@item.TieuDe</a></h6>
+
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-lg-12">
+            <div class="pagination-area pt-10">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        @if (PageCurrent > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/khach-san.html?page=@(PageCurrent - 1)" aria-label="Previous">
+                                    <span class="fa fa-chevron-left"></span>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/khach-san.html" aria-label="Previous">
+                                    <span class="fa fa-chevron-left"></span>
+                                </a>
+                            </li>
+                        }
+
+                        <li class="page-item active"><a class="page-link" href="/khach-san.html?page=@PageCurrent">@PageCurrent</a></li>
+                        <li class="page-item"><a class="page-link" href="/khach-san.html?page=@PageNext">@PageNext</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="/khach-san.html?page=@PageNext" aria-label="Next">
+                                <span class="fa fa-chevron-right"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div>
+            <h3>Tổng hợp kinh nghiệm khám phá ẩm thực</h3>
+            <p>Đặc sản là tên gọi để chỉ các món ăn đặc trưng của vùng miền nhất định. Nếu bạn không có kinh nghiệm du lịch ăn uống thì có thể bạn sẽ bỏ qua 1 số lượng lớn các món ăn đặc sản khi đến vùng miền nào đó.</p>
+            <img class="mx-auto d-block" src="~/assets/images/anuong/an-uong.jpg" />
+
+            <p>Hotline mua đặc sản uy tín: 0906 540 518 hoặc 0989 066 664</p>
+            <p>Nếu bạn đang muốn thưởng thức các món ăn đặc sản của miền Trung; hãy tham khảo qua kinh nghiệm du lịch ăn uống của Quy Nhon Me tổng hợp. Đây là những món ăn mang vị cay nóng đặc trưng của người dân miền Trung. Có thể kể đến các món ăn như bánh canh chả cá, tré, nem…</p>
+            <p>
+                Ngoài ra, chúng tôi còn gợi ý cho bạn những hàng quán lâu đời tại Phú Yên; Quy Nhơn, Bình Định. Những địa điểm này còn lưu giữ trọn vị món ăn truyền thống từ thời ông bà xưa đến tận bây giờ.
+
+                Bên cạnh đó, với niềm yêu thích ẩm thực miền Trung; Quy Nhon Me còn tìm tòi, sưu tầm công thức chế biến các món ăn bài bản nhất.
+
+                Hy vọng qua những kinh nghiệm du lịch ăn uống qua các bài blog mà Quy Nhon Me chia sẻ sẽ giúp bạn càn quét được hết các món ăn đặc sản tại vùng Trung Bộ Việt Nam thân yêu.
+            </p>
+            <p>Xem thêm về các thông tin du lịch:</p>
+            <p>
+                <ol>
+                    <li>Đi du lịch du lịch Quy Nhơn Bình Định, Đường đi eo gió Quy Nhơn, cách thuê xe Quy Nhơn</li>
+                    <li>Đi du lịch Bình Định tự túc, đến cù lao xanh Bình Định</li>
+                    <li>Các điểm du lịch Phú Yên, du lịch Phú Yên</li>
+                    <li>Khu du lịch Quy Nhơn, hòn khô Quy Nhơn</li>
+                    <li>Du lịch đá đĩa, du lịch Kỳ Co, du lịch Quy Nhơn Phú Yên</li>
+                </ol>
+
+            </p>
+        </div>
+    </div>
+</section>
+

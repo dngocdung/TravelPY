@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Hoa Vàng - Cỏ Xanh</title>
@@ -18,13 +19,8 @@
     <link rel="stylesheet" href="~/assets/css/jquery.timepicker.css">
     <link rel="stylesheet" href="~/assets/css/flaticon.css">
     <link rel="stylesheet" href="~/assets/css/style.css">
-    <link rel="stylesheet" href="~/assets/css/nav.css">
-    <style>
-        .nav-item .dropdown:hover > .dropdown-menu
-        {
-            display:block;
-        }
-    </style>
+    
+    
  
 </head>
 <body>
@@ -33,7 +29,7 @@
         <div class="nav-wrapper">
             <div class="grad-bar"></div>
             <nav class="navbar">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c8/Bluestar_%28bus_company%29_logo.svg/1280px-Bluestar_%28bus_company%29_logo.svg.png" alt="Company Logo">
+                <img  src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c8/Bluestar_%28bus_company%29_logo.svg/1280px-Bluestar_%28bus_company%29_logo.svg.png" alt="Company Logo">
                 <div class="menu-toggle" id="mobile-menu">
                     <span class="bar"></span>
                     <span class="bar"></span>
@@ -41,14 +37,23 @@
                 </div>
                 <ul class="nav no-search">
                     <li class="nav-item"><a asp-controller="Home" asp-action="Index">TRANG CHỦ</a></li>
-                    <li class="nav-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">GIỚI THIỆU</a></li>
-                    <li class="nav-item"><a href="tour.html">TOUR PHÚ YÊN</a></li>
-                    <li class="nav-item dropdown">
-                        <a href="baiviets.html" >KINH NGHIỆM DU LỊCH <i class="fa-solid fa-chevron-down"></i></a>
+                    <li class="nav-item"><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">GIỚI THIỆU</a></li>
+                    <li class="nav-item dropdown"><a href="tour.html">TOUR PHÚ YÊN</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="baiviets.html">Ăn Uống</a>
-                            <a class="dropdown-item" href="single-blog.html">Địa Điểm</a>
-                            <a class="dropdown-item" href="single-blog.html">Khách Sạn</a>
+                            <a class="dropdown-item" href="/1-ngay.html">1 Ngày</a>
+                            <a class="dropdown-item" href="/dai-ngay.html">Dài Ngày</a>
+                            
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="/khach-san.html">KHÁCH SẠN</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="kinh-nghiem-du-lich.html">KINH NGHIỆM DU LỊCH <i class="fa-solid fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/an-uong.html">Ăn Uống</a>
+                            <a class="dropdown-item" href="/dia-diem.html">Địa Điểm</a>
+                            <a class="dropdown-item" href="/khach-san.html">Khách Sạn</a>
+                            
+
                         </div>
                     </li>
                     <li class="nav-item"><a href="lien-he.html">LIÊN HỆ</a></li>
@@ -68,7 +73,7 @@
                             }
                         
                     </li>
-                    <a href="cart.html"><i class="fa-sharp fa-solid fa-cart-plus"></i></a>
+                    <a href="/cart.html"><i class="fa-sharp fa-solid fa-cart-plus"></i></a>
                     @*<i class="fas fa-search" id="search-icon"></i>
                     <input class="search-input" type="text" placeholder="Search..">*@
                 </ul>

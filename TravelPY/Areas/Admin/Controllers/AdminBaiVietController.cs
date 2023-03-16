@@ -236,8 +236,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 if (baiViet.MaTaiKhoan != account.MaTaiKhoan) return RedirectToAction(nameof(Index));
             }*/
 
-            if (!ModelState.IsValid)
-            {
+            
                 /*post.AccountId = account.AccountId;
                 post.Author = account.FullName;
                 if (post.CatId == null) post.CatId = 1;
@@ -272,7 +271,7 @@ namespace TravelPY.Areas.Admin.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            
             ViewData["MaPage"] = new SelectList(_context.Pages, "MaPage", "TenPage", baiViet.MaPage);
             ViewData["MaTaiKhoan"] = new SelectList(_context.TaiKhoans, "MaTaiKhoan", "TenTaiKhoan", baiViet.MaTaiKhoan);
             return View(baiViet);

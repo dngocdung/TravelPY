@@ -180,7 +180,7 @@
                         <i class="fa fa-home text-center mr-1"></i>
                         Tài khoản của tôi
                     </a>
-                    <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+                    <a class="nav-link" href="doi-mat-khau.html" role="tab" aria-controls="password" aria-selected="false">
                         <i class="fa fa-key text-center mr-1"></i>
                         Thay đổi mật khẩu
                     </a>
@@ -190,9 +190,9 @@
                     </a>*@
                     <a class="nav-link" id="application-tab" data-toggle="pill" href="#application" role="tab" aria-controls="application" aria-selected="false">
                         <i class="fa fa-tv text-center mr-1"></i>
-                        Thông tin đon hàng
+                        Thông tin đơn hàng
                     </a>
-                    <a class="nav-link" id="notification-tab" data-toggle="pill" href="#notification" role="tab" aria-controls="notification" aria-selected="false">
+                    <a class="nav-link" href="dang-xuat.html">
                         <i class="fa fa-bell text-center mr-1"></i>
                         Đăng xuất
                     </a>
@@ -202,7 +202,7 @@
                 <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                     <h3 class="mb-4">Hồ sơ của tôi</h3>
 
-                    <form asp-controller="Checkout" asp-action="Index" method="post">
+                    <form asp-controller="Account" asp-action="Update" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="MaKhachHang" />
                         <div class="row">
@@ -240,39 +240,44 @@
                             
                         </div>
                         <div>
+                            <button class="btn btn-primary" type="submit">Cập nhập thông tin</button>
+                            
+                        </div>
+                    </form>
+                    
+                </div>
+                <div>
+                    
+                    @*@await Html.PartialAsync("_ChangePasswordPartialView", changePassword)*@
+                    @*<h3 class="mb-4">Password Settings</h3>
+                    <form asp-controller="Account" asp-action="ChangePassword" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Old password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>New password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Confirm new password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
                             <button class="btn btn-primary">Update</button>
                             <button class="btn btn-light">Cancel</button>
                         </div>
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-                    <h3 class="mb-4">Password Settings</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Old password</label>
-                                <input type="password" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>New password</label>
-                                <input type="password" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Confirm new password</label>
-                                <input type="password" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary">Update</button>
-                        <button class="btn btn-light">Cancel</button>
-                    </div>
+                    </form>*@
                 </div>
                 @*<div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
                     <h3 class="mb-4">Security Settings</h3>
@@ -307,6 +312,7 @@
                 </div>*@
                 <div class="tab-pane fade" id="application" role="tabpanel" aria-labelledby="application-tab">
                     <h4 class="small-title">DANH SÁCH ĐƠN HÀNG</h4>
+                    @*@Html.PartialAsync("_TourPartialView.cshtml")*@
                     @if (DanhSachDonHang != null && DanhSachDonHang.Count() > 0)
                     {
                         <div class="table-responsive">

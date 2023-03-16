@@ -79,10 +79,64 @@ namespace TravelPY.Controllers
             }
             return RedirectToAction("DangNhap");
         }
+        //[Route("cap-nhap-thong-tin.html", Name = "Update")]
+        /*public IActionResult Update(string returnUrl = null)
+        {
+            var taikhoanID = HttpContext.Session.GetString("MaKhachHang"); //Check tai khoan da login chua
+            DatTourVM model = new DatTourVM();
+            if (taikhoanID != null)
+            {
+                var khachhang = _context.KhachHangs.AsNoTracking().Include(x => x.Location).SingleOrDefault(x => x.MaKhachHang == Convert.ToInt32(taikhoanID));
+                model.MaKhachHang = khachhang.MaKhachHang;
+                model.TenKhachHang = khachhang.TenKhachHang;
+                model.Email = khachhang.Email;
+                model.SDT = khachhang.Sdt;
+                model.DiaChi = khachhang.DiaChi;
 
-        [Route("thong-tin-don-hang.html", Name = "ThongTin")]
+            }
+            ViewData["lsTinhThanh"] = new SelectList(_context.Locations.Where(x => x.Levels == 1).OrderBy(x => x.Type).ToList(), "LocationId", "Name");
+            //ViewBag.GioHang = cart;
+            return View(model);
+        }*/
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //[Route("cap-nhap-thong-tin.html", Name = "Update")]
+        public IActionResult Update(DatTourVM muaHang)
+        {
+            var cart = HttpContext.Session.Get<List<CartItem>>("GioHang");
+            var taikhoanID = HttpContext.Session.GetString("MaKhachHang");
+            DatTourVM model = new DatTourVM();
+            if (taikhoanID != null)
+            {
+                var khachhang = _context.KhachHangs.AsNoTracking().Include(x => x.Location).SingleOrDefault(x => x.MaKhachHang == Convert.ToInt32(taikhoanID));
+                
+                khachhang.DiaChi = muaHang.DiaChi;
+                khachhang.TenKhachHang = muaHang.TenKhachHang;
+                khachhang.Email = muaHang.Email;
+                khachhang.Sdt = muaHang.SDT;
+                khachhang.NgaySinh = muaHang.NgaySinh;
+
+                /*model.MaKhachHang = khachhang.MaKhachHang;
+                model.TenKhachHang = khachhang.TenKhachHang;
+                model.Email = khachhang.Email;
+                model.SDT = khachhang.Sdt;
+                model.DiaChi = khachhang.DiaChi;*/
+                _context.Update(khachhang);
+                _context.SaveChanges();
+                return RedirectToAction("Dashboard","Account");
+            }
+            //ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", khachHang.LocationId);
+            return View(model);
+        }
+        private bool KhachHangExists(int id)
+        {
+            return _context.KhachHangs.Any(e => e.MaKhachHang == id);
+        }
+
+        /*[Route("thong-tin-don-hang.html", Name = "ThongTin")]
         public IActionResult TourPartialView()
-        { return View(); }
+        { return PartialView("_TourPartialView"); }*/
 
         [HttpGet]
         [AllowAnonymous]
@@ -227,9 +281,15 @@ namespace TravelPY.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Route("/doi-mat-khau.html", Name = "ChangePassword")]
+        public IActionResult ChangePassword()
+        {
+            return PartialView("_ChangePasswordPartialView");
+        }
+
         [HttpPost]
-        //[AllowAnonymous]
-        //[Route("doi-mat-khau.html", Name = "ChangePassword")]
+        [AllowAnonymous]
+        [Route("/doi-mat-khau.html", Name = "ChangePassword")]
         public IActionResult ChangePassword(ChangePasswordVM model)
         {
             try

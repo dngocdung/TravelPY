@@ -4,6 +4,7 @@
     ViewData["Title"] = "Home Page";
     Layout = "_Layout";
     List<Tour> lsTours = ViewBag.AllTours;
+    
 }
 <style>
     .border-left-orange {
@@ -13,7 +14,7 @@
 </style>
 <div class="hero-wrap js-fullheight" style="background-image: url('assets/images/41748037_1820204554724833_301770153178169344_o.jpg');">
 
-    <div class="overlay"></div>
+    @*<div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
             <div class="col-md-7 ftco-animate">
@@ -25,7 +26,7 @@
                 <span class="fa fa-play"></span>
             </a>
         </div>
-    </div>
+    </div>*@
 </div>
 <section class="ftco-section ftco-no-pb">
     <div class="container">
@@ -116,14 +117,18 @@
                 <div class="tab-pane fade show active" id="all-items" role="tabpanel" aria-labelledby="all-items-tab">
                     @await Html.PartialAsync("_ListProductPartialView", lsTours)
                 </div>
-                @foreach (var item in Model.Tours)
+                
+                @*@foreach (var item in Model.Tours)
                 {
                     <div class="tab-pane fade" id="@item.danhmuc.Alias" role="tabpanel" aria-labelledby="fresh-fruits-tab">
                         @await Html.PartialAsync("_ListProductPartialView", item.lsTours)
                     </div>
-                }
+                }*@
             </div>
         </div>
+
+    
+        
         <div class="row mt-5">
             <div class="col text-center">
                 <div class="block-27">
@@ -154,7 +159,7 @@
         </div>
     </div>
 </section>
-@*Sứ mệnh tầm nhìn*@
+
 <section class="ftco-section ftco-about ftco-no-pt img">
     <div class="container">
         <div class="row d-flex">
@@ -214,9 +219,10 @@
                                         <span class="yr">@item.NgayTao.Value.Month</span>
                                         <span class="mos">@item.NgayTao.Value.Year</span>
                                     </div>
-                                    @*<div class="one">
-                            <span class="yr">@item.MaPageNavigation.TenPage</span>
-                            </div>*@
+
+                                    <div class="one">
+                                        <span class="yr">@item.MaPageNavigation.TenPage</span>
+                                    </div>
                                 </div>
 
                                 <h6 class="heading text-center"><a href="@url">@item.TieuDe</a></h6>

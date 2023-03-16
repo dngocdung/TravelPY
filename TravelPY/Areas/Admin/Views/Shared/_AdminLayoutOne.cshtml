@@ -99,7 +99,12 @@
             </div>
             <ul class="navbar-nav flex-fill w-100 mb-2">
                 <li class="nav-item">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">
+                            <span><i class="fe fe-home fe-16"></i></span>
+                            <span class="ml-3">Trang chủ</span>
+                        </a>
+
+                    <a asp-area="Admin" asp-controller="AdminHome" asp-action="Index" class="nav-link">
                         <span><i class="fe fe-home fe-16"></i></span>
                         <span class="ml-3">Home</span>
                     </a>
@@ -112,7 +117,7 @@
                     </a>
 
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item">
                     <a asp-area="Admin" asp-controller="AdminDatTour" asp-action="Index" class="nav-link">
                         <i class="fe fe-box fe-16"></i>
                         <span class="ml-3 item-text">Quản lí đơn hàng</span>
@@ -188,6 +193,25 @@
                         </li>
                     </ul>
                 </li>
+
+                    @*<li class="nav-item dropdown">
+                        <a href="#khachsan" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-grid fe-16"></i>
+                            <span class="ml-3 item-text">Quản lí khách sạn</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="khachsan">*@
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="Admin" asp-controller="AdminKhachSan" asp-action="Index"><span class="ml-1 item-text">Quản lí khách sạn</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="Admin" asp-controller="AdminLoaiPhong" asp-action="Index"><span class="ml-1 item-text">Quản lí loại phòng</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="Admin" asp-controller="AdminPhong" asp-action="Index"><span class="ml-1 item-text">Quản lí phòng</span></a>
+                            </li>
+                            
+                        @*</ul>
+                    </li>*@
             </ul>
                 @*<ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item w-100">
