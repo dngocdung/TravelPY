@@ -11,5 +11,9 @@ public partial class LoaiPhong
 
     public int? Gia { get; set; }
 
+    public int? MaKhachSan { get; set; }
+
+    public virtual KhachSan? MaKhachSanNavigation { get; set; }
+
     public virtual ICollection<Phong> Phongs { get; } = new List<Phong>();
 }

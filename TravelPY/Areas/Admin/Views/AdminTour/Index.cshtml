@@ -25,7 +25,7 @@
                     <div class="col-md-6">
                         <div class="input-affix m-v-10">
                             <i class="prefix-icon anticon anticon-search opacity-04"></i>
-                            <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm Fail">
+                            <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Tìm kiếm tour">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -144,7 +144,7 @@
             $("#keyword").keyup(function () {
                 var strkeyword = $('#keyword').val();
                 $.ajax({
-                    url: '~/Admin/Search/FindProduct/',
+                    url: "@Url.Action("FindTour", "Search")",
                     datatype: "json",
                     type: "POST",
                     data: { keyword: strkeyword },

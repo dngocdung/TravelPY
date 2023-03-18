@@ -3,42 +3,42 @@
 {
     foreach (var item in Model)
     {
-        <tr>
-
-            <td>
-                @item.MaTour
-            </td>
-            <td>
-                <div class="d-flex align-items-center">
-                    <img class="img-fluid rounded" src="assets/images/others/thumb-9.jpg" style="max-width: 60px" alt="">
-                    <h6 class="m-b-0 m-l-10">@item.TenTour</h6>
-                </div>
-            </td>
-            <td>@item.MaDanhMucNavigation.TenDanhMuc</td>
-            <td>@item.Gia.Value.ToString("#,##0") VNĐ</td>
-            @*<td>@item.UnitsInStock</td>
-            <td>
-                @if (item.UnitsInStock.Value > 0)
+        string url = $"/{item.Alias}";
+                <tr>
+                    <td>@item.MaTour</td>
+                    <td style="max-width:200px">
+                @item.TenTour
+                    </td>
+                    <td>@item.MaDanhMucNavigation.TenDanhMuc</td>
+                    <td>@item.SoNgay</td>
+                    <td>@item.MaHdvNavigation.TenHdv</td>
+                    <td>
+                @if (item.TrangThai == true)
                 {
-                    <div class="d-flex align-items-center">
-                        <div class="badge badge-success badge-dot m-r-10"></div>
-                        <div>Còn hàng</div>
-                    </div>
+
+                                <div class="">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                        Đang hoạt động
+                                    </label>
+                                </div>
+
                 }
                 else
                 {
-                    <div class="d-flex align-items-center">
-                        <div class="badge badge-success badge-dot m-r-10"></div>
-                        <div>Hết hàng</div>
-                    </div>
+                                <div class="">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                        Không hoạt động
+                                    </label>
+                                </div>
                 }
-            </td>*@
-            <td>
-                <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTour" asp-action="Details" asp-route-id="@item.MaTour">Chi tiết</a>
-                <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTour" asp-action="Edit" asp-route-id="@item.MaTour">Sửa</a>
-                <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTour" asp-action="Delete" asp-route-id="@item.MaTour">Xóa</a>
-
-            </td>
-        </tr>
+                    </td>
+                    <td>
+                        <a asp-area="Admin" asp-controller="AdminTour" asp-action="Details" asp-route-id="@item.MaTour" class="btn btn-outline-primary">Chi tiết</a>
+                        <a asp-area="Admin" asp-controller="AdminTour" asp-action="Edit" asp-route-id="@item.MaTour" class="btn btn-outline-warning">Sửa</a>
+                        <a asp-area="Admin" asp-controller="AdminTour" asp-action="Delete" asp-route-id="@item.MaTour" class="btn btn-outline-danger">Xoá</a>
+                    </td>
+                </tr>
     }
 }

@@ -119,7 +119,7 @@
             $("#keyword").keyup(function () {
                 var strkeyword = $('#keyword').val();
                 $.ajax({
-                    url: '~/Admin/Search/FindProduct/',
+                    url: "@Url.Action("FindBaiViet", "Search")",
                     datatype: "json",
                     type: "POST",
                     data: { keyword: strkeyword },

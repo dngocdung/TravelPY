@@ -102,6 +102,7 @@ namespace TravelPY.Controllers
         [Route("/tour/{Alias}/{id}.html", Name = ("ChiTietTour"))]
         public IActionResult Details(int id)
         {
+
             try
             {
                 var tour = _context.Tours

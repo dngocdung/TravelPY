@@ -246,70 +246,7 @@
                     </form>
                     
                 </div>
-                <div>
-                    
-                    @*@await Html.PartialAsync("_ChangePasswordPartialView", changePassword)*@
-                    @*<h3 class="mb-4">Password Settings</h3>
-                    <form asp-controller="Account" asp-action="ChangePassword" method="post">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Old password</label>
-                                    <input type="password" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>New password</label>
-                                    <input type="password" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Confirm new password</label>
-                                    <input type="password" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <button class="btn btn-primary">Update</button>
-                            <button class="btn btn-light">Cancel</button>
-                        </div>
-                    </form>*@
-                </div>
-                @*<div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
-                    <h3 class="mb-4">Security Settings</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Login</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Two-factor auth</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="recovery">
-                                    <label class="form-check-label" for="recovery">
-                                        Recovery
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary">Update</button>
-                        <button class="btn btn-light">Cancel</button>
-                    </div>
-                </div>*@
+                
                 <div class="tab-pane fade" id="application" role="tabpanel" aria-labelledby="application-tab">
                     <h4 class="small-title">DANH SÁCH ĐƠN HÀNG</h4>
                     @*@Html.PartialAsync("_TourPartialView.cshtml")*@
@@ -318,31 +255,33 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <tbody>
+                                    <p>Nếu quý khách muốn huỷ chuyến đi vui lòng liên hệ: 0702743839</p>
                                     <tr>
                                         <th>ID</th>
                                         <th>Ngày đặt tour</th>
                                         <th>Ngày thanh toán</th>
                                         <th>Trạng thái</th>
-
-
                                         <th>Tổng tiền</th>
                                     </tr>
                                     @foreach (var item in DanhSachDonHang)
                                     {
-                                        <tr>
-                                            <td><a class="account-order-id" href="javascript:void(0)">#@item.MaDatTour</a></td>
-                                            <td>@item.NgayDatTour</td>
-                                            <td>@item.NgayThanhToan</td>
-                                            <td>@item.MaTrangThaiNavigation.TenTrangThai</td>
+                                        
+                                            <tr>
+                                                <td><a class="account-order-id" href="javascript:void(0)">#@item.MaDatTour</a></td>
+                                                <td>@item.NgayDatTour</td>
+                                                <td>@item.NgayThanhToan</td>
+                                                <td>@item.MaTrangThaiNavigation.TenTrangThai</td>
+                                                <td>@item.TongTien VNĐ</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" class="xemdonhang" data-madonhang="@item.MaDatTour"><span>Xem đơn hàng</span></a>
+                                                </td>
+                                            </tr>
+                                        
 
-
-
-                                            <td>@item.TongTien VNĐ</td>
-                                            <td>
-                                                <a href="javascript:void(0)" class="xemdonhang" data-madonhang="@item.MaDatTour"><span>Xem đơn hàng</span></a>
-                                            </td>
-                                        </tr>
+                                        
                                     }
+                                    
+                                    
 
 
                                 </tbody>
@@ -355,6 +294,7 @@
                             <div id="records_table">
                             </div>
                         </div>
+                        
                     }
                     else
                     {

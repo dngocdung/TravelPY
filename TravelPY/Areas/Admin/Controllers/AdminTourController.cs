@@ -172,7 +172,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -185,12 +185,12 @@ namespace TravelPY.Areas.Admin.Controllers
                     }
                     if (string.IsNullOrEmpty(tour.HinhAnh)) tour.HinhAnh = "default.jpg";
                     tour.Alias = Utilities.SEOUrl(tour.TenTour);
-                    //tour.DateModified = DateTime.Now;
+                    
                     //tour.DateCreated = DateTime.Now;
 
                     _context.Update(tour);
                     await _context.SaveChangesAsync();
-                    _notyfService.Success("Thêm mới thành công");
+                    _notyfService.Success("Sửa thành công");
                 }
                 catch (DbUpdateConcurrencyException)
                 {

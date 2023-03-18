@@ -20,27 +20,31 @@ namespace TravelPY.Controllers
             _context = context;
         }
         // GET: /<controller>/
-        //[HttpPost]
-        //public IActionResult FindProduct(string keyword)
-        //{
-        //    List<Product> ls = new List<Product>();
-        //    if (string.IsNullOrEmpty(keyword) || keyword.Length < 1)
-        //    {
-        //        return PartialView("ListProductsSearchPartial", null);
-        //    }
-        //    ls = _context.Products.AsNoTracking()
-        //                          .Where(x => x.ProductName.Contains(keyword))
-        //                          .OrderByDescending(x => x.ProductName)
-        //                          .ToList();
-        //    if (ls == null)
-        //    {
-        //        return PartialView("ListProductsSearchPartial", null);
-        //    }
-        //    else
-        //    {
-        //        return PartialView("ListProductsSearchPartial", ls);
-        //    }
-        //}
+        [HttpPost]
+        public IActionResult FindTours(string keyword)
+        {
+            List<Tour> ls = new List<Tour>();
+            if (string.IsNullOrEmpty(keyword) || keyword.Length < 1)
+            {
+                return PartialView("~/Views/Search/ListToursSearchPartial.cshtml", null);
+            }
+            ls = _context.Tours.AsNoTracking()
+                                  .Include(a => a.MaDanhMucNavigation)
+                                  .Include(t => t.MaHdvNavigation)
+                                  .Where(x => x.TenTour.Contains(keyword))
+                                  .OrderByDescending(x => x.TenTour)
+                                  .Take(10)
+                                  .ToList();
+            if (ls == null)
+            {
+                return PartialView("~/Views/Search/ListToursSearchPartial.cshtml", null);
+
+            }
+            else
+            {
+                return PartialView("~/Views/Search/ListToursSearchPartial.cshtml", ls);
+            }
+        }
 
     }
 }

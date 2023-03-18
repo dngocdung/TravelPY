@@ -1,0 +1,20 @@
+﻿@model List<BaiViet>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MaBaiViet</td>
+            <td style="max-width:200px">@item.TieuDe</td>
+            <td>@item.NgayTao</td>
+            <td>@item.MaTaiKhoanNavigation.TenTaiKhoan</td>
+            <td>@item.MaPageNavigation.TenPage</td>
+
+            <td>
+                <a asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Details" asp-route-id="@item.MaBaiViet" class="btn btn-outline-primary">Chi tiết</a>
+                <a asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Edit" asp-route-id="@item.MaBaiViet" class="btn btn-outline-warning">Sửa</a>
+                <a asp-area="Admin" asp-controller="AdminBaiViet" asp-action="Delete" asp-route-id="@item.MaBaiViet" class="btn btn-outline-danger">Xoá</a>
+            </td>
+        </tr>
+    }
+}

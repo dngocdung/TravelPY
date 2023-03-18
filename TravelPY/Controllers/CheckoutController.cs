@@ -147,7 +147,7 @@ namespace TravelPY.Controllers
         [Route("datks.html", Name = "DatKhachSan")]
         public IActionResult DatKhachSan(string returnUrl = null) 
         {
-            /*var taikhoanID = HttpContext.Session.GetString("MaKhachHang"); //Check tai khoan da login chua
+            var taikhoanID = HttpContext.Session.GetString("MaKhachHang"); //Check tai khoan da login chua
             DatKhachSanVM model = new DatKhachSanVM();
             if (taikhoanID != null)
             {
@@ -161,11 +161,11 @@ namespace TravelPY.Controllers
             }
             //ViewData["lsTinhThanh"] = new SelectList(_context.Locations.Where(x => x.Levels == 1).OrderBy(x => x.Type).ToList(), "LocationId", "Name");
             //ViewBag.GioHang = cart;
-            return View(model);*/
-            return View(); 
+            return View(model);
+            //return View(); 
         }
 
-        public KhachSan ks { get; set; }
+        public LoaiPhong lp { get; set; }
         [HttpPost]
         [Route("datks.html", Name = "DatKhachSan")]
         public IActionResult DatKhachSan(DatTourVM khachsan)
@@ -202,7 +202,7 @@ namespace TravelPY.Controllers
                     //Khoi tao don hang
                     DatKhachSan donhang = new DatKhachSan();
                     donhang.MaKhachHang = model.MaKhachHang;
-
+                    //donhang.MaKhachSan = model.MaKhachSan;
                     //donhang.DiaChi = model.DiaChi;
                     
 
@@ -221,14 +221,14 @@ namespace TravelPY.Controllers
 
 
 
-                    ChiTietDatK orderDetail = new ChiTietDatK();
+                    /*ChiTietDatK orderDetail = new ChiTietDatK();
                     orderDetail.MaDatKs = donhang.MaDatKs;
-                    orderDetail.MaKhachSan = ks.MaKhachSan;
+                    //orderDetail.MaKhachSan = ks.MaKhachSan;
 
                     //orderDetail.ThanhToan = donhang.TongTien;
                     //orderDetail.Gia = ks.Gia;
                     orderDetail.Ngay = DateTime.Now;
-                    _context.Add(orderDetail);
+                    _context.Add(orderDetail);*/
 
 
                     _context.SaveChanges();
@@ -237,7 +237,7 @@ namespace TravelPY.Controllers
                     //Xuat thong bao
                     _notyfService.Success("Đơn hàng đặt thành công");
                     //cap nhat thong tin khach hang
-                    return RedirectToAction("Success");
+                    return RedirectToAction("Index");
 
 
                 }

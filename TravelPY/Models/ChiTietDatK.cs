@@ -14,8 +14,4 @@ public partial class ChiTietDatK
     public DateTime? Ngay { get; set; }
 
     public int? Gia { get; set; }
-
-    public virtual DatKhachSan? MaDatKsNavigation { get; set; }
-
-    public virtual KhachSan? MaKhachSanNavigation { get; set; }
 }

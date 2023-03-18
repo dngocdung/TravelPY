@@ -53,9 +53,9 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Tên Tour</th>
-                                    <th scope="col" class="text-right">Rate</th>
-                                    @*<th scope="col" class="text-right">Hours</th>*@
-                                    <th scope="col" class="text-right">Ammout</th>
+                                    <th scope="col">Giá 1 người</th>
+                                   
+                                    <th scope="col" class="text-center">Tổng tiền</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,7 +69,7 @@
                                             <th scope="row">1</th>
                                             <td><a target="_blank" href="@url">@item.MaTourNavigation.TenTour</a></td>
                                             <td>@item.GiaGiam.Value.ToString("#,##0") VNĐ</td>
-                                            @*<td class="text-right">2</td>*@
+                                           
                                             <td>@item.ThanhToan.Value.ToString("#,##0") VNĐ</td>
                                         </tr>
                                     }
@@ -88,8 +88,8 @@
                                 <div class="text-right mr-2">
                                     
                                     <p class="mb-2 h6">
-                                        <span class="text-muted">Total : </span>
-                                        <span>@Model.TongTien</span>
+                                        <span class="text-muted">Tổng tiền : </span>
+                                        <span>@Model.TongTien.ToString("#,##0") VND</span>
                                     </p>
                                 </div>
                             </div>

@@ -29,6 +29,7 @@ namespace TravelPY.Areas.Admin.Controllers
             var pageSize = Utilities.PAGE_SIZE;
             var lsDatTours = _context.DatKhachSans
                 .Include(d => d.MaKhachHangNavigation)
+                .Include(d => d.MaKhachSanNavigation)
                 .AsNoTracking()
                 .OrderByDescending(x => x.NgayDat);
             PagedList<DatKhachSan> models = new PagedList<DatKhachSan>(lsDatTours, pageNumber, pageSize);
@@ -49,13 +50,23 @@ namespace TravelPY.Areas.Admin.Controllers
             }
 
             var datKhachSan = await _context.DatKhachSans
-                //.Include(d => d.MaChiTietKsNavigation)
-                .Include(d => d.MaKhachHangNavigation)
-                .FirstOrDefaultAsync(m => m.MaDatKs == id);
+               .Include(d => d.MaKhachHangNavigation)
+               //.Include(d => d.MaTrangThaiNavigation)
+               .FirstOrDefaultAsync(m => m.MaDatKs == id);
             if (datKhachSan == null)
             {
                 return NotFound();
             }
+            /*var Chitietdonhang = _context.ChiTietDatKs
+                .Include(x => x.MaKhachSanNavigation)
+                .Include(x => x.MaKhachSanNavigation.MaLoaiNavigation)
+                .AsNoTracking()
+                .Where(x => x.MaDatKs == datKhachSan.MaDatKs)
+                .OrderBy(x => x.MaChiTietKs)
+                .ToList();
+            ViewBag.ChiTiet = Chitietdonhang;*/
+
+            
 
             return View(datKhachSan);
         }

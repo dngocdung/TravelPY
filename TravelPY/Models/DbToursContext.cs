@@ -84,14 +84,6 @@ public partial class DbToursContext : DbContext
             entity.Property(e => e.MaChiTietKs).HasColumnName("MaChiTietKS");
             entity.Property(e => e.MaDatKs).HasColumnName("MaDatKS");
             entity.Property(e => e.Ngay).HasColumnType("datetime");
-
-            entity.HasOne(d => d.MaDatKsNavigation).WithMany(p => p.ChiTietDatKs)
-                .HasForeignKey(d => d.MaDatKs)
-                .HasConstraintName("FK_ChiTietDatKS_DatKhachSan");
-
-            entity.HasOne(d => d.MaKhachSanNavigation).WithMany(p => p.ChiTietDatKs)
-                .HasForeignKey(d => d.MaKhachSan)
-                .HasConstraintName("FK_ChiTietDatKS_KhachSan");
         });
 
         modelBuilder.Entity<ChiTietDatTour>(entity =>
@@ -129,7 +121,6 @@ public partial class DbToursContext : DbContext
             entity.ToTable("DatKhachSan");
 
             entity.Property(e => e.MaDatKs).HasColumnName("MaDatKS");
-            entity.Property(e => e.MaChiTietKs).HasColumnName("MaChiTietKS");
             entity.Property(e => e.NgayDat).HasColumnType("datetime");
             entity.Property(e => e.NgayDen).HasColumnType("date");
             entity.Property(e => e.NgayDi).HasColumnType("date");
@@ -137,6 +128,14 @@ public partial class DbToursContext : DbContext
             entity.HasOne(d => d.MaKhachHangNavigation).WithMany(p => p.DatKhachSans)
                 .HasForeignKey(d => d.MaKhachHang)
                 .HasConstraintName("FK_DatKhachSan_KhachHang");
+
+            entity.HasOne(d => d.MaKhachSanNavigation).WithMany(p => p.DatKhachSans)
+                .HasForeignKey(d => d.MaKhachSan)
+                .HasConstraintName("FK_DatKhachSan_KhachSan");
+
+            entity.HasOne(d => d.MaPhongNavigation).WithMany(p => p.DatKhachSans)
+                .HasForeignKey(d => d.MaPhong)
+                .HasConstraintName("FK_DatKhachSan_Phong");
         });
 
         modelBuilder.Entity<DatTour>(entity =>
@@ -236,6 +235,10 @@ public partial class DbToursContext : DbContext
             entity.Property(e => e.LoaiPhong1)
                 .HasMaxLength(50)
                 .HasColumnName("LoaiPhong");
+
+            entity.HasOne(d => d.MaKhachSanNavigation).WithMany(p => p.LoaiPhongs)
+                .HasForeignKey(d => d.MaKhachSan)
+                .HasConstraintName("FK_LoaiPhong_KhachSan");
         });
 
         modelBuilder.Entity<Location>(entity =>
@@ -263,10 +266,6 @@ public partial class DbToursContext : DbContext
             entity.HasKey(e => e.MaPhong);
 
             entity.ToTable("Phong");
-
-            entity.HasOne(d => d.MaKhachSanNavigation).WithMany(p => p.Phongs)
-                .HasForeignKey(d => d.MaKhachSan)
-                .HasConstraintName("FK_Phong_KhachSan");
 
             entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.Phongs)
                 .HasForeignKey(d => d.MaLoai)

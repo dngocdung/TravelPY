@@ -6,7 +6,7 @@ namespace TravelPY.ModelViews
     {
         [Key]
         public int MaKhachHang { get; set; }
-
+        public int MaKhachSan { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập Họ và Tên")]
         public string TenKhachHang { get; set; }
         public string Email { get; set; }
