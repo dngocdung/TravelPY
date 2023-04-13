@@ -15,8 +15,8 @@ using TravelPY.Models;
 namespace TravelPY.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize()]
-    
+    //[Authorize(Roles = "CTV")]
+
     public class AdminBaiVietController : Controller
     {
         private readonly DbToursContext _context;
@@ -31,12 +31,12 @@ namespace TravelPY.Areas.Admin.Controllers
         [AllowAnonymous]
         public IActionResult Index(int page = 1, int MaPage = 0)
         {
-            /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
+            //if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
             var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
-            if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });
+            if (taikhoanID == null) return RedirectToAction("AdminLogin", "Accounts", new { Area = "Admin" });
 
             var account = _context.TaiKhoans.AsNoTracking().FirstOrDefault(x => x.MaTaiKhoan == int.Parse(taikhoanID));
-            if (account == null) return NotFound();*/
+            if (account == null) return NotFound();
 
 
             //Danh sach bai viet
@@ -76,7 +76,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 .OrderBy(x => x.MaBaiViet).ToList();
             }
 
-            /*if (account.MaVaiTro == 1) //Admin
+            if (account.MaVaiTro == 1) //Admin
             {
                 lsBaiViets = _context.BaiViets
                 .Include(p => p.MaTaiKhoanNavigation).Include(p => p.MaPageNavigation)
@@ -88,8 +88,8 @@ namespace TravelPY.Areas.Admin.Controllers
                 .Include(p => p.MaTaiKhoanNavigation).Include(p => p.MaPageNavigation)
                 .Where(x => x.MaTaiKhoan == account.MaTaiKhoan)
                 .OrderByDescending(x => x.MaBaiViet).ToList();
-            }*/
-            
+            }
+
             PagedList<BaiViet> models = new PagedList<BaiViet>(lsBaiViets.AsQueryable(), pageNumber, pageSize);
             ViewBag.CurrentMaPage = MaPage;
             ViewBag.CurrentPage = pageNumber;
@@ -110,7 +110,8 @@ namespace TravelPY.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminBaiViet/Details/5
-        //[AllowAnonymous]
+        [AllowAnonymous]
+        [Authorize(Roles = "CTV")]
         public async Task<IActionResult> Details(int? id)
         {
             /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");

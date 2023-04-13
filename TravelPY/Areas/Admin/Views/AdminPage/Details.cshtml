@@ -5,45 +5,46 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutOne.cshtml";
 }
 
-<h1>Details</h1>
+<div class="card-body">
+    <h4 class="card-title">Thông tin tài khoản</h4>
+    <div class="table-responsive">
+        <table class="table text-white">
+            <tbody>
+                <tr>
+                    <td>Mã Page:</td>
+                    <td class="font-weight-semibold">@Model.MaPage</td>
+                </tr>
+                <tr>
+                    <td>Tên Page:</td>
+                    <td>@Model.TenPage</td>
+                </tr>
+                <tr>
+                    <td>Số bài viết:</td>
+                    <td>@Model.SoBaiViet</td>
+                </tr>
+                
+                <tr>
+                    <td>Hình ảnh:</td>
+                    <td>
+                        <img width="200" height="200" src="~/AdminAssetsOne/images/pages/@Model.HinhAnh" alt="@Model.TenPage" />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Lịch trình chi tiết:</td>
+                    <td>@Html.Raw(Model.NoiDung)</td>
+                </tr>
+            </tbody>
 
-<div>
-    <h4>Page</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenPage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenPage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NoiDung)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HinhAnh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HinhAnh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoBaiViet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoBaiViet)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Alias)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Alias)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.MaPage">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+        </table>
+
+        <div>
+            <a class="btn btn-outline-primary btn-icon-text col-md-5" asp-area="Admin" asp-controller="AdminPage" asp-action="Edit" asp-route-id="@Model.MaPage">
+                <i class="mdi mdi-file-check btn-icon-prepend"></i> Sửa
+            </a>
+            <a style="float:right" class="btn btn-outline-warning btn-icon-text col-md-5" asp-area="Admin" asp-controller="AdminPage" asp-action="Index">
+                <i class="mdi mdi-reload btn-icon-prepend"></i> Trở về
+            </a>
+        </div>
+    </div>
 </div>

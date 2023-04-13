@@ -18,6 +18,7 @@ namespace TravelPY.Areas.Admin.Controllers
 
         //[AllowAnonymous]
         //[Route("admin.html", Name = "Home")]
+        //[Authorize()]
         public IActionResult Index()
         {
             var soKhachHangs = _context.KhachHangs.Count();

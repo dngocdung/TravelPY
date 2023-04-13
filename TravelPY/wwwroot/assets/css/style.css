@@ -14236,10 +14236,11 @@ h2 {
 }
 
     .navbar img {
-        height: 30px;
+        height: 58px;
         width: auto;
         justify-self: center;
         margin-left: 20px;
+        
     }
 
     .navbar ul {

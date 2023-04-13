@@ -18,7 +18,7 @@ using TravelPY.Models;
 namespace TravelPY.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize()]
+    //[Authorize(Roles = "Admin")]
     public class AdminTaiKhoanController : Controller
     {
         private readonly DbToursContext _context;
@@ -31,6 +31,7 @@ namespace TravelPY.Areas.Admin.Controllers
 
         // GET: Admin/AdminTaiKhoan
         //[AllowAnonymous]
+        
         public async Task<IActionResult> Index(int page = 1, int MaDanhMuc = 0)
         {
             ViewData["QuyenTruyCap"] = new SelectList(_context.VaiTros, "MaVaiTro", "MoTa");
@@ -42,18 +43,18 @@ namespace TravelPY.Areas.Admin.Controllers
             return View(await dbToursContext.ToListAsync());
         }
 
-        //[AllowAnonymous]
-        [Route("login.html", Name = "Login")]
+        /*[AllowAnonymous]
+        //[Route("/login.html", Name = "Login")]
         public IActionResult AdminLogin(string returnUrl = null)
         {
             var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
-            if (taikhoanID != null) return RedirectToAction("Index", "Home", new { Area = "Admin" });
+            if (taikhoanID != null) return RedirectToAction("Index", "AdminHome", new { Area = "Admin" });
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
         [HttpPost]
-        //[AllowAnonymous]
-        [Route("login.html", Name = "Login")]
+        [AllowAnonymous]
+        //[Route("/login.html", Name = "Login")]
         public async Task<IActionResult> AdminLogin(DangNhapViewModel model, string returnUrl = null)
         {
             try
@@ -104,12 +105,12 @@ namespace TravelPY.Areas.Admin.Controllers
                     var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
                     await HttpContext.SignInAsync(userPrincipal);
 
-                    if (Url.IsLocalUrl(returnUrl))
+                    *//*if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
-                    }
+                    }*//*
 
-                    return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    return RedirectToAction("Index", "AdminHome", new { Area = "Admin" });
                 }
             }
             catch
@@ -118,21 +119,21 @@ namespace TravelPY.Areas.Admin.Controllers
             }
             return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });
         }
-        //[Route("logout.html", Name = "Logout")]
-        //[AllowAnonymous]
+        [Route("logout.html", Name = "Logout")]
+        [AllowAnonymous]
         public IActionResult AdminLogout()
         {
             try
             {
                 HttpContext.SignOutAsync();
                 HttpContext.Session.Remove("MaTaiKhoan");
-                return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                return RedirectToAction("Index", "AdminHome", new { Area = "Admin" });
             }
             catch
             {
-                return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                return RedirectToAction("Index", "AdminHome", new { Area = "Admin" });
             }
-        }
+        }*/
 
         // GET: Admin/AdminTaiKhoan/Details/5
         public async Task<IActionResult> Details(int? id)

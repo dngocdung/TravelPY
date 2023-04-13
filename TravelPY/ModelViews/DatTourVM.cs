@@ -25,6 +25,8 @@ namespace TravelPY.ModelViews
         public int PhuongXa { get; set; }
         public int PaymentID { get; set; }
         public string Note { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn ngày đi")]
+        public DateTime NgayDi { get; set; }
 
         
     }

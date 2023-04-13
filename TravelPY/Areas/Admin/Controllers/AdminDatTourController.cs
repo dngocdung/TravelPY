@@ -27,22 +27,50 @@ namespace TravelPY.Areas.Admin.Controllers
 
         // GET: Admin/AdminDatTour
 
-        public IActionResult Index(int? page)
+        public IActionResult Index(int page = 1, int MaTrangThai = 0)
         {
-            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageNumber = page;
             var pageSize = Utilities.PAGE_SIZE;
-            var lsDatTours = _context.DatTours
+            /*var lsDatTours = _context.DatTours
                 .Include(d => d.MaKhachHangNavigation)
                 .Include(d => d.MaTrangThaiNavigation)
                 .AsNoTracking()
-                .OrderByDescending(x => x.NgayDatTour);
-            PagedList<DatTour> models = new PagedList<DatTour>(lsDatTours, pageNumber, pageSize);
-
+                .OrderByDescending(x => x.NgayDatTour);*/
+            List<DatTour> ls = new List<DatTour>();
+            if (MaTrangThai != 0)
+            {
+                ls = _context.DatTours
+                .AsNoTracking()
+                .Where(b => b.MaTrangThai == MaTrangThai)
+                .Include(b => b.MaTrangThaiNavigation)
+                .Include(b => b.MaKhachHangNavigation)
+                .OrderBy(x => x.MaDatTour).ToList();
+            }
+            else
+            {
+                ls = _context.DatTours
+                .AsNoTracking()
+                .Include(b => b.MaTrangThaiNavigation)
+                .Include(b => b.MaKhachHangNavigation)
+                .OrderBy(x => x.MaDatTour).ToList();
+            }
+            PagedList<DatTour> models = new PagedList<DatTour>(ls.AsQueryable(), pageNumber, pageSize);
+            ViewData["TrangThai"] = new SelectList(_context.TrangThais, "MaTrangThai", "TenTrangThai");
+            ViewBag.MaTrangThai = MaTrangThai;
             ViewBag.CurrentPage = pageNumber;
             return View(models);
 
         }
 
+        public IActionResult Filtter(int MaTrangThai = 0)
+        {
+            var url = $"/Admin/AdminDatTour?MaTrangThai={MaTrangThai}";
+            if (MaTrangThai == 0)
+            {
+                url = $"/Admin/AdminDatTour";
+            }
+            return Json(new { status = "success", redirectUrl = url });
+        }
         // GET: Admin/AdminDatTour/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -61,6 +89,7 @@ namespace TravelPY.Areas.Admin.Controllers
             }
             var Chitietdonhang = _context.ChiTietDatTours
                 .Include(x => x.MaTourNavigation)
+                .Include(x=>x.MaDatTourNavigation)
                 .AsNoTracking()
                 .Where(x => x.MaDatTour == datTour.MaDatTour)
                 .OrderBy(x => x.MaChiTiet)
@@ -138,7 +167,7 @@ namespace TravelPY.Areas.Admin.Controllers
                             donhang.NgayThanhToan = DateTime.Now;
                         }
                         if (donhang.MaTrangThai == 4) donhang.Deleted = true;
-                        if (donhang.MaTrangThai == 2) donhang.NgayDi = DateTime.Now;
+                        //if (donhang.MaTrangThai == 2) donhang.NgayDi = DateTime.Now;
                     }
                     _context.Update(donhang);
                     await _context.SaveChangesAsync();
@@ -278,7 +307,7 @@ namespace TravelPY.Areas.Admin.Controllers
             order.Deleted = true;
             _context.Update(order);
             await _context.SaveChangesAsync();
-            _notyfService.Success("Xóa đơn hàng thành công");
+            //_notyfService.Success("Xóa đơn hàng thành công");
             return RedirectToAction(nameof(Index));
         }
 

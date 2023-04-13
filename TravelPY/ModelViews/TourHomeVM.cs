@@ -10,7 +10,9 @@ namespace TravelPY.ModelViews
         
         public DanhMuc danhmuc { get; set; }
         public List<Tour> lsTours { get; set; }
-
         
+
+
+
     }
 }

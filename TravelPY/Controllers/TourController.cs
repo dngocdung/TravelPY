@@ -21,6 +21,8 @@ namespace TravelPY.Controllers
         }
 
         // GET: Tour
+        
+
         [Route("/1-ngay.html", Name = ("Tour1N"))]
         public IActionResult Tour1N(int? page)
         {

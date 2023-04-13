@@ -1,5 +1,6 @@
 using AspNetCoreHero.ToastNotification;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
@@ -14,15 +15,29 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<DbToursContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TravelPYConnectionString")));
 builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
 builder.Services.AddSession();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+builder.Services.AddAuthorization(options =>
+{
+    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
+/*builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(p =>
                 {
                     p.Cookie.Name = "UserLoginCookie";
                     p.ExpireTimeSpan = TimeSpan.FromDays(10);
-                    //p.LoginPath = "/login.html";
-                    //p.LogoutPath = "/logout.html";
+                    p.LoginPath = "/login.html";
+                    p.LogoutPath = "/logout.html";
                     p.AccessDeniedPath = "/not-found.html";
-                });
+                });*/
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/login.html";
+        options.LogoutPath = "/logout.html";
+        options.AccessDeniedPath = "/Admin/Accounts/AccessDenied";
+        options.ReturnUrlParameter = "ReturnUrl";
+    });
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 3; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
 var app = builder.Build();
 
@@ -43,7 +58,7 @@ app.UseAuthorization();
 app.UseAuthentication();
 app.MapControllerRoute(
     name: "Admin",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    pattern: "{area:exists}/{controller=AdminHome}/{action=Index}/{id?}"
 
     );
 

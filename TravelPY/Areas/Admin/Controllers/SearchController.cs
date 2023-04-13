@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SolrNet.Utils;
 using TravelPY.Models;
 
 
@@ -27,7 +28,8 @@ namespace TravelPY.Areas.Admin.Controllers
             ls = _context.Tours.AsNoTracking()
                                   .Include(a => a.MaDanhMucNavigation)
                                   .Include(t => t.MaHdvNavigation)
-                                  .Where(x => x.TenTour.Contains(keyword))
+                                  .Where(x => x.TenTour.Contains(keyword) || x.MaHdvNavigation.TenHdv.Contains(keyword))
+                                  
                                   .OrderByDescending(x => x.TenTour)
                                   .Take(10)
                                   .ToList();

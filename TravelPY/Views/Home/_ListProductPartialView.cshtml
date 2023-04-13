@@ -8,14 +8,14 @@
 
     @if (Model != null && Model.Count() > 0)
     {
-        <div class="product-item-wrap row">
+    <div class="product-item-wrap row">
             @foreach (var item in Model)
             {
                 string url = $"/tour/{item.Alias}/{item.MaTour}.html";
                 <div class="col-md-4 ftco-animate ">
                     <div class="project-wrap hotel">
-                        <a href="#" class="img rounded-pill" style="background-image: url('images/tours/@item.HinhAnh');">
-                            <span class="price">@item.GiaGiam</span>
+                        <a href="#" class="img rounded-pill" style="background-image: url('AdminAssetsOne/images/tours/@item.HinhAnh');">
+                        <span class="price">@item.GiaGiam.Value.ToString("#,##0") VND / Người</span>
                         </a>
 
                         <div class="text p-4 rounded-pill" style="min-height:300px;">
@@ -44,27 +44,3 @@
     }
 
 
-@section Scripts{
-    <script>
-        $(document).ready(function () {
-
-
-            $("#keyword").keyup(function () {
-                var strkeyword = $('#keyword').val();
-                $.ajax({
-                    url: "@Url.Action("FindTours", "Search")",
-                    datatype: "json",
-                    type: "POST",
-                    data: { keyword: strkeyword },
-                    async: true,
-                    success: function (results) {
-                        $("#records_table").html("");
-                        $("#records_table").html(results);
-                    }
-                });
-            });
-
-        });
-    </script>
-
-}

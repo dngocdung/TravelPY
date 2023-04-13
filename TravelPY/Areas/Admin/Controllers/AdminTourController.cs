@@ -15,7 +15,7 @@ using TravelPY.Models;
 namespace TravelPY.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "CTV")]
     public class AdminTourController : Controller
     {
         private readonly DbToursContext _context;
@@ -29,12 +29,12 @@ namespace TravelPY.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminTour
-        
+        [AllowAnonymous]
         public IActionResult Index(int page = 1, int MaDanhMuc = 0)
         {
             /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");
             var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
-            if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });
+            if (taikhoanID == null) return RedirectToAction("AdminLogin", "Accounts", new { Area = "Admin" });
 
             var account = _context.TaiKhoans.AsNoTracking().FirstOrDefault(x => x.MaTaiKhoan == int.Parse(taikhoanID));
             if (account == null) return NotFound();*/
@@ -60,7 +60,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 .Include(t => t.MaHdvNavigation)
                 .OrderBy(x => x.MaTour).ToList();
             }
-
+               
 
 
             PagedList<Tour> models = new PagedList<Tour>(lsTours.AsQueryable(), pageNumber, pageSize);

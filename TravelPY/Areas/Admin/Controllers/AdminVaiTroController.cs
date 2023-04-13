@@ -13,7 +13,7 @@ using TravelPY.Models;
 namespace TravelPY.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminVaiTroController : Controller
     {
         private readonly DbToursContext _context;
@@ -26,6 +26,7 @@ namespace TravelPY.Areas.Admin.Controllers
 
         // GET: Admin/AdminVaiTro
         //[AllowAnonymous]
+        
         public async Task<IActionResult> Index()
         {
             /*if (!User.Identity.IsAuthenticated) Response.Redirect("/login.html");

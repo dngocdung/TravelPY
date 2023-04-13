@@ -35,17 +35,17 @@
                     string url = $"/{item.Alias}/{item.MaBaiViet}.html";
                     <div class="col-md-4 d-flex ftco-animate">
                         <div class="blog-entry justify-content-end" style="min-width:350px;">
-                            <a href="@url" class="block-20" style="background-image: url('images/news/@item.HinhAnh');">
+                            <a href="@url" class="block-20" style="background-image: url('AdminAssetsOne/images/news/@item.HinhAnh');">
                             </a>
                             <div class="text" style="border-radius:20px; min-height:150px;">
                                 <div class="d-flex align-items-center mb-4 topp">
-                                    <div class="one">
+                                    @*<div class="one">
                                         <span class="day">@item.NgayTao.Value.Day</span>
                                     </div>
                                     <div class="two">
                                         <span class="yr">@item.NgayTao.Value.Month</span>
                                         <span class="mos">@item.NgayTao.Value.Year</span>
-                                    </div>
+                                    </div>*@
                                     <div class="one">
                                         <span class="yr">@item.MaPageNavigation.TenPage</span>
                                     </div>

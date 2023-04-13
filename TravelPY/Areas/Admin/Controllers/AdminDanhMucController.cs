@@ -78,14 +78,14 @@ namespace TravelPY.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaDanhMuc,TenDanhMuc,Mota,SoTour,Alias,HinhAnh")] DanhMuc danhMuc, Microsoft.AspNetCore.Http.IFormFile fHinhAnh)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 //Xu ly Thumb
                 if (fHinhAnh != null)
                 {
                     string extension = Path.GetExtension(fHinhAnh.FileName);
                     string imageName = Utilities.SEOUrl(danhMuc.TenDanhMuc) + extension;
-                    danhMuc.HinhAnh = await Utilities.UploadFile(fHinhAnh, @"hinhanh", imageName.ToLower());
+                    danhMuc.HinhAnh = await Utilities.UploadFile(fHinhAnh, @"danhmucs", imageName.ToLower());
                 }
                 if (string.IsNullOrEmpty(danhMuc.HinhAnh)) danhMuc.HinhAnh = "default.jpg";
                 danhMuc.Alias = Utilities.SEOUrl(danhMuc.TenDanhMuc);
@@ -133,10 +133,10 @@ namespace TravelPY.Areas.Admin.Controllers
                     {
                         string extension = Path.GetExtension(fHinhAnh.FileName);
                         string imageName = Utilities.SEOUrl(danhMuc.TenDanhMuc) + extension;
-                        danhMuc.HinhAnh = await Utilities.UploadFile(fHinhAnh, @"hinhanh", imageName.ToLower());
+                        danhMuc.HinhAnh = await Utilities.UploadFile(fHinhAnh, @"danhmucs", imageName.ToLower());
                     }
                     if (string.IsNullOrEmpty(danhMuc.HinhAnh)) danhMuc.HinhAnh = "default.jpg";
-
+                    danhMuc.Alias = Utilities.SEOUrl(danhMuc.TenDanhMuc);
                     _context.Update(danhMuc);
                     await _context.SaveChangesAsync();
                     _notyfService.Success("Thêm mới thành công");

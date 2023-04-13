@@ -10,20 +10,31 @@
 <div class="page-header">
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
-            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
-            <span class="breadcrumb-item active">Danh sách đơn hàng : trang @CurrentPage</span>
+            <a asp-area="Admin" asp-controller="AdminHome" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <span class="breadcrumb-item active">Danh sách tour đã đặt : trang @CurrentPage</span>
         </nav>
     </div>
 </div>
 <div class="card">
     <div class="card-body">
         <div class="row m-b-30">
-            <div class="col-lg-8">
-                <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminDatTour" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm Tour</span></a>
+            <div class="col-md-8">
+                <div class="row">
+
+                    
+                    <div class="col-md-6">
+                        <div class="input-affix m-v-10">
+                            <select class="custom-select" id="txtCatID" name="txtCatID" style="min-width: 200px;" asp-items="ViewBag.TrangThai">
+                                <option selected>Chọn trạng thái</option>
+                                <option value="0">Chọn tất cả</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-4 text-right">
-            </div>
+           
         </div>
+        </br>
 
         <div class="table-responsive">
             <table class="table table-hover e-commerce-table">
@@ -87,6 +98,32 @@
             var modal = $(this);
             // note that this will replace the content of modal-content ever time the modal is opened
             modal.find('.modal-content').load(url);
+        });
+        $(document).ready(function () {
+            jQuery("#txtCatID").change(function () {
+                var maTrangThai = jQuery(this).children(":selected").attr("value");
+                maTrangThai = parseFloat(maTrangThai);
+                $('#txtCatID option')
+                    .removeAttr('selected');
+                $("#txtCatID > [value=" + maTrangThai + "]").attr("selected", "true");
+                $.ajax({
+                    url: '/Admin/AdminDatTour/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        MaTrangThai: maTrangThai
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
         });
     </script>
 

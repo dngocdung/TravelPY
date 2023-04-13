@@ -14,19 +14,19 @@
                     <div class="col">
                         <h2 class="h5 page-title"><small class="text-muted text-uppercase">Chi tiết đơn có mã số </small>@Model.MaDatTour</h2>
                     </div>
-                    <div class="col-auto">
+                    @*<div class="col-auto">
                         <button type="button" class="btn btn-secondary">Print</button>
                         <button type="button" class="btn btn-primary">Pay</button>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="card shadow">
                     <div class="card-body p-5">
                         <div class="row mb-5">
-                            <div class="col-12 text-center mb-4">
+                            @*<div class="col-12 text-center mb-4">
                                 <img src="./assets/images/logo.svg" class="navbar-brand-img brand-sm mx-auto mb-4" alt="...">
                                 <h2 class="mb-0 text-uppercase">Invoice</h2>
                                 <p class="text-muted"> Altavista<br /> 9022 Suspendisse Rd. </p>
-                            </div>
+                            </div>*@
                             <div class="col-md-7">
                                 <p class="small text-muted text-uppercase mb-2">Thông tin khách hàng</p>
                                 <p class="mb-4">
@@ -34,8 +34,9 @@
                                     Email: @Model.MaKhachHangNavigation.Email<br /> 
                                     SDT: @Model.MaKhachHangNavigation.Sdt<br /> 
                                     Mã đặt Tour: @Model.MaDatTour<br /> 
-                                    Ngày đặt Tour: @Model.NgayDatTour<br />
-                                    Trạng thai Tour: @Model.MaTrangThaiNavigation.TenTrangThai<br />
+                                    Ngày đặt Tour: @Model.NgayDatTour.Value.ToString("dd/MM/yyyy HH:mm:ss tt")<br />
+                                    Trạng thái Tour: @Model.MaTrangThaiNavigation.TenTrangThai<br />
+                                    Ngày đi: @Model.NgayDi.Value.ToString("dd/MM/yyyy")
                                 </p>
                                 
                             </div>
@@ -54,7 +55,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Tên Tour</th>
                                     <th scope="col">Giá 1 người</th>
-                                   
+                                    <th scope="col">Số người</th>
                                     <th scope="col" class="text-center">Tổng tiền</th>
                                 </tr>
                             </thead>
@@ -69,7 +70,7 @@
                                             <th scope="row">1</th>
                                             <td><a target="_blank" href="@url">@item.MaTourNavigation.TenTour</a></td>
                                             <td>@item.GiaGiam.Value.ToString("#,##0") VNĐ</td>
-                                           
+                                           <td>@item.MaDatTourNavigation.MaThanhToan</td>
                                             <td>@item.ThanhToan.Value.ToString("#,##0") VNĐ</td>
                                         </tr>
                                     }

@@ -61,7 +61,15 @@ namespace TravelPY.Controllers
             }
             return View(model);
         }
-
+        public IActionResult Filtter(int MaDanhMuc = 0)
+        {
+            var url = $"/Home?MaDanhMuc={MaDanhMuc}";
+            if (MaDanhMuc == 0)
+            {
+                url = $"/Home";
+            }
+            return Json(new { status = "success", redirectUrl = url });
+        }
 
 
         [Route("lien-he.html", Name = "Contact")]

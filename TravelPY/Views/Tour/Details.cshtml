@@ -6,7 +6,11 @@
 
     List<Tour> lsTour = ViewBag.lsTour;
 }
+
 <style>
+
+
+
     .categories > li > i {
         color: orangered;
         margin-right: 10px;
@@ -36,9 +40,33 @@
         <div class="row">
             <div class="col-lg-8 ftco-animate py-md-5 mt-md-5">
                 <h2 class="mb-3">@Model.TenTour</h2>
-                <div>
-                    @Html.Raw(Model.MoTa)
+
+
+
+                <div class="w3-container">
+
+
+                    <div class="w3-bar w3-white">
+                        <button class="w3-bar-item w3-button tablink w3-deep-orange" onclick="openCity(event,'ChiTiet')">Lịch trình chi tiết</button>
+                        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'HinhAnh')">Thư viện ảnh</button>
+                    </div>
+
+                    <div id="ChiTiet" class="w3-container w3-border city">
+
+                        <p>@Html.Raw(Model.MoTa)</p>
+                    </div>
+
+                    <div id="HinhAnh" class="w3-container w3-border city" style="display:none">
+                        <h2>Hình ảnh</h2>
+                        <p>Chưa có hình ảnh về tour này.</p>
+                    </div>
+
+
                 </div>
+
+
+
+
 
                 <div class="tag-widget post-tag-container mb-5 mt-5">
                     <div class="tagcloud">
@@ -49,15 +77,15 @@
                     </div>
                 </div>
 
-                <div class="about-author d-flex p-4 bg-light">
-                    <div class="bio mr-5">
-                        <img src="~/assets/images/Home/about-3.jpg" alt="Image placeholder" class="img-fluid mb-4">
-                    </div>
-                    <div class="desc">
-                        <h3>George Washington</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-                    </div>
+                @*<div class="about-author d-flex p-4 bg-light">
+                <div class="bio mr-5">
+                <img src="~/assets/images/Home/about-3.jpg" alt="Image placeholder" class="img-fluid mb-4">
                 </div>
+                <div class="desc">
+                <h3>George Washington</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+                </div>
+                </div>*@
             </div> <!-- .col-md-8 -->
             <div class="col-lg-4 sidebar ftco-animate bg-light py-md-5">
 
@@ -73,7 +101,7 @@
                         <li><i class="fa-sharp fa-solid fa-calendar-days"></i><b>Số ngày:</b> @Model.SoNgay</li>
                         <li class="quantity">
                             <div class="cart-plus-minus">
-                                Số người: 
+                                <i class="fa-solid fa-user"></i><b> Số người:</b>
                                 <input id="txtsoLuong" name="txtsoLuong" class="cart-plus-minus-box" value="1" type="text">
                             </div>
                         </li>
@@ -81,63 +109,65 @@
                             <a class="btn btn-custom-size lg-size btn-primary btn-secondary-hover rounded-0" href="javascript:void(0)">Thêm vào giỏ hàng</a>
                             <input hidden asp-for="MaTour" />
                         </li>
-                        <li>
-                            <a href="/checkout.html" class="btn btn-danger mx-auto">Đặt Tour</a>
-                            
-                        </li>
+
 
 
                     </div>
                 </div>
 
+                <!--Tour liên quan-->
                 <div class="sidebar-box ftco-animate">
-                    <h3>Bài viết liên quan</h3>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url('assets/images//news/image_1.jpg');"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="fa fa-calendar"></span> September 11, 2020</a></div>
-                                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
+                    <h3>Các Tour khác:</h3>
+                    @if (lsTour != null && lsTour.Count() > 0)
+                    {
+                        @foreach (var item in lsTour)
+                        {
+                            string _url = $"/{item.Alias}/{item.MaTour}.html";
+                            <div class="block-21 mb-4 d-flex">
+                                <a class="blog-img mr-4" style="background-image: url('assets/images//tours/@item.HinhAnh');"></a>
+                                <div class="text">
+                                    <h3 class="heading"><a href="@_url">@item.TenTour</a></h3>
+                                    <div class="meta">
+                                        <div><a href="#"><span class="fa fa-calendar"></span>@item.SoNgay</a></div>
+                                        <div><a href="#"><span class="fa fa-user"></span>@item.NgayKhoiHanh</a></div>
+                                        @*<div><a href="#"><span class="fa fa-comment"></span> 19</a></div>*@
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="fa fa-calendar"></span> September 11, 2020</a></div>
-                                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="fa fa-calendar"></span> September 11, 2020</a></div>
-                                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div>
+                        }
+                    }
+
                 </div>
-
-
-
 
             </div>
 
+
+
+
         </div>
+
+    </div>
     </div>
 </section>
 
 @section Scripts{
+
     <script>
+
+        function openCity(evt, cityName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        };
+
         $(document).ready(function () {
             $(function () {
                 $(".add-to-cart").click(function () {
@@ -185,7 +215,7 @@
                 }
                 });
                 });*@
-                                });
+                                                                        });
             function loadHeaderCart() {
                 $('#miniCart').load("/AjaxContent/HeaderCart");
                 $('#numberCart').load("/AjaxContent/NumberCart");

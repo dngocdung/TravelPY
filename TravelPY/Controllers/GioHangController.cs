@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using TravelPY.ModelViews;
 using TravelPY.Extension;
 using TravelPY.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TravelPY.Controllers
 {
@@ -32,15 +34,22 @@ namespace TravelPY.Controllers
         //Thêm mới vào giỏ hàng
         [HttpPost]
         [Route("api/cart/add")]
+        //[Authorize]
         public IActionResult AddToCart(int productID, int? amount)
         {
+            /*if (!User.Identity.IsAuthenticated) Response.Redirect("/dang-nhap.html");
+            var taikhoanID = HttpContext.Session.GetString("MaKhachHang");
+            if (taikhoanID == null) return RedirectToAction("DangNhap", "Account", new { Area = "" });
+
+            var account = _context.KhachHangs.AsNoTracking().FirstOrDefault(x => x.MaKhachHang == int.Parse(taikhoanID));
+            if (account == null) return NotFound();*/
             List<CartItem> cart = GioHang;
 
             try
             {
-                //Them san pham vao gio hang
+                //Them tour vao gio hang
                 CartItem item = cart.SingleOrDefault(p => p.product.MaTour == productID);
-                if (item != null) // da co => cap nhat so luong
+                if (item != null) // da co => cap nhat so nguoi di
                 {
                     item.amount = item.amount + amount.Value;
                     //luu lai session
@@ -61,7 +70,8 @@ namespace TravelPY.Controllers
 
                 //Luu lai Session
                 HttpContext.Session.Set<List<CartItem>>("GioHang", cart);
-                _notyfService.Success("Thêm sản phẩm thành công");
+                _notyfService.Success("Thêm tour thành công");
+                
                 return Json(new { success = true });
             }
             catch

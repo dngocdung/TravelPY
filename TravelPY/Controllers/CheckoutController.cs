@@ -97,8 +97,8 @@ namespace TravelPY.Controllers
                     donhang.LocationId = model.TinhThanh;
                     donhang.QuanHuyen = model.QuanHuyen;
                     donhang.PhuongXa = model.PhuongXa;
-                    
-
+                    donhang.NgayDi = muaHang.NgayDi;
+                    donhang.MaThanhToan = cart.Sum(x=>x.amount);
                     donhang.NgayDatTour = DateTime.Now;
                     donhang.MaTrangThai = 1;//Don hang moi
                     donhang.Deleted = false;

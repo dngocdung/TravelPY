@@ -37,6 +37,7 @@ namespace TravelPY.Controllers
         {
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 9;
+            var lsPage = _context.Pages.AsNoTracking();
             var lsBaiViets = _context.BaiViets
                 .Include(b => b.MaPageNavigation)
                 .Include(b => b.MaTaiKhoanNavigation)

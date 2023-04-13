@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using TravelPY.Helpper;
 using TravelPY.Models;
 
 namespace TravelPY.Areas.Admin.Controllers
@@ -13,10 +15,11 @@ namespace TravelPY.Areas.Admin.Controllers
     public class AdminPageController : Controller
     {
         private readonly DbToursContext _context;
-
-        public AdminPageController(DbToursContext context)
+        public INotyfService _notyfService { get; }
+        public AdminPageController(DbToursContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Admin/AdminPage
@@ -62,12 +65,22 @@ namespace TravelPY.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaPage,TenPage,NoiDung,HinhAnh,SoBaiViet,Alias")] Page page)
+        public async Task<IActionResult> Create([Bind("MaPage,TenPage,NoiDung,HinhAnh,SoBaiViet,Alias")] Page page, Microsoft.AspNetCore.Http.IFormFile fHinhAnh)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                //Xu ly Thumb
+                if (fHinhAnh != null)
+                {
+                    string extension = Path.GetExtension(fHinhAnh.FileName);
+                    string imageName = Utilities.SEOUrl(page.TenPage) + extension;
+                    page.TenPage = await Utilities.UploadFile(fHinhAnh, @"pages", imageName.ToLower());
+                }
+                if (string.IsNullOrEmpty(page.HinhAnh)) page.HinhAnh = "default.jpg";
+                page.Alias = Utilities.SEOUrl(page.TenPage);
                 _context.Add(page);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Thêm mới thành công");
                 return RedirectToAction(nameof(Index));
             }
             return View(page);
@@ -94,19 +107,28 @@ namespace TravelPY.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaPage,TenPage,NoiDung,HinhAnh,SoBaiViet,Alias")] Page page)
+        public async Task<IActionResult> Edit(int id, [Bind("MaPage,TenPage,NoiDung,HinhAnh,SoBaiViet,Alias")] Page page, Microsoft.AspNetCore.Http.IFormFile fHinhAnh)
         {
             if (id != page.MaPage)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
+                    if (fHinhAnh != null)
+                    {
+                        string extension = Path.GetExtension(fHinhAnh.FileName);
+                        string imageName = Utilities.SEOUrl(page.TenPage) + extension;
+                        page.HinhAnh = await Utilities.UploadFile(fHinhAnh, @"pages", imageName.ToLower());
+                    }
+                    if (string.IsNullOrEmpty(page.HinhAnh)) page.HinhAnh = "default.jpg";
+                    page.Alias = Utilities.SEOUrl(page.TenPage);
                     _context.Update(page);
                     await _context.SaveChangesAsync();
+                    _notyfService.Success("Sửa thành công");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
