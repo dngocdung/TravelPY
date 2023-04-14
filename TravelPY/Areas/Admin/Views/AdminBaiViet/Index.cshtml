@@ -92,17 +92,17 @@
     <script>
         $(document).ready(function () {
             jQuery("#txtCatID").change(function () {
-                var maDanhMuc = jQuery(this).children(":selected").attr("value");
-                maDanhMuc = parseFloat(maDanhMuc);
+                var maPage = jQuery(this).children(":selected").attr("value");
+                maPage = parseFloat(maPage);
                 $('#txtCatID option')
                     .removeAttr('selected');
-                $("#txtCatID > [value=" + maDanhMuc + "]").attr("selected", "true");
+                $("#txtCatID > [value=" + maPage + "]").attr("selected", "true");
                 $.ajax({
                     url: '/Admin/AdminBaiViet/Filtter',
                     datatype: "json",
                     type: "GET",
                     data: {
-                        MaPage: maDanhMuc
+                        MaPage: maPage
                     },
                     async: true,
                     success: function (results) {

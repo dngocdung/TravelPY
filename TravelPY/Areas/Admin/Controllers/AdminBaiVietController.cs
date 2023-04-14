@@ -101,10 +101,10 @@ namespace TravelPY.Areas.Admin.Controllers
         //Chuan hoa duong dan khi chon danh muc
         public IActionResult Filtter(int MaPage = 0)
         {
-            var url = $"/Admin/AdminBaiViet/Index?MaPage={MaPage}";
+            var url = $"/Admin/AdminBaiViet?MaPage={MaPage}";
             if (MaPage == 0)
             {
-                url = $"/Admin/AdminBaiViet/Index";
+                url = $"/Admin/AdminBaiViet";
             }
             return Json(new { status = "success", redirectUrl = url });
         }

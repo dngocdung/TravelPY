@@ -217,7 +217,7 @@ namespace TravelPY.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("dang-nhap.html", Name = "DangNhap")]
-        public async Task<IActionResult> DangNhap(DangNhapVM customer, string returnUrl)
+        public async Task<IActionResult> DangNhap(DangNhapVM customer, string returnUrl = null)
         {
             try
             {

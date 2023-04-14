@@ -43,6 +43,12 @@ namespace TravelPY.Controllers
 
             var account = _context.KhachHangs.AsNoTracking().FirstOrDefault(x => x.MaKhachHang == int.Parse(taikhoanID));
             if (account == null) return NotFound();*/
+
+
+            /*var taikhoanID = HttpContext.Session.GetString("MaKhachHang");
+            if (string.IsNullOrEmpty(taikhoanID)) return RedirectToAction("DangNhap", "Account");
+            var khachhang = _context.KhachHangs.AsNoTracking().SingleOrDefault(x => x.MaKhachHang == Convert.ToInt32(taikhoanID));
+            if (khachhang == null) return NotFound();*/
             List<CartItem> cart = GioHang;
 
             try
