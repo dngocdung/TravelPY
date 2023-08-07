@@ -24,7 +24,7 @@ namespace TravelPY.Areas.Admin.Controllers
         public AdminBaiVietController(DbToursContext context, INotyfService notyfService)
         {
             _context = context;
-            _notyfService= notyfService;
+            _notyfService = notyfService;
         }
 
         // GET: Admin/AdminBaiViet
@@ -58,21 +58,21 @@ namespace TravelPY.Areas.Admin.Controllers
             var pageNumber = page;
             var pageSize = Utilities.PAGE_SIZE;
             List<BaiViet> lsBaiViets = new List<BaiViet>();
-            if(MaPage!=0)
+            if (MaPage != 0)
             {
                 lsBaiViets = _context.BaiViets
                 .AsNoTracking()
                 .Where(b => b.MaPage == MaPage)
                 .Include(b => b.MaPageNavigation)
-                .Include(b => b.MaTaiKhoanNavigation)               
+                .Include(b => b.MaTaiKhoanNavigation)
                 .OrderBy(x => x.MaBaiViet).ToList();
-            }    
+            }
             else
             {
                 lsBaiViets = _context.BaiViets
                 .AsNoTracking()
                 .Include(b => b.MaPageNavigation)
-                .Include(b => b.MaTaiKhoanNavigation)               
+                .Include(b => b.MaTaiKhoanNavigation)
                 .OrderBy(x => x.MaBaiViet).ToList();
             }
 
@@ -118,7 +118,7 @@ namespace TravelPY.Areas.Admin.Controllers
             var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
             if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });*/
 
-            
+
 
             if (id == null || _context.BaiViets == null)
             {
@@ -145,7 +145,7 @@ namespace TravelPY.Areas.Admin.Controllers
             var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
             if (taikhoanID == null) return RedirectToAction("AdminLogin", "AdminTaiKhoan", new { Area = "Admin" });*/
 
-            
+
 
             ViewData["MaPage"] = new SelectList(_context.Pages, "MaPage", "TenPage");
             ViewData["MaTaiKhoan"] = new SelectList(_context.TaiKhoans, "MaTaiKhoan", "TenTaiKhoan");
@@ -237,13 +237,15 @@ namespace TravelPY.Areas.Admin.Controllers
                 if (baiViet.MaTaiKhoan != account.MaTaiKhoan) return RedirectToAction(nameof(Index));
             }*/
 
-            
-                /*post.AccountId = account.AccountId;
-                post.Author = account.FullName;
-                if (post.CatId == null) post.CatId = 1;
-                post.CreatedDate = DateTime.Now;
-                post.Alias = Utilities.SEOUrl(post.Title);
-                //post.Views = 0;*/
+
+            /*post.AccountId = account.AccountId;
+            post.Author = account.FullName;
+            if (post.CatId == null) post.CatId = 1;
+            post.CreatedDate = DateTime.Now;
+            post.Alias = Utilities.SEOUrl(post.Title);
+            //post.Views = 0;*/
+            if (ModelState.IsValid)
+            {
                 try
                 {
                     if (fHinhAnh != null)
@@ -272,7 +274,8 @@ namespace TravelPY.Areas.Admin.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            
+            }
+
             ViewData["MaPage"] = new SelectList(_context.Pages, "MaPage", "TenPage", baiViet.MaPage);
             ViewData["MaTaiKhoan"] = new SelectList(_context.TaiKhoans, "MaTaiKhoan", "TenTaiKhoan", baiViet.MaTaiKhoan);
             return View(baiViet);
@@ -321,7 +324,7 @@ namespace TravelPY.Areas.Admin.Controllers
 
         private bool BaiVietExists(int id)
         {
-          return _context.BaiViets.Any(e => e.MaBaiViet == id);
+            return _context.BaiViets.Any(e => e.MaBaiViet == id);
         }
     }
 }

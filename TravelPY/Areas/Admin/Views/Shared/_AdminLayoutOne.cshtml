@@ -42,7 +42,7 @@
                         <i class="fe fe-sun fe-16"></i>
                     </a>
                 </li>
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-shortcut">
                         <span class="fe fe-grid fe-16"></span>
                     </a>
@@ -52,7 +52,7 @@
                         <span class="fe fe-bell fe-16"></span>
                         <span class="dot dot-md bg-success"></span>
                     </a>
-                </li>
+                </li>*@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="avatar avatar-sm mt-2">
@@ -63,7 +63,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <h5 class="mb-0 nav-user-name dropdown-item">@User.Identity.Name </h5>
-                            <a class="dropdown-item" href="#">Profile</a>
+                            @*<a class="dropdown-item" href="#">Profile</a>*@
                             <a class="dropdown-item" href="/logout.html">Đăng xuất</a>
                         }
                         else
@@ -437,7 +437,7 @@
                 <div class="col">
                     <h2 class="h5 page-title">Welcome!</h2>
                 </div>
-                <div class="col-auto">
+                @*<div class="col-auto">
                     <form class="form-inline">
                         <div class="form-group d-none d-lg-inline">
                             <label for="reportrange" class="sr-only">Date Ranges</label>
@@ -450,7 +450,7 @@
                             <button type="button" class="btn btn-sm mr-2"><span class="fe fe-filter fe-16 text-muted"></span></button>
                         </div>
                     </form>
-                </div>
+                </div>*@
             </div>
             @RenderBody()
         </main> <!-- main -->

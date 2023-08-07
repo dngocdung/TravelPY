@@ -70,7 +70,7 @@ namespace TravelPY.Areas.Admin.Controllers
 
                     var taikhoanID = HttpContext.Session.GetString("MaTaiKhoan");
                     //identity
-                    //luuw seccion Makh
+                    //luuw secsion Makh
                     HttpContext.Session.SetString("MaTaiKhoan", kh.MaTaiKhoan.ToString());
 
                     //identity
@@ -108,11 +108,12 @@ namespace TravelPY.Areas.Admin.Controllers
             {
                 HttpContext.SignOutAsync();
                 HttpContext.Session.Remove("MaTaiKhoan");
-                return RedirectToAction("Index", "AdminHome", new { Area = "Admin" });
+                return RedirectToAction("AdminLogin", "Accounts", new { Area = "Admin" });
             }
             catch
             {
-                return RedirectToAction("Index", "AdminHome", new { Area = "Admin" });
+                return RedirectToAction("AdminLogin", "Accounts", new { Area = "Admin" });
+                /*return RedirectToAction("Index", "AdminHome", new { Area = "Admin" });*/
             }
         }
     }

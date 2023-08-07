@@ -46,14 +46,18 @@
                                     <span class="fa fa-star"></span>
                                 </p>
                                 <span class="days">@item.SoNgay</span>
-                                <h6 class="heading"><a href="@url">@item.TenTour</a></h6>
-                                <p class="location"><span class="fa fa-map-marker"></span> @item.NoiKhoiHanh</p>
+                                <h6><a style="overflow:hidden;" href="@url">@item.TenTour</a></h6>
+
                                 <ul>
-                                    <li><span class="flaticon-shower"></span>@item.Gia</li>
-                                    <li><span class="flaticon-king-size"></span>@item.GiaGiam</li>
+                                    <li class="location"><span class="fa fa-map-marker"></span> Nơi khởi hành: @item.NoiKhoiHanh</li>
+
+                                    <li class="location"><span class="fa-regular fa-calendar-days"></span> Số ngày: @item.SoNgay</li>
+                                </ul>
+                                <ul>
+                                    <li><span class="flaticon-shower"></span>Giá gốc: @item.Gia.Value.ToString("#,##0") VND</li>
+                                    <li><span class="flaticon-king-size"></span>Giá giảm: @item.GiaGiam.Value.ToString("#,##0") VND</li>
 
                                 </ul>
-
                             </div>
                         </div>
                     </div>

@@ -67,7 +67,7 @@ namespace TravelPY.Controllers
             ViewBag.CurrentPage = pageNumber;
             return View(models);
         }
-        //[Route("/khach-san.html", Name = ("BaiVietKhachSan"))]
+        [Route("/khach-san.html", Name = ("BaiVietKhachSan"))]
         public IActionResult KhachSan(int? page)
         {
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;

@@ -49,6 +49,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -56,6 +57,9 @@ app.UseRouting();
 app.UseSession();
 app.UseAuthorization();
 app.UseAuthentication();
+
+//app.UseDeveloperExceptionPage();
+//app.UseMigrationsEndPoint();
 app.MapControllerRoute(
     name: "Admin",
     pattern: "{area:exists}/{controller=AdminHome}/{action=Index}/{id?}"

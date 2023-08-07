@@ -67,7 +67,7 @@ namespace TravelPY.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaPage,TenPage,NoiDung,HinhAnh,SoBaiViet,Alias")] Page page, Microsoft.AspNetCore.Http.IFormFile fHinhAnh)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //Xu ly Thumb
                 if (fHinhAnh != null)
@@ -114,7 +114,7 @@ namespace TravelPY.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {

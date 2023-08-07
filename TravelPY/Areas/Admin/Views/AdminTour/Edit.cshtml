@@ -16,7 +16,7 @@
     <form class="needs-validation" asp-area="Admin" asp-controller="AdminTour" asp-route-id="@Model.MaTour" asp-action="Edit" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="MaTour" />
-
+        <input type="hidden" asp-for="HinhAnh" />
         <div>
             <div class="form-row">
                 <div class="col-md-6 mb-3">

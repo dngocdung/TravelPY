@@ -69,7 +69,27 @@
                                 <td>@item.MaVaiTroNavigation.MoTa</td>
 
                                 <td>
-                                    @if (item.TrangThai == true)
+                                    @*@if (item.TrangThai == true)
+                                    {
+
+                                        <div class="">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                                Đang hoạt động
+                                            </label>
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs">
+                                                Không hoạt động
+                                            </label>
+                                        </div>
+                                    }*@
+                                    @if (User.Identity.IsAuthenticated)
                                     {
 
                                         <div class="">

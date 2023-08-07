@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="wwwroot\AdminAssetsOne\images\news\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>
