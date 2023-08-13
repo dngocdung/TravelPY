@@ -1,4 +1,4 @@
-# Website đặt Tour du lịch(Đang trong quá trình cập nhập và phát triển)
+# Website đặt Tour du lịch
 Chức năng cơ bản:
 - Trang chủ hiển thị đẹp, các tour, bài viết được hiển thị theo từng danh mục.
 - Đăng nhập, đăng ký cho trang người dùng.
